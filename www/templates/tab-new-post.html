@@ -1,0 +1,21 @@
+
+<ion-view view-title="Post">
+    <ion-content class="padding">
+        <div class="white-bg">
+            <form ng-submit="save(post)">
+                <div class="list">
+                    <label class="item item-input">
+                        <input type="text" ng-model="post.title" placeholder="Title">
+                    </label>
+                    <label class="item item-input">
+                        <textarea ng-model="post.content" placeholder="Description"></textarea>
+                    </label>
+                    <label class="item item-input">
+                        <input type="file" ng-model="post.image">
+                    </label>
+                </div>
+                <button class="button button-block button-balanced">Post</button>
+            </form>
+        </div>
+    </ion-content>
+</ion-view>

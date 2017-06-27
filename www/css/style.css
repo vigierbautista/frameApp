@@ -1,1 +1,29 @@
 /* Empty. Add your own CSS if you like */
+
+ion-content {
+    background-color: #ffc900;
+}
+
+.white-bg {
+    background-color: white;
+}
+
+#newPost {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    min-width: 60px;
+    min-height: 60px;
+    box-shadow: 1px 1px 10px #888888;
+    padding-top: 5px;
+}
+
+
+
+/************* OVERRRIDES **************/
+
+
+.tabs a .icon {
+    padding-top: 7px;
+}
