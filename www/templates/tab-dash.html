@@ -1,19 +1,18 @@
-<ion-view view-title="Frame App">
+<ion-view id="dashboard" view-title="Frame">
 
-    <ion-content class="padding">
-        <div class="white-bg padding">
+    <ion-content ng-show="posts" class="padding">
+        <div class="frame-color-bg padding">
             <ion-list>
-                <ion-item ng-repeat="post in posts">
-                    <h3>{{ post.title }}</h3>
-                    <p>{{ post.date_added }}</p>
-                    <img ng-src="{{post.image}}">
-                    <p>{{ post.content }}</p>
+                <ion-item href="#/tab/dash/{{post.id}}" ng-repeat="post in posts">
+                    <h3 class="post-title">{{ post.title }}</h3>
+                    <p class="post-info">{{ post.user }} - {{ post.date_added }}</p>
+                    <img class="post-img" ng-src="img/{{post.image}}">
+                    <p class="post-content">{{ post.content }}</p>
                 </ion-item>
             </ion-list>
         </div>
     </ion-content>
-
-    <a ui-sref="tab.dash-new" id="newPost" class="button button-balanced">
+    <a ui-sref="tab.dash-new" class="button frame-color2-bg btn-fixed">
         <i class="icon ion-paintbrush"></i>
     </a>
 </ion-view>

@@ -7,7 +7,7 @@
 // 'FrameApp.controllers' is found in controllers.js
 angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'])
 
-    .run(function($ionicPlatform) {
+    .run(function($ionicPlatform, $rootScope, $ionicPopup, $state, AuthService, CommentsService, UserService) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -20,21 +20,54 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
+            if(!AuthService.isLogged()) {
+
+                $state.go('login');
+
+            } else if (AuthService.isLogged()) {
+
+                $state.go('tab.dash');
+
+            }
+        });
+        $rootScope.$on('$stateChangeStart', function(ev, toState) {
+            // ev contiene los datos del evento. toState contiene los datos del state al que estamos tratando de ingresar.
+            if(toState.data !== undefined) {
+                // Verificamos si el state requiere que el usuario esté autenticado.
+                if(toState.data.requireAuth === true) {
+                    if (!AuthService.isLogged()) {
+                        $ionicPopup.alert({
+                            title: 'Error de autenticación',
+                            template: 'Para acceder a esta sección, debe primero estar autenticado.'
+                        });
+
+                        // Cancelamos la transición al state.
+                        ev.preventDefault();
+                    }
+                } else if(toState.data.redirectToIfLogged !== undefined) {
+                    // Verificamos si el usuario está autenticado
+                    if (AuthService.isLogged()) {
+                        // Redireccionamos al usuario a donde nos indica el atribto del data.
+                        ev.preventDefault();
+                        $state.go(toState.data.redirectToIfLogged);
+                    }
+                }
+            }
+
+            CommentsService.clear();
+
         });
 
 
-        // TODO Crear método $on para los cambios de estado y requerir autenticación
+
+
     })
 
     .config(function($stateProvider, $urlRouterProvider) {
 
-        // Ionic uses AngularUI Router which uses the concept of states
-        // Learn more here: https://github.com/angular-ui/ui-router
-        // Set up the various states which the app can be in.
-        // Each state's controller can be found in controllers.js
         $stateProvider
 
-        // setup an abstract state for the tabs directive
+            // setup an abstract state for the tabs directive
             .state('tab', {
                 url: '/tab',
                 abstract: true,
@@ -43,8 +76,25 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
 
             // Each tab has its own nav history stack:
 
+            .state('login', {
+                url: '/login',
+                data : {
+                    redirectToIfLogged: 'tab.cuenta'
+                },
+                templateUrl: 'templates/login-form.html',
+                controller: 'LoginCtrl'
+            })
+
+            .state('register', {
+                url: '/register',
+                templateUrl: 'templates/login-register.html',
+                controller: 'RegisterCtrl'
+            })
             .state('tab.dash', {
                 url: '/dash',
+                data: {
+                    requireAuth: true
+                },
                 views: {
                     'tab-dash': {
                         templateUrl: 'templates/tab-dash.html',
@@ -53,10 +103,10 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                 }
             })
             .state('tab.dash-new', {
-                url: '/dash/new',
                 data: {
-                    // TODO agregar autentificación.
+                    requireAuth: true
                 },
+                url: '/dash/new',
                 views: {
                     'tab-dash': {
                         templateUrl: 'templates/tab-new-post.html',
@@ -64,8 +114,25 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                     }
                 }
             })
+            .state('tab.dash-detail', {
+                data: {
+                    requireAuth: true
+                },
+                url: '/dash/:postId',
+                views: {
+                    'tab-dash': {
+                        templateUrl: 'templates/tab-detail-post.html',
+                        controller: 'DetailPostCtrl'
+                    }
+                }
+            })
+
+
             .state('tab.chats', {
                 url: '/chats',
+                data: {
+                    requireAuth: true
+                },
                 views: {
                     'tab-chats': {
                         templateUrl: 'templates/tab-chats.html',
@@ -75,6 +142,9 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
             })
             .state('tab.chat-detail', {
                 url: '/chats/:chatId',
+                data: {
+                    requireAuth: true
+                },
                 views: {
                     'tab-chats': {
                         templateUrl: 'templates/chat-detail.html',
@@ -85,16 +155,32 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
 
             .state('tab.profile', {
                 url: '/profile',
+                data: {
+                    requireAuth: true,
+                    refresh: true
+                },
                 views: {
-                    'tab-account': {
+                    'tab-profile': {
                         templateUrl: 'templates/tab-profile.html',
                         controller: 'ProfileCtrl'
+                    }
+                }
+            })
+            .state('tab.profile-options', {
+                data: {
+                    requireAuth: true
+                },
+                url: '/profile/options',
+                views: {
+                    'tab-profile': {
+                        templateUrl: 'templates/tab-profile-options.html',
+                        controller: 'ProfileOptionsCtrl'
                     }
                 }
             });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/tab/dash');
+        $urlRouterProvider.otherwise('/dash');
 
 
     });

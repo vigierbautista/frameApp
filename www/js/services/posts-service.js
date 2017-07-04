@@ -2,12 +2,12 @@
  * Created by Bautista on 25/6/2017.
  */
 angular.module('FrameApp.services')
-    .service('PostsService', function ($http, $q) {
+    .service('PostsService', function ($http, $q, AuthService) {
         /**
          * Variable que contendría los posts
-         * @type {null}
+         * @type Array
          */
-        var posts = null;
+        var posts = [];
 
         /**
          * Trae todos los posts.
@@ -25,12 +25,14 @@ angular.module('FrameApp.services')
             // Creamos nuestra promesa.
             var deferred = $q.defer();
 
-            if(posts === null) {
+            if(posts.length === 0) {
                 // Si no hay posts los traemos a todos.
                 this.getAll().then(
                     function(response) {
+                        var responseData = response.data;
                         // En caso de exito guardamos los posts en el resolve de la promesa.
-                        posts = response.data;
+                        posts = responseData.data;
+
                         deferred.resolve(posts);
                     },
                     function () {
@@ -46,25 +48,44 @@ angular.module('FrameApp.services')
         };
 
         /**
+         * Trae un post especifico.
+         * @param id
+         * @returns {response} Devuelve la respuesta de la Api.
+         */
+        this.get = function (id) {
+            return $http.get('../../frameApi/public/posts/' + id, {
+                'headers': {
+                    'X-Token': AuthService.getToken()
+                }
+            }).then(function(response) {
+                    var responseData = response.data;
+
+                    return responseData;
+                },
+                function(response) {
+                    return response;
+                }
+            );
+        };
+
+        /**
          * Crea un nuevo post.
          * Hace la llamada para agregarlo a la base y luego lo agrega al array posts
          * @param newPost
          * @returns {response} Devuelve la respuesta de la Api.
          */
         this.create = function (newPost) {
+            console.log(newPost);
             return $http.post('../../frameApi/public/posts/save', newPost, {
                 'headers': {
-                   /* 'X-Token': AuthService.getToken()*/
+                    'X-Token': AuthService.getToken()
                 }
             }).then(function(response) {
                     var responseData = response.data;
                     console.log(responseData);
                     // Verificamos si grabó bien.
                     if(responseData.status == 1) {
-                        // Le agregamos el id a los datos del post.
-                        newPost.id = responseData.data.id;
-                        // Agregamos el nuevo post.
-                        addPost(posts);
+                        posts.push(responseData.data);
                     }
 
                     return response;
@@ -75,11 +96,4 @@ angular.module('FrameApp.services')
             );
         };
 
-        /**
-         * Agrega un post al array posts.
-         * @param newPost
-         */
-        function addPost(newPost) {
-            posts.push(newPost);
-        }
     });

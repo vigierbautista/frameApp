@@ -3,29 +3,48 @@
  */
 
 angular.module('FrameApp.controllers')
-    .controller('NewPostCtrl', function ($scope, $ionicPopup, PostsService) {
+    .controller('NewPostCtrl', function ($scope, $state, $ionicPopup, PostsService, AuthService) {
+
+        var user = AuthService.getUserData();
+
+        $scope.post = {
+            title: null,
+            content: null,
+            image: null,
+            date_added: null,
+            id_user: user.id
+        };
         $scope.save = function(data) {
-           PostsService.create(data).then(
-               function(response) {
+            if(!data.title) {
+                $ionicPopup.alert({
+                    title: 'Error',
+                    template: "Para postear se necesita un título al menos."
+                });
+                return;
+            }
+            PostsService.create(data).then(
+                function(response) {
 
-                   console.log(response.data);
-                   // Sí, existe este operador todavía.
-                   var title = response.data.status === 1 ? 'Éxito!' : 'Error...';
-                   var popup = $ionicPopup.alert({
-                       title: title,
-                       template: '<p>' + response.data.msg + '</p>',
-                       okText: 'Aceptar'
-                   });
+                    var responseData = response.data;
 
-                   // Si está todo bien, lo enviamos al listado.
-                   if(response.data.status === 1) {
-                       popup.then(
-                           function(gatito) {
-                               $state.go('tab.productos');
-                           }
-                       )
-                   }
-               }
-           );
+                    // Verificamos si tuvimos éxito  o no.
+                    if(responseData.status == 1) {
+                        var popup = $ionicPopup.alert({
+                            title: 'Éxito',
+                            template: responseData.msg
+                        });
+                        // Redireccionamos al usuario cuando cierre el popup.
+                        popup.then(function(rta) {
+                            $state.go('tab.dash');
+                        });
+                    } else {
+                        $ionicPopup.alert({
+                            title: 'Error...',
+                            // TODO: Agregar los errores de validación.
+                            template: 'Hubo un error al tratar de crear el producto. Por favor, verifique los datos.'
+                        });
+                    }
+                }
+            );
         };
     });

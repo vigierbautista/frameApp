@@ -1,9 +1,13 @@
-<ion-view view-title="Profile">
+
+<ion-view id="profile-wrapper" view-title="Profile">
   <ion-content class="padding">
-    <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
-    </ion-list>
+    <div class="padding">
+      <img class="post-img" ng-src="img/user/{{user.image}}">
+      <h3>{{user.name}} {{user.last_name}}</h3>
+      <p class="post-info">{{ user.email }}</p>
+    </div>
   </ion-content>
+  <a ui-sref="tab.profile-options" class="button frame-color2-bg btn-fixed">
+    <i class="icon ion-gear-a"></i>
+  </a>
 </ion-view>

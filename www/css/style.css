@@ -1,14 +1,35 @@
 /* Empty. Add your own CSS if you like */
-
+/************* GENERAL **************/
 ion-content {
-    background-color: #ffc900;
+    /*background-color: #ffc900;*/
 }
 
-.white-bg {
-    background-color: white;
+.frame-color {
+    color: #39B7CC !important;
+}
+.frame-color-bg {
+    background-color: #39B7CC !important;
+    color: white;
+}
+.frame-color2-bg {
+    background-color: #48E4FF !important;
+    color: white;
+}
+img {
+    display: block;
+    width: 100%;
+}
+.bar button.back-button {
+    color: #39B7CC;
+}
+.bar .title {
+    font-family: pacificoregular, fantasy !important;
+    font-size: 25px !important;
+    line-height: 44px;
+    color: #39B7CC !important;
 }
 
-#newPost {
+.btn-fixed {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -19,11 +40,118 @@ ion-content {
     padding-top: 5px;
 }
 
+#comment-form {
+    position: fixed;
+    bottom: 10px;
+    right: 0;
+    width: 100%;
+    padding: 0 10px;
+}
+
+#comment-form label {
+    display: inline-block;
+    width: 79%;
+    margin-right: 2%;
+}
+
+#comment-form button {
+    display: inline-block;
+    width: 18%;
+}
+
+#detail-post-wrapper ion-list ion-item:last-child {
+    margin-bottom: 70px;
+}
 
 
+/************* PROFILE **************/
+
+#profile-wrapper .button i {
+    font-size: 200px;
+}
+
+#profile-wrapper img {
+    display: inline-block;
+    border-radius: 50%;
+    width: 20%;
+}
+#profile-wrapper h3 {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10px;
+    width: 75%;
+}
+
+
+
+/************* LOGIN **************/
+#login-wrapper ion-content {
+    padding: 0 50px;
+}
+
+#login-wrapper .logo {
+    margin: 40px auto 20px;
+    width: 30%;
+}
+#login-wrapper button {
+    padding: 10px;
+}
+
+#login-wrapper p {
+    font-size: 15px !important;
+    margin-top: 20px !important;
+    margin-bottom: 10px !important;
+}
+#login-wrapper p:nth-child(4) {
+    margin-bottom: 25px !important;
+    padding: 0 20px;
+}
+/************* POSTS **************/
+
+#dashboard ion-list ion-item {
+    margin-bottom: 10px;
+}
+#dashboard ion-list ion-item:last-child {
+    margin-bottom: 0;
+}
+
+.post-title {
+    font-size: 20px !important;
+    margin-bottom: 10px !important;
+}
+.post-img {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+}
+.post-info {
+    font-size: 12px !important;
+    color: #aaaaaa !important;
+    font-style: italic !important;
+    margin-bottom: 10px !important;
+}
+
+
+#new-post-wrapper textarea {
+    min-height: 150px;
+}
 /************* OVERRRIDES **************/
 
 
 .tabs a .icon {
     padding-top: 7px;
+}
+
+ion-tabs.tabs-striped.tabs-color-active-frame-color .tab-item.tab-item-active,
+ion-tabs.tabs-striped.tabs-color-active-frame-color .tab-item.active,
+ion-tabs.tabs-striped.tabs-color-active-frame-color .tab-item.activated {
+    border-color: #39B7CC !important;
+    color: #39B7CC !important;
+}
+
+.popup-buttons .button.button-positive {
+    border-color: transparent;
+    background-color: #39B7CC;
+    color: #fff;
+    font-size: 20px !important;
 }

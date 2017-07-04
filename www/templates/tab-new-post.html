@@ -1,5 +1,5 @@
 
-<ion-view view-title="Post">
+<ion-view id="new-post-wrapper" view-title="Post">
     <ion-content class="padding">
         <div class="white-bg">
             <form ng-submit="save(post)">
@@ -13,8 +13,9 @@
                     <label class="item item-input">
                         <input type="file" ng-model="post.image">
                     </label>
+                    <input type="hidden" ng-model="post.id_user">
                 </div>
-                <button class="button button-block button-balanced">Post</button>
+                <button class="button button-block frame-color-bg">Post</button>
             </form>
         </div>
     </ion-content>
