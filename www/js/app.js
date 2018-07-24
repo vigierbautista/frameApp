@@ -58,7 +58,11 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
 
         });
 
-
+		/**
+         * Definimos la variable global con la ruta a la API.
+		 * @type {string}
+		 */
+		$rootScope.API_PATH = '../../frameApi/public/';
 
 
     })

@@ -54,7 +54,7 @@ angular.module('FrameApp.services')
         /**
          * Crea un nuevo comentario.
          * Hace la llamada para agregarlo a la base y luego lo agrega al array de comentarios.
-         * @param newComments
+         * @param newComment
          * @returns {response} Devuelve la respuesta de la Api.
          */
         this.save = function (newComment) {
