@@ -52,6 +52,12 @@ angular.module('FrameApp.controllers')
                                 template: responseData.msg
                             });
 
+                            // Reseteamos el form.
+							$scope.user = {
+								name: null,
+								password: null
+							};
+
                             // Cuando el usuario cierre  el popup, lo redireccionamos al dashboard.
                             popup.then(
                                 function(rta) {
@@ -75,7 +81,6 @@ angular.module('FrameApp.controllers')
                     },
                     function(response) {
                         // Reject
-						console.log(response);
 						$ionicPopup.alert({
 							title: 'Error',
 							template: "No pudimos conectarnos. Intente de nuevo más tarde."

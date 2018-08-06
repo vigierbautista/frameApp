@@ -30,7 +30,6 @@ angular.module('FrameApp.services')
 			 * LLama a la validación de cada regla.
 			 */
 			 var validate = function () {
-			 	console.log(_rules);
 				for (var field in _rules) {
 					if(_rules.hasOwnProperty(field)) {
 
@@ -220,6 +219,27 @@ angular.module('FrameApp.services')
 				}
 
 				return true;
+			};
+
+
+			/**
+			 * Valida que el campo tenga al menos 5 caracteres, 1 número y 1 mayúscula.
+			 * @param field
+			 * @returns {boolean}
+			 * @private
+			 */
+			this._password = function (field) {
+				if (
+					_data[field].length < 5
+					|| !/[0-9]/.test(_data[field])
+					|| !/[A-Z]/.test(_data[field])
+				) {
+					self.addError(field, _msgs[field]['password']);
+					return false;
+				}
+
+				return true;
+
 			};
 
 
