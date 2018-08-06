@@ -79,7 +79,6 @@ angular.module('FrameApp.services')
                     function(response) {
                         var responseData = response.data;
                         if(responseData.status == 1) {
-                            console.log(response);
                             // Guardamos los datos del usuario.
                             userData = {
                                 usuario: responseData.data.name,
@@ -88,7 +87,7 @@ angular.module('FrameApp.services')
                                 email: responseData.data.email,
                                 image: responseData.data.image
                             };
-                            token = responseData.data.token;
+                            token = responseData.token;
 
                             // Guardamos los datos en el almacenamiento.
                             StorageService.set('token', token);
@@ -144,7 +143,7 @@ angular.module('FrameApp.services')
              * @returns {boolean}
              */
             this.isLogged = function() {
-                return userData !== null;
+                return userData !== null || typeof token == 'undefined';
             };
 
             /**

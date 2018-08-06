@@ -134,7 +134,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                 }
             })
 
-
+            /*
             .state('tab.chats', {
                 url: '/chats',
                 data: {
@@ -147,6 +147,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                     }
                 }
             })
+
             .state('tab.chat-detail', {
                 url: '/chats/:chatId',
                 data: {
@@ -159,7 +160,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                     }
                 }
             })
-
+            */
             .state('tab.profile', {
                 url: '/profile',
                 data: {

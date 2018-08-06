@@ -9,9 +9,12 @@ angular.module('FrameApp.controllers')
         function($scope, $ionicPopup, $state, AuthService, ValidationService) {
             $scope.user = {
                 name: null,
-                password: null
+                last_name: null,
+                email: null,
+                password: null,
+                password2: null
             };
-            //TODO REGISTER VALIDATION
+
             $scope.register = function(userData) {
 
 				var Validator = ValidationService.init(userData, {
@@ -65,9 +68,17 @@ angular.module('FrameApp.controllers')
 						var responseData = response.data;
 						if(responseData.status == 1) {
 							var popup = $ionicPopup.alert({
-								title: 'Éxito',
-								template: responseData.msg
+								title: '¡Cuenta creada con éxito!'
 							});
+
+							// reseteamos el form.
+							$scope.user = {
+								name: null,
+								last_name: null,
+								email: null,
+								password: null,
+								password2: null
+							};
 
 							// Cuando el usuario cierre  el popup, lo redireccionamos al dashboard.
 							popup.then(
@@ -76,15 +87,21 @@ angular.module('FrameApp.controllers')
 								}
 							);
 						} else {
+							var error_msg = '';
+							var errors = responseData.errors;
+							for (var i in errors) {
+								error_msg += errors[i] + '<br>';
+							}
+
 							$ionicPopup.alert({
-								title: 'Error',
-								template: responseData.msg
+								title: 'Datos incorrectos',
+								template: error_msg
 							});
 						}
 					},
 					function(response) {
 						// Reject
-						console.log("REGISTER REJECT:" + response);
+						console.error("REGISTER REJECT:" + response);
 					}
 				);
             }

@@ -134,7 +134,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                 }
             })
 
-
+            /*
             .state('tab.chats', {
                 url: '/chats',
                 data: {
@@ -147,6 +147,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                     }
                 }
             })
+
             .state('tab.chat-detail', {
                 url: '/chats/:chatId',
                 data: {
@@ -159,7 +160,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                     }
                 }
             })
-
+            */
             .state('tab.profile', {
                 url: '/profile',
                 data: {
@@ -412,6 +413,12 @@ angular.module('FrameApp.controllers')
                                 template: responseData.msg
                             });
 
+                            // Reseteamos el form.
+							$scope.user = {
+								name: null,
+								password: null
+							};
+
                             // Cuando el usuario cierre  el popup, lo redireccionamos al dashboard.
                             popup.then(
                                 function(rta) {
@@ -435,7 +442,6 @@ angular.module('FrameApp.controllers')
                     },
                     function(response) {
                         // Reject
-						console.log(response);
 						$ionicPopup.alert({
 							title: 'Error',
 							template: "No pudimos conectarnos. Intente de nuevo más tarde."
@@ -656,9 +662,12 @@ angular.module('FrameApp.controllers')
         function($scope, $ionicPopup, $state, AuthService, ValidationService) {
             $scope.user = {
                 name: null,
-                password: null
+                last_name: null,
+                email: null,
+                password: null,
+                password2: null
             };
-            //TODO REGISTER VALIDATION
+
             $scope.register = function(userData) {
 
 				var Validator = ValidationService.init(userData, {
@@ -712,9 +721,17 @@ angular.module('FrameApp.controllers')
 						var responseData = response.data;
 						if(responseData.status == 1) {
 							var popup = $ionicPopup.alert({
-								title: 'Éxito',
-								template: responseData.msg
+								title: '¡Cuenta creada con éxito!'
 							});
+
+							// reseteamos el form.
+							$scope.user = {
+								name: null,
+								last_name: null,
+								email: null,
+								password: null,
+								password2: null
+							};
 
 							// Cuando el usuario cierre  el popup, lo redireccionamos al dashboard.
 							popup.then(
@@ -723,15 +740,21 @@ angular.module('FrameApp.controllers')
 								}
 							);
 						} else {
+							var error_msg = '';
+							var errors = responseData.errors;
+							for (var i in errors) {
+								error_msg += errors[i] + '<br>';
+							}
+
 							$ionicPopup.alert({
-								title: 'Error',
-								template: responseData.msg
+								title: 'Datos incorrectos',
+								template: error_msg
 							});
 						}
 					},
 					function(response) {
 						// Reject
-						console.log("REGISTER REJECT:" + response);
+						console.error("REGISTER REJECT:" + response);
 					}
 				);
             }
@@ -818,7 +841,6 @@ angular.module('FrameApp.services')
                     function(response) {
                         var responseData = response.data;
                         if(responseData.status == 1) {
-                            console.log(response);
                             // Guardamos los datos del usuario.
                             userData = {
                                 usuario: responseData.data.name,
@@ -827,7 +849,7 @@ angular.module('FrameApp.services')
                                 email: responseData.data.email,
                                 image: responseData.data.image
                             };
-                            token = responseData.data.token;
+                            token = responseData.token;
 
                             // Guardamos los datos en el almacenamiento.
                             StorageService.set('token', token);
@@ -883,7 +905,7 @@ angular.module('FrameApp.services')
              * @returns {boolean}
              */
             this.isLogged = function() {
-                return userData !== null;
+                return userData !== null || typeof token == 'undefined';
             };
 
             /**
@@ -1260,7 +1282,6 @@ angular.module('FrameApp.services')
 			 * LLama a la validación de cada regla.
 			 */
 			 var validate = function () {
-			 	console.log(_rules);
 				for (var field in _rules) {
 					if(_rules.hasOwnProperty(field)) {
 
@@ -1450,6 +1471,27 @@ angular.module('FrameApp.services')
 				}
 
 				return true;
+			};
+
+
+			/**
+			 * Valida que el campo tenga al menos 5 caracteres, 1 número y 1 mayúscula.
+			 * @param field
+			 * @returns {boolean}
+			 * @private
+			 */
+			this._password = function (field) {
+				if (
+					_data[field].length < 5
+					|| !/[0-9]/.test(_data[field])
+					|| !/[A-Z]/.test(_data[field])
+				) {
+					self.addError(field, _msgs[field]['password']);
+					return false;
+				}
+
+				return true;
+
 			};
 
 
