@@ -14,10 +14,9 @@ angular.module('FrameApp.controllers')
 
             $scope.login = function(userData) {
 
-
             	var Validator = ValidationService.init(userData, {
-            		name: {'required': true},
-					password: {'required': true}
+            		name: ['required'],
+					password: ['required']
 				}, {
             		name: {required: "Ingrese su nombre."},
             		password: {required: "Ingrese su constraseña."}
@@ -42,10 +41,12 @@ angular.module('FrameApp.controllers')
 
                 AuthService.login(userData).then(
                     function(response) {
-						console.log(response);
                         // Resolve
+
                         var responseData = response.data;
+
                         if(responseData.status == 1) {
+
                             var popup = $ionicPopup.alert({
                                 title: 'Éxito',
                                 template: responseData.msg
@@ -57,17 +58,19 @@ angular.module('FrameApp.controllers')
                                     $state.go('tab.dash');
                                 }
                             );
+
                         } else {
 
 							var error_msg = '';
-							for (var i in response.errors) {
-								error_msg += response.errors[i] + '<br>';
+							for (var i in responseData.errors) {
+								error_msg += responseData.errors[i] + '<br>';
 							}
 
                             $ionicPopup.alert({
-                                title: 'Error',
+                                title: responseData.msg,
                                 template: error_msg
                             });
+
                         }
                     },
                     function(response) {

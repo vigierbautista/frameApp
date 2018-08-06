@@ -6,8 +6,10 @@
 // 'FrameApp.services' is found in services.js
 // 'FrameApp.controllers' is found in controllers.js
 angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'])
-
-    .run(function($ionicPlatform, $rootScope, $ionicPopup, $state, AuthService, CommentsService, UserService) {
+    /**
+     * APP RUN CONFIG
+     */
+	.run(function($ionicPlatform, $rootScope, $ionicPopup, $state, AuthService, CommentsService, UserService) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -63,11 +65,12 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
 		 * @type {string}
 		 */
 		$rootScope.API_PATH = '../../frameApi/public/';
-
-
     })
 
-    .config(function($stateProvider, $urlRouterProvider) {
+	/**
+     * APP GLOBAL CONFIG
+	 */
+	.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
         $stateProvider
 
@@ -186,7 +189,8 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/dash');
 
-
+        // Custom back button. Removes text.
+		$ionicConfigProvider.backButton.previousTitleText(false).text('');
     });
 
 angular.module('FrameApp.controllers', [])
@@ -370,10 +374,9 @@ angular.module('FrameApp.controllers')
 
             $scope.login = function(userData) {
 
-
             	var Validator = ValidationService.init(userData, {
-            		name: {'required': true},
-					password: {'required': true}
+            		name: ['required'],
+					password: ['required']
 				}, {
             		name: {required: "Ingrese su nombre."},
             		password: {required: "Ingrese su constraseña."}
@@ -398,10 +401,12 @@ angular.module('FrameApp.controllers')
 
                 AuthService.login(userData).then(
                     function(response) {
-						console.log(response);
                         // Resolve
+
                         var responseData = response.data;
+
                         if(responseData.status == 1) {
+
                             var popup = $ionicPopup.alert({
                                 title: 'Éxito',
                                 template: responseData.msg
@@ -413,17 +418,19 @@ angular.module('FrameApp.controllers')
                                     $state.go('tab.dash');
                                 }
                             );
+
                         } else {
 
 							var error_msg = '';
-							for (var i in response.errors) {
-								error_msg += response.errors[i] + '<br>';
+							for (var i in responseData.errors) {
+								error_msg += responseData.errors[i] + '<br>';
 							}
 
                             $ionicPopup.alert({
-                                title: 'Error',
+                                title: responseData.msg,
                                 template: error_msg
                             });
+
                         }
                     },
                     function(response) {
@@ -645,71 +652,88 @@ angular.module('FrameApp.controllers')
         '$ionicPopup',
         '$state',
         'AuthService',
-        function($scope, $ionicPopup, $state, AuthService) {
+        'ValidationService',
+        function($scope, $ionicPopup, $state, AuthService, ValidationService) {
             $scope.user = {
                 name: null,
                 password: null
             };
-
+            //TODO REGISTER VALIDATION
             $scope.register = function(userData) {
-                console.log(!userData.name && !userData.password && !userData.email && !userData.last_name);
 
-                if(!userData.name) {
-                    $ionicPopup.alert({
-                        title: 'Error',
-                        template: "Complete su nombre"
-                    });
-                    return;
-                }
-                if(!userData.password) {
-                    $ionicPopup.alert({
-                        title: 'Error',
-                        template: "Complete su password"
-                    });
-                    return;
-                }
-                if(!userData.email) {
-                    $ionicPopup.alert({
-                        title: 'Error',
-                        template: "Complete su email"
-                    });
-                    return;
-                }
-                if(!userData.last_name) {
-                    $ionicPopup.alert({
-                        title: 'Error',
-                        template: "Complete su apellido"
-                    });
-                    return;
-                }
-                AuthService.register(userData).then(
-                    function(response) {
-                        // Resolve
-                        var responseData = response.data;
-                        if(responseData.status == 1) {
-                            var popup = $ionicPopup.alert({
-                                title: 'Éxito',
-                                template: responseData.msg
-                            });
+				var Validator = ValidationService.init(userData, {
+					name: ['required', 'min:3', 'max:20'],
+					last_name: ['required', 'min:3', 'max:20'],
+					email: ['required', 'email'],
+					password: ['required', 'password'],
+					password2: ['required', 'equal:password']
+				}, {
+					name: {
+						required: "Ingrese su nombre.",
+						min: 'Su nombre debe tener un mínimo de 3 letras.',
+						max: 'Su nombre debe tener un máximo de 20 letras.'
+					},
+					last_name: {
+						required: "Ingrese su apellido.",
+						min: 'Su apellido debe tener un mínimo de 3 letras.',
+						max: 'Su apellido debe tener un máximo de 20 letras.'
+					},
+					email: {
+						required: 'Ingrese su email.',
+						email: 'El formato del email debe ser ejemplo@dominio.com'
+					},
+					password: {
+						required: "Ingrese su contraseña.",
+						password: 'La contraseña debe tener un mínimo de 5 caracteres, una mayúscula y un número.'
+					},
+					password2: {
+						required: 'Repita la contraseña.',
+						equal: 'Las contraseñas deben ser iguales.'
+					}
+				});
 
-                            // Cuando el usuario cierre  el popup, lo redireccionamos al dashboard.
-                            popup.then(
-                                function(rta) {
-                                    $state.go('tab.dash');
-                                }
-                            );
-                        } else {
-                            $ionicPopup.alert({
-                                title: 'Error',
-                                template: responseData.msg
-                            });
-                        }
-                    },
-                    function(response) {
-                        // Reject
-                        console.log("REGISTER REJECT:" + response);
-                    }
-                );
+				if (Validator.isInvalid()) {
+					var error_msg = '';
+					var errors = Validator.getErrors();
+					for (var i in errors) {
+						error_msg += errors[i] + '<br>';
+					}
+
+					$ionicPopup.alert({
+						title: 'Datos incorrectos',
+						template: error_msg
+					});
+					return;
+				}
+
+				AuthService.register(userData).then(
+					function(response) {
+						// Resolve
+						var responseData = response.data;
+						if(responseData.status == 1) {
+							var popup = $ionicPopup.alert({
+								title: 'Éxito',
+								template: responseData.msg
+							});
+
+							// Cuando el usuario cierre  el popup, lo redireccionamos al dashboard.
+							popup.then(
+								function(rta) {
+									$state.go('tab.dash');
+								}
+							);
+						} else {
+							$ionicPopup.alert({
+								title: 'Error',
+								template: responseData.msg
+							});
+						}
+					},
+					function(response) {
+						// Reject
+						console.log("REGISTER REJECT:" + response);
+					}
+				);
             }
         }
     ]);
@@ -1236,6 +1260,7 @@ angular.module('FrameApp.services')
 			 * LLama a la validación de cada regla.
 			 */
 			 var validate = function () {
+			 	console.log(_rules);
 				for (var field in _rules) {
 					if(_rules.hasOwnProperty(field)) {
 
@@ -1243,9 +1268,7 @@ angular.module('FrameApp.services')
 							if(_rules[field].hasOwnProperty(rule)) {
 
 								var rule_value = _rules[field][rule];
-								if (rule_value) {
-									if (!callValidation(rule, field)) break;
-								}
+								if (!callValidation(rule_value, field)) break;
 
 							}
 						}

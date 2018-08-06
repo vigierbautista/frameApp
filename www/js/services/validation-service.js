@@ -30,6 +30,7 @@ angular.module('FrameApp.services')
 			 * LLama a la validación de cada regla.
 			 */
 			 var validate = function () {
+			 	console.log(_rules);
 				for (var field in _rules) {
 					if(_rules.hasOwnProperty(field)) {
 
@@ -37,9 +38,7 @@ angular.module('FrameApp.services')
 							if(_rules[field].hasOwnProperty(rule)) {
 
 								var rule_value = _rules[field][rule];
-								if (rule_value) {
-									if (!callValidation(rule, field)) break;
-								}
+								if (!callValidation(rule_value, field)) break;
 
 							}
 						}

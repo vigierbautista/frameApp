@@ -6,8 +6,10 @@
 // 'FrameApp.services' is found in services.js
 // 'FrameApp.controllers' is found in controllers.js
 angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'])
-
-    .run(function($ionicPlatform, $rootScope, $ionicPopup, $state, AuthService, CommentsService, UserService) {
+    /**
+     * APP RUN CONFIG
+     */
+	.run(function($ionicPlatform, $rootScope, $ionicPopup, $state, AuthService, CommentsService, UserService) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -63,11 +65,12 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
 		 * @type {string}
 		 */
 		$rootScope.API_PATH = '../../frameApi/public/';
-
-
     })
 
-    .config(function($stateProvider, $urlRouterProvider) {
+	/**
+     * APP GLOBAL CONFIG
+	 */
+	.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
         $stateProvider
 
@@ -186,5 +189,6 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/dash');
 
-
+        // Custom back button. Removes text.
+		$ionicConfigProvider.backButton.previousTitleText(false).text('');
     });
