@@ -6,8 +6,10 @@
 // 'FrameApp.services' is found in services.js
 // 'FrameApp.controllers' is found in controllers.js
 angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'])
-
-    .run(function($ionicPlatform, $rootScope, $ionicPopup, $state, AuthService, CommentsService, UserService) {
+    /**
+     * APP RUN CONFIG
+     */
+	.run(function($ionicPlatform, $rootScope, $ionicPopup, $state, AuthService, CommentsService, UserService) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -58,12 +60,17 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
 
         });
 
-
-
-
+		/**
+         * Definimos la variable global con la ruta a la API.
+		 * @type {string}
+		 */
+		$rootScope.API_PATH = '../../frameApi/public/';
     })
 
-    .config(function($stateProvider, $urlRouterProvider) {
+	/**
+     * APP GLOBAL CONFIG
+	 */
+	.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
         $stateProvider
 
@@ -182,7 +189,8 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/dash');
 
-
+        // Custom back button. Removes text.
+		$ionicConfigProvider.backButton.previousTitleText(false).text('');
     });
 
 angular.module('FrameApp.controllers', [])
@@ -357,26 +365,48 @@ angular.module('FrameApp.controllers')
         '$ionicPopup',
         '$state',
         'AuthService',
-        function($scope, $ionicPopup, $state, AuthService) {
+        'ValidationService',
+        function($scope, $ionicPopup, $state, AuthService, ValidationService) {
             $scope.user = {
                 name: null,
                 password: null
             };
 
             $scope.login = function(userData) {
-                if(!userData.name || !userData.password) {
+
+            	var Validator = ValidationService.init(userData, {
+            		name: ['required'],
+					password: ['required']
+				}, {
+            		name: {required: "Ingrese su nombre."},
+            		password: {required: "Ingrese su constraseña."}
+				});
+
+
+                if(Validator.isInvalid()) {
+
+                	var error_msg = '';
+					var errors = Validator.getErrors();
+                	for (var i in errors) {
+                		error_msg += errors[i] + '<br>';
+					}
+
                     $ionicPopup.alert({
-                        title: 'Error',
-                        template: "Complete el formulario con su nombre y password!"
+                        title: 'Datos incorrectos',
+                        template: error_msg
                     });
                     return;
                 }
+
+
                 AuthService.login(userData).then(
                     function(response) {
-
                         // Resolve
+
                         var responseData = response.data;
+
                         if(responseData.status == 1) {
+
                             var popup = $ionicPopup.alert({
                                 title: 'Éxito',
                                 template: responseData.msg
@@ -388,15 +418,28 @@ angular.module('FrameApp.controllers')
                                     $state.go('tab.dash');
                                 }
                             );
+
                         } else {
+
+							var error_msg = '';
+							for (var i in responseData.errors) {
+								error_msg += responseData.errors[i] + '<br>';
+							}
+
                             $ionicPopup.alert({
-                                title: 'Error',
-                                template: responseData.msg
+                                title: responseData.msg,
+                                template: error_msg
                             });
+
                         }
                     },
                     function(response) {
                         // Reject
+						console.log(response);
+						$ionicPopup.alert({
+							title: 'Error',
+							template: "No pudimos conectarnos. Intente de nuevo más tarde."
+						});
                     }
                 );
             }
@@ -609,71 +652,88 @@ angular.module('FrameApp.controllers')
         '$ionicPopup',
         '$state',
         'AuthService',
-        function($scope, $ionicPopup, $state, AuthService) {
+        'ValidationService',
+        function($scope, $ionicPopup, $state, AuthService, ValidationService) {
             $scope.user = {
                 name: null,
                 password: null
             };
-
+            //TODO REGISTER VALIDATION
             $scope.register = function(userData) {
-                console.log(!userData.name && !userData.password && !userData.email && !userData.last_name);
 
-                if(!userData.name) {
-                    $ionicPopup.alert({
-                        title: 'Error',
-                        template: "Complete su nombre"
-                    });
-                    return;
-                }
-                if(!userData.password) {
-                    $ionicPopup.alert({
-                        title: 'Error',
-                        template: "Complete su password"
-                    });
-                    return;
-                }
-                if(!userData.email) {
-                    $ionicPopup.alert({
-                        title: 'Error',
-                        template: "Complete su email"
-                    });
-                    return;
-                }
-                if(!userData.last_name) {
-                    $ionicPopup.alert({
-                        title: 'Error',
-                        template: "Complete su apellido"
-                    });
-                    return;
-                }
-                AuthService.register(userData).then(
-                    function(response) {
-                        // Resolve
-                        var responseData = response.data;
-                        if(responseData.status == 1) {
-                            var popup = $ionicPopup.alert({
-                                title: 'Éxito',
-                                template: responseData.msg
-                            });
+				var Validator = ValidationService.init(userData, {
+					name: ['required', 'min:3', 'max:20'],
+					last_name: ['required', 'min:3', 'max:20'],
+					email: ['required', 'email'],
+					password: ['required', 'password'],
+					password2: ['required', 'equal:password']
+				}, {
+					name: {
+						required: "Ingrese su nombre.",
+						min: 'Su nombre debe tener un mínimo de 3 letras.',
+						max: 'Su nombre debe tener un máximo de 20 letras.'
+					},
+					last_name: {
+						required: "Ingrese su apellido.",
+						min: 'Su apellido debe tener un mínimo de 3 letras.',
+						max: 'Su apellido debe tener un máximo de 20 letras.'
+					},
+					email: {
+						required: 'Ingrese su email.',
+						email: 'El formato del email debe ser ejemplo@dominio.com'
+					},
+					password: {
+						required: "Ingrese su contraseña.",
+						password: 'La contraseña debe tener un mínimo de 5 caracteres, una mayúscula y un número.'
+					},
+					password2: {
+						required: 'Repita la contraseña.',
+						equal: 'Las contraseñas deben ser iguales.'
+					}
+				});
 
-                            // Cuando el usuario cierre  el popup, lo redireccionamos al dashboard.
-                            popup.then(
-                                function(rta) {
-                                    $state.go('tab.dash');
-                                }
-                            );
-                        } else {
-                            $ionicPopup.alert({
-                                title: 'Error',
-                                template: responseData.msg
-                            });
-                        }
-                    },
-                    function(response) {
-                        // Reject
-                        console.log("REGISTER REJECT:" + response);
-                    }
-                );
+				if (Validator.isInvalid()) {
+					var error_msg = '';
+					var errors = Validator.getErrors();
+					for (var i in errors) {
+						error_msg += errors[i] + '<br>';
+					}
+
+					$ionicPopup.alert({
+						title: 'Datos incorrectos',
+						template: error_msg
+					});
+					return;
+				}
+
+				AuthService.register(userData).then(
+					function(response) {
+						// Resolve
+						var responseData = response.data;
+						if(responseData.status == 1) {
+							var popup = $ionicPopup.alert({
+								title: 'Éxito',
+								template: responseData.msg
+							});
+
+							// Cuando el usuario cierre  el popup, lo redireccionamos al dashboard.
+							popup.then(
+								function(rta) {
+									$state.go('tab.dash');
+								}
+							);
+						} else {
+							$ionicPopup.alert({
+								title: 'Error',
+								template: responseData.msg
+							});
+						}
+					},
+					function(response) {
+						// Reject
+						console.log("REGISTER REJECT:" + response);
+					}
+				);
             }
         }
     ]);
@@ -687,14 +747,16 @@ angular.module('FrameApp.controllers')
 angular.module('FrameApp.services')
     .service('AuthService', [
         '$http',
+        '$rootScope',
         'StorageService',
         /**
          * Servicio de administración de la autenticación.
          *
          * @param $http
+         * @param $rootScope
          * @param StorageService
          */
-        function($http, StorageService) {
+        function($http, $rootScope, StorageService) {
 
             // Definimos algunas variables internas
             var token = null;
@@ -715,13 +777,12 @@ angular.module('FrameApp.services')
                 // Acá estamos retornando como venimos haciendo siempre el $http.post para  devolver la promesa.
                 // Si embargo, a diferencia de los casos anteriores, en este el mismo método está utilizando ya la promesa.
                 // Para que el que llame a este método tenga acceso a los datos de la promesa, los métodos del then deben retornar el resultado que reciben.
-                return $http.post('../../frameApi/public/login', data).then(
+                return $http.post($rootScope.API_PATH + 'login', data).then(
                     function(response) {
                         // Resolve
                         var responseData = response.data;
                         if(responseData.status == 1) {
                             // Guardamos los datos del usuario.
-                            console.log(responseData.data);
                             userData = {
                                 usuario: responseData.data.name,
                                 lastName: responseData.data.last_name,
@@ -753,7 +814,7 @@ angular.module('FrameApp.services')
              * @returns {*}
              */
             this.register = function (data) {
-                return $http.post('../../frameApi/public/register', data).then(
+                return $http.post($rootScope.API_PATH + 'register', data).then(
                     function(response) {
                         var responseData = response.data;
                         if(responseData.status == 1) {
@@ -894,7 +955,7 @@ angular.module('FrameApp.services')
         /**
          * Crea un nuevo comentario.
          * Hace la llamada para agregarlo a la base y luego lo agrega al array de comentarios.
-         * @param newComments
+         * @param newComment
          * @returns {response} Devuelve la respuesta de la Api.
          */
         this.save = function (newComment) {
@@ -1167,3 +1228,312 @@ angular.module('FrameApp.services')
 
         }
     ]);
+/**
+ * Definimos el servicio de Validación de datos.
+ * Este servicio se va a encargar de validar los datos que ingrese el usuario.
+ */
+angular.module('FrameApp.services')
+	.service('ValidationService', [
+		function() {
+			var self = this,
+				_data,
+				_rules,
+				_msgs,
+				_errors = {};
+
+			/**
+			 * Validator Constructor
+			 * @param data
+			 * @param rules
+			 * @param msgs
+			 */
+			this.init = function (data, rules, msgs) {
+				_data = data;
+				_rules = rules;
+				_msgs = msgs;
+				_errors = {};
+				validate();
+				return self;
+			};
+
+			/**
+			 * LLama a la validación de cada regla.
+			 */
+			 var validate = function () {
+			 	console.log(_rules);
+				for (var field in _rules) {
+					if(_rules.hasOwnProperty(field)) {
+
+						for (var rule in _rules[field]) {
+							if(_rules[field].hasOwnProperty(rule)) {
+
+								var rule_value = _rules[field][rule];
+								if (!callValidation(rule_value, field)) break;
+
+							}
+						}
+
+					}
+				}
+			};
+
+			/**
+			 * LLama define los parametros que tiene que recibir el metodo de validación.
+			 * @param rule
+			 * @param field
+			 * @return {*}
+			 */
+			var callValidation = function (rule, field) {
+
+				var ruleData = rule.split(':');
+				var method = '_' + ruleData[0];
+
+				if (self.hasOwnProperty(method)) {
+
+					if (typeof self[method] == 'function') {
+
+						switch (ruleData.length) {
+							case 1:
+								return self[method](field);
+							case 2:
+								return self[method](field, ruleData[1]);
+							case 3:
+								return self[method](field, ruleData[1], ruleData[2]);
+						}
+
+					} else {
+						console.error('Undefined validation method: ' + rule + ', for field: ' + field);
+						return false;
+					}
+
+				}
+
+			};
+
+
+
+			//////////////////////////////////////////
+			////////    VALIDATIONS     ///////////
+			////////////////////////////////////
+
+			/**
+			 * Valida que el campo no esté vacío
+			 * @param field
+			 * @return {boolean}
+			 * @private
+			 */
+			this._required = function (field) {
+				if (_data[field] == '' ||  typeof _data[field] == 'undefined' ||  _data[field] == null) {
+					self.addError(field, _msgs[field]['required']);
+					return false;
+				}
+
+				return true;
+			};
+
+
+			/**
+			 * Valida si el campo es más grande que lo indicado.
+			 * @param field
+			 * @param than
+			 * @return {boolean}
+			 * @private
+			 */
+			this._greater = function (field, than) {
+				switch (typeof _data[field]) {
+					case 'string':
+						if (Date.parse(_data[field]) < Date.parse(than)) {
+							self.addError(field, _msgs[field]['greater']);
+							return false;
+						}
+						break;
+
+					case 'number':
+						if (_data[field] < than) {
+							self.addError(field, _msgs[field]['greater']);
+							return false;
+						}
+						break;
+				}
+
+				return true;
+			};
+
+			/**
+			 * Valida si el campo es más chico que lo indicado.
+			 * @param field
+			 * @param than
+			 * @return {boolean}
+			 * @private
+			 */
+			this._smaller = function (field, than) {
+				switch (typeof _data[field]) {
+					case 'string':
+						if (Date.parse(_data[field]) > Date.parse(than)) {
+							self.addError(field, _msgs[field]['smaller']);
+							return false;
+						}
+						break;
+
+					case 'number':
+						if (_data[field] > than) {
+							self.addError(field, _msgs[field]['smaller']);
+							return false;
+						}
+						break;
+				}
+
+				return true;
+			};
+
+			/**
+			 * Valida si el campo es más corto que lo indicado.
+			 * @param field
+			 * @param than
+			 * @return {boolean}
+			 * @private
+			 */
+			this._min = function (field, than) {
+				if (_data[field].length < than) {
+					self.addError(field, _msgs[field]['min']);
+					return false;
+				}
+
+				return true;
+			};
+
+
+			/**
+			 * Valida si el campo es más largo que lo indicado.
+			 * @param field
+			 * @param than
+			 * @return {boolean}
+			 * @private
+			 */
+			this._max = function (field, than) {
+				if (_data[field].length > than) {
+					self.addError(field, _msgs[field]['max']);
+					return false;
+				}
+
+				return true;
+			};
+
+
+			/**
+			 * Valida si el campo tiene formato de email.
+			 * @param field
+			 * @return {boolean}
+			 * @private
+			 */
+			this._email = function (field) {
+				var regex = /^([\w-\.]+)@((?:[\w]+\.)+)([a-z]{2,4})/;
+				if(!regex.test(_data[field])) {
+					self.addError(field, _msgs[field]['email']);
+					return false;
+				}
+
+				return true;
+			};
+
+
+			/**
+			 * Valida que el campo sea numérico.
+			 * @param field
+			 * @return {boolean}
+			 * @private
+			 */
+			this._numeric = function (field) {
+				if(isNaN(_data[field])) {
+					self.addError(field, _msgs[field]['numeric']);
+					return false;
+				}
+
+				return true;
+			};
+
+
+			/**
+			 * Valida que el campo sea igual al campo indicado.
+			 * @param field
+			 * @param otherField
+			 * @return {boolean}
+			 * @private
+			 */
+			this._equal = function (field, otherField) {
+				if (_data[field] !== _data[otherField]) {
+					self.addError(field, _msgs[field]['equal']);
+					return false;
+				}
+
+				return true;
+			};
+
+
+			/**
+			 * Valido que el campo tenga el formato de fecha.
+			 * @param field
+			 * @return {boolean}
+			 * @private
+			 */
+			this._dateformat = function (field) {
+				var regex = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
+				if (!regex.test(_data[field])) {
+					self.addError(field, _msgs[field]['dateformat']);
+					return false;
+				}
+
+				return true;
+			};
+
+
+			///////////////////////////////////////
+			////////    HANDLERS     ///////////
+			/////////////////////////////////
+
+			/**
+			 * Agrega un error.
+			 * @param field
+			 * @param msg
+			 */
+			this.addError = function (field, msg) {
+				_errors[field] = msg;
+			};
+
+
+			/**
+			 * Retorna los errores.
+			 * @return {{}}
+			 */
+			this.getErrors = function () {
+				return _errors;
+			};
+
+
+			/**
+			 * Retorna si es válido.
+			 * @return {boolean}
+			 */
+			this.isValid = function () {
+				if (_errors.length > 0) return false;
+
+				var length = 0;
+
+				for (var i in _errors) {
+					if (_errors.hasOwnProperty(i)) length++;
+				}
+
+				return length <= 0;
+
+			};
+
+
+			/**
+			 * Retorna si es inválido.
+			 * @return {boolean}
+			 */
+			this.isInvalid = function () {
+				return !self.isValid();
+			}
+		}
+	]);
