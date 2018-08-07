@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'FrameApp.services' is found in services.js
 // 'FrameApp.controllers' is found in controllers.js
-angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'])
+angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services', 'FrameApp.directives'])
     /**
      * APP RUN CONFIG
      */
@@ -61,7 +61,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
         });
 
 
-		var DEV = false;
+		var DEV = true;
 		/**
 		 * Definimos la variable global con la ruta a la API.
 		 * @type {string}
@@ -791,6 +791,22 @@ angular.module('FrameApp.controllers')
             }
         }
     ]);
+angular.module('FrameApp.directives', [])
+	.directive('fileModel', function($parse) {
+		return {
+			restrict: 'A',
+			link: function(scope, element, attrs) {
+				var model = $parse(attrs.fileModel);
+				var modelSetter = model.assign;
+
+				element.bind('change', function(){
+					scope.$apply(function(){
+						modelSetter(scope, element[0].files[0]);
+					});
+				});
+			}
+		};
+	});
 // Definimos el servicio de autenticación.
 // Este servicio debe poder:
 // 1. Loguear a un usuario
@@ -1116,6 +1132,15 @@ angular.module('FrameApp.services')
          */
         this.create = function (newPost) {
             console.log(newPost);
+
+			var payload = new FormData();
+
+			payload.append("title", newPost.title);
+			payload.append('content', newPost.text);
+			payload.append('image', newPost.file);
+			payload.append('id_user', newPost.id_user);
+			payload.append('date_added', newPost.date_added);
+
             return $http.post($rootScope.API_PATH + 'posts/save', newPost, {
                 'headers': {
                     'X-Token': AuthService.getToken()

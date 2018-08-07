@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'FrameApp.services' is found in services.js
 // 'FrameApp.controllers' is found in controllers.js
-angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'])
+angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services', 'FrameApp.directives'])
     /**
      * APP RUN CONFIG
      */
@@ -61,7 +61,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
         });
 
 
-		var DEV = false;
+		var DEV = true;
 		/**
 		 * Definimos la variable global con la ruta a la API.
 		 * @type {string}
