@@ -2,7 +2,7 @@
  * Created by Bautista on 25/6/2017.
  */
 angular.module('FrameApp.services')
-    .service('PostsService', function ($http, $q, AuthService) {
+    .service('PostsService', function ($http, $q, $rootScope, AuthService) {
         /**
          * Variable que contendría los posts
          * @type Array
@@ -11,10 +11,10 @@ angular.module('FrameApp.services')
 
         /**
          * Trae todos los posts.
-         * @returns {HttpPromise}
+         * @returns {Promise}
          */
         this.getAll = function() {
-            return $http.get('../../frameApi/public/posts')
+            return $http.get($rootScope.API_PATH + 'posts')
         };
 
         /**
@@ -53,14 +53,13 @@ angular.module('FrameApp.services')
          * @returns {response} Devuelve la respuesta de la Api.
          */
         this.get = function (id) {
-            return $http.get('../../frameApi/public/posts/' + id, {
+            return $http.get($rootScope.API_PATH + 'posts/' + id, {
                 'headers': {
                     'X-Token': AuthService.getToken()
                 }
             }).then(function(response) {
-                    var responseData = response.data;
 
-                    return responseData;
+                    return response.data;
                 },
                 function(response) {
                     return response;
@@ -76,18 +75,25 @@ angular.module('FrameApp.services')
          */
         this.create = function (newPost) {
             console.log(newPost);
-            return $http.post('../../frameApi/public/posts/save', newPost, {
+
+			var payload = new FormData();
+
+			payload.append("title", newPost.title);
+			payload.append('content', newPost.text);
+			payload.append('image', newPost.file);
+			payload.append('id_user', newPost.id_user);
+			payload.append('date_added', newPost.date_added);
+
+            return $http.post($rootScope.API_PATH + 'posts/save', newPost, {
                 'headers': {
                     'X-Token': AuthService.getToken()
                 }
             }).then(function(response) {
                     var responseData = response.data;
-                    console.log(responseData);
                     // Verificamos si grabó bien.
                     if(responseData.status == 1) {
-                        posts.push(responseData.data);
+                        posts.unshift(responseData.data);
                     }
-
                     return response;
                 },
                 function(response) {

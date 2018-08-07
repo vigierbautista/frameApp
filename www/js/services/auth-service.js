@@ -8,14 +8,16 @@
 angular.module('FrameApp.services')
     .service('AuthService', [
         '$http',
+        '$rootScope',
         'StorageService',
         /**
          * Servicio de administración de la autenticación.
          *
          * @param $http
+         * @param $rootScope
          * @param StorageService
          */
-        function($http, StorageService) {
+        function($http, $rootScope, StorageService) {
 
             // Definimos algunas variables internas
             var token = null;
@@ -36,13 +38,12 @@ angular.module('FrameApp.services')
                 // Acá estamos retornando como venimos haciendo siempre el $http.post para  devolver la promesa.
                 // Si embargo, a diferencia de los casos anteriores, en este el mismo método está utilizando ya la promesa.
                 // Para que el que llame a este método tenga acceso a los datos de la promesa, los métodos del then deben retornar el resultado que reciben.
-                return $http.post('../../frameApi/public/login', data).then(
+                return $http.post($rootScope.API_PATH + 'login', data).then(
                     function(response) {
                         // Resolve
                         var responseData = response.data;
                         if(responseData.status == 1) {
                             // Guardamos los datos del usuario.
-                            console.log(responseData.data);
                             userData = {
                                 usuario: responseData.data.name,
                                 lastName: responseData.data.last_name,
@@ -74,11 +75,10 @@ angular.module('FrameApp.services')
              * @returns {*}
              */
             this.register = function (data) {
-                return $http.post('../../frameApi/public/register', data).then(
+                return $http.post($rootScope.API_PATH + 'register', data).then(
                     function(response) {
                         var responseData = response.data;
                         if(responseData.status == 1) {
-                            console.log(response);
                             // Guardamos los datos del usuario.
                             userData = {
                                 usuario: responseData.data.name,
@@ -87,7 +87,7 @@ angular.module('FrameApp.services')
                                 email: responseData.data.email,
                                 image: responseData.data.image
                             };
-                            token = responseData.data.token;
+                            token = responseData.token;
 
                             // Guardamos los datos en el almacenamiento.
                             StorageService.set('token', token);
@@ -143,7 +143,7 @@ angular.module('FrameApp.services')
              * @returns {boolean}
              */
             this.isLogged = function() {
-                return userData !== null;
+                return userData !== null || typeof token == 'undefined';
             };
 
             /**

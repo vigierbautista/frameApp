@@ -5,9 +5,11 @@
 // the 2nd parameter is an array of 'requires'
 // 'FrameApp.services' is found in services.js
 // 'FrameApp.controllers' is found in controllers.js
-angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'])
-
-    .run(function($ionicPlatform, $rootScope, $ionicPopup, $state, AuthService, CommentsService, UserService) {
+angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services', 'FrameApp.directives'])
+    /**
+     * APP RUN CONFIG
+     */
+	.run(function($ionicPlatform, $rootScope, $ionicPopup, $state, AuthService, CommentsService, UserService) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -59,11 +61,18 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
         });
 
 
-
-
+		var DEV = false;
+		/**
+		 * Definimos la variable global con la ruta a la API.
+		 * @type {string}
+		 */
+		$rootScope.API_PATH = DEV? '../../frameApi/public_html/' : 'https://frameapi.000webhostapp.com/';
     })
 
-    .config(function($stateProvider, $urlRouterProvider) {
+	/**
+     * APP GLOBAL CONFIG
+	 */
+	.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
         $stateProvider
 
@@ -127,7 +136,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                 }
             })
 
-
+            /*
             .state('tab.chats', {
                 url: '/chats',
                 data: {
@@ -140,6 +149,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                     }
                 }
             })
+
             .state('tab.chat-detail', {
                 url: '/chats/:chatId',
                 data: {
@@ -152,7 +162,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                     }
                 }
             })
-
+            */
             .state('tab.profile', {
                 url: '/profile',
                 data: {
@@ -182,5 +192,6 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/dash');
 
-
+        // Custom back button. Removes text.
+		$ionicConfigProvider.backButton.previousTitleText(false).text('');
     });

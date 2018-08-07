@@ -16,7 +16,7 @@ var paths = {
 };
 
 // Tarea por defecto
-gulp.task('default', ['sass']);
+gulp.task('default', ['sass', 'js']);
 
 // Creamos nuestra tarea para unificar los archivos de js.
 gulp.task('js', function(done) {
