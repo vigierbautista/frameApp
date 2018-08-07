@@ -61,7 +61,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
         });
 
 
-		var DEV = true;
+		var DEV = false;
 		/**
 		 * Definimos la variable global con la ruta a la API.
 		 * @type {string}

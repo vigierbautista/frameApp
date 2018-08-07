@@ -1,5 +1,7 @@
 {
   "name": "frameApp",
-  "app_id": "",
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic1"
 }
