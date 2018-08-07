@@ -75,6 +75,15 @@ angular.module('FrameApp.services')
          */
         this.create = function (newPost) {
             console.log(newPost);
+
+			var payload = new FormData();
+
+			payload.append("title", newPost.title);
+			payload.append('content', newPost.text);
+			payload.append('image', newPost.file);
+			payload.append('id_user', newPost.id_user);
+			payload.append('date_added', newPost.date_added);
+
             return $http.post($rootScope.API_PATH + 'posts/save', newPost, {
                 'headers': {
                     'X-Token': AuthService.getToken()
