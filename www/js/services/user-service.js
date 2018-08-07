@@ -8,6 +8,7 @@
 angular.module('FrameApp.services')
     .service('UserService', [
         '$http',
+        '$rootScope',
         'StorageService',
         'AuthService',
         '$q',
@@ -15,11 +16,12 @@ angular.module('FrameApp.services')
 		 * Servicio de administración de la autenticación.
 		 *
 		 * @param $http
+		 * @param $rootScope
 		 * @param StorageService
 		 * @param $q
 		 * @param AuthService
 		 */
-        function($http, StorageService, AuthService, $q) {
+        function($http, $rootScope,  StorageService, AuthService, $q) {
 
 
             var userData = null;
@@ -58,7 +60,7 @@ angular.module('FrameApp.services')
                 // Acá estamos retornando como venimos haciendo siempre el $http.post para  devolver la promesa.
                 // Si embargo, a diferencia de los casos anteriores, en este el mismo método está utilizando ya la promesa.
                 // Para que el que llame a este método tenga acceso a los datos de la promesa, los métodos del then deben retornar el resultado que reciben.
-                return $http.put('../../frameApi/public/users/edit', data, {
+                return $http.put($rootScope.API_PATH + 'users/edit', data, {
                     'headers': {
                         'X-Token': AuthService.getToken()
                     }

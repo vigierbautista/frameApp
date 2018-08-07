@@ -2,7 +2,7 @@
  * Created by Bautista on 3/7/2017.
  */
 angular.module('FrameApp.services')
-    .service('CommentsService', function($http, $q, AuthService) {
+    .service('CommentsService', function($http, $q, $rootScope, AuthService) {
         /**
          * Array con todos los comentarios.
          * @type {Array}
@@ -15,7 +15,7 @@ angular.module('FrameApp.services')
          * @returns {Promise}
          */
         this.getAll = function(id) {
-            return $http.get('../../frameApi/public/comments/' + id)
+            return $http.get($rootScope.API_PATH + 'comments/' + id);
         };
 
 
@@ -58,7 +58,7 @@ angular.module('FrameApp.services')
          * @returns {response} Devuelve la respuesta de la Api.
          */
         this.save = function (newComment) {
-            return $http.post('../../frameApi/public/comments/save', newComment, {
+            return $http.post($rootScope.API_PATH + 'comments/save', newComment, {
                 'headers': {
                     'X-Token': AuthService.getToken()
                 }

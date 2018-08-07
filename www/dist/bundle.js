@@ -60,11 +60,13 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
 
         });
 
+
+		var DEV = false;
 		/**
-         * Definimos la variable global con la ruta a la API.
+		 * Definimos la variable global con la ruta a la API.
 		 * @type {string}
 		 */
-		$rootScope.API_PATH = '../../frameApi/public/';
+		$rootScope.API_PATH = DEV? '../../frameApi/public_html/' : 'https://frameapi.000webhostapp.com/';
     })
 
 	/**
@@ -954,7 +956,7 @@ angular.module('FrameApp.services')
  * Created by Bautista on 3/7/2017.
  */
 angular.module('FrameApp.services')
-    .service('CommentsService', function($http, $q, AuthService) {
+    .service('CommentsService', function($http, $q, $rootScope, AuthService) {
         /**
          * Array con todos los comentarios.
          * @type {Array}
@@ -967,7 +969,7 @@ angular.module('FrameApp.services')
          * @returns {Promise}
          */
         this.getAll = function(id) {
-            return $http.get('../../frameApi/public/comments/' + id)
+            return $http.get($rootScope.API_PATH + 'comments/' + id);
         };
 
 
@@ -1010,7 +1012,7 @@ angular.module('FrameApp.services')
          * @returns {response} Devuelve la respuesta de la Api.
          */
         this.save = function (newComment) {
-            return $http.post('../../frameApi/public/comments/save', newComment, {
+            return $http.post($rootScope.API_PATH + 'comments/save', newComment, {
                 'headers': {
                     'X-Token': AuthService.getToken()
                 }
@@ -1041,7 +1043,7 @@ angular.module('FrameApp.services')
  * Created by Bautista on 25/6/2017.
  */
 angular.module('FrameApp.services')
-    .service('PostsService', function ($http, $q, AuthService) {
+    .service('PostsService', function ($http, $q, $rootScope, AuthService) {
         /**
          * Variable que contendría los posts
          * @type Array
@@ -1053,7 +1055,7 @@ angular.module('FrameApp.services')
          * @returns {Promise}
          */
         this.getAll = function() {
-            return $http.get('../../frameApi/public/posts')
+            return $http.get($rootScope.API_PATH + 'posts')
         };
 
         /**
@@ -1092,7 +1094,7 @@ angular.module('FrameApp.services')
          * @returns {response} Devuelve la respuesta de la Api.
          */
         this.get = function (id) {
-            return $http.get('../../frameApi/public/posts/' + id, {
+            return $http.get($rootScope.API_PATH + 'posts/' + id, {
                 'headers': {
                     'X-Token': AuthService.getToken()
                 }
@@ -1114,7 +1116,7 @@ angular.module('FrameApp.services')
          */
         this.create = function (newPost) {
             console.log(newPost);
-            return $http.post('../../frameApi/public/posts/save', newPost, {
+            return $http.post($rootScope.API_PATH + 'posts/save', newPost, {
                 'headers': {
                     'X-Token': AuthService.getToken()
                 }
@@ -1189,6 +1191,7 @@ angular.module('FrameApp.services')
 angular.module('FrameApp.services')
     .service('UserService', [
         '$http',
+        '$rootScope',
         'StorageService',
         'AuthService',
         '$q',
@@ -1196,11 +1199,12 @@ angular.module('FrameApp.services')
 		 * Servicio de administración de la autenticación.
 		 *
 		 * @param $http
+		 * @param $rootScope
 		 * @param StorageService
 		 * @param $q
 		 * @param AuthService
 		 */
-        function($http, StorageService, AuthService, $q) {
+        function($http, $rootScope,  StorageService, AuthService, $q) {
 
 
             var userData = null;
@@ -1239,7 +1243,7 @@ angular.module('FrameApp.services')
                 // Acá estamos retornando como venimos haciendo siempre el $http.post para  devolver la promesa.
                 // Si embargo, a diferencia de los casos anteriores, en este el mismo método está utilizando ya la promesa.
                 // Para que el que llame a este método tenga acceso a los datos de la promesa, los métodos del then deben retornar el resultado que reciben.
-                return $http.put('../../frameApi/public/users/edit', data, {
+                return $http.put($rootScope.API_PATH + 'users/edit', data, {
                     'headers': {
                         'X-Token': AuthService.getToken()
                     }

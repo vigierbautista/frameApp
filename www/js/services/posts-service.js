@@ -2,7 +2,7 @@
  * Created by Bautista on 25/6/2017.
  */
 angular.module('FrameApp.services')
-    .service('PostsService', function ($http, $q, AuthService) {
+    .service('PostsService', function ($http, $q, $rootScope, AuthService) {
         /**
          * Variable que contendría los posts
          * @type Array
@@ -14,7 +14,7 @@ angular.module('FrameApp.services')
          * @returns {Promise}
          */
         this.getAll = function() {
-            return $http.get('../../frameApi/public/posts')
+            return $http.get($rootScope.API_PATH + 'posts')
         };
 
         /**
@@ -53,7 +53,7 @@ angular.module('FrameApp.services')
          * @returns {response} Devuelve la respuesta de la Api.
          */
         this.get = function (id) {
-            return $http.get('../../frameApi/public/posts/' + id, {
+            return $http.get($rootScope.API_PATH + 'posts/' + id, {
                 'headers': {
                     'X-Token': AuthService.getToken()
                 }
@@ -75,7 +75,7 @@ angular.module('FrameApp.services')
          */
         this.create = function (newPost) {
             console.log(newPost);
-            return $http.post('../../frameApi/public/posts/save', newPost, {
+            return $http.post($rootScope.API_PATH + 'posts/save', newPost, {
                 'headers': {
                     'X-Token': AuthService.getToken()
                 }
