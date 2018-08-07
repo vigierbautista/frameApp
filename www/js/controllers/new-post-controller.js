@@ -3,7 +3,7 @@
  */
 
 angular.module('FrameApp.controllers')
-    .controller('NewPostCtrl', function ($scope, $state, $ionicPopup, PostsService, AuthService) {
+    .controller('NewPostCtrl', function ($scope, $state, $ionicPopup, PostsService, AuthService, ValidationService) {
 
         var user = AuthService.getUserData();
 
@@ -14,14 +14,32 @@ angular.module('FrameApp.controllers')
             date_added: null,
             id_user: user.id
         };
+
         $scope.save = function(data) {
-            if(!data.title) {
-                $ionicPopup.alert({
-                    title: 'Error',
-                    template: "Para postear se necesita un título al menos."
-                });
-                return;
+			var Validator = ValidationService.init(data, {
+				title: ['required', 'min:3', 'max:30']
+			}, {
+				title: {
+				    required: 'Ingrese un título.',
+                    min: 'El título debe tener al menos 3 caracteres.',
+                    max: 'El título no debe tener más de 30 caracteres.'
+                }
+			});
+
+			if(Validator.isInvalid()) {
+				var error_msg = '';
+				var errors = Validator.getErrors();
+				for (var i in errors) {
+					error_msg += errors[i] + '<br>';
+				}
+
+				$ionicPopup.alert({
+					title: 'Datos incorrectos',
+					template: error_msg
+				});
+				return;
             }
+
             PostsService.create(data).then(
                 function(response) {
 
@@ -38,13 +56,24 @@ angular.module('FrameApp.controllers')
                             $state.go('tab.dash');
                         });
                     } else {
-                        $ionicPopup.alert({
-                            title: 'Error...',
-                            // TODO: Agregar los errores de validación.
-                            template: 'Hubo un error al tratar de crear el producto. Por favor, verifique los datos.'
-                        });
+						var error_msg = '';
+						for (var i in responseData.errors) {
+							error_msg += responseData.errors[i] + '<br>';
+						}
+
+						$ionicPopup.alert({
+							title: responseData.msg,
+							template: error_msg
+						});
                     }
-                }
+                },
+				function() {
+					// Reject
+					$ionicPopup.alert({
+						title: 'Error',
+						template: "No pudimos conectarnos. Intente de nuevo más tarde."
+					});
+				}
             );
         };
     });

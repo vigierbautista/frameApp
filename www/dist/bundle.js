@@ -60,11 +60,13 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
 
         });
 
+
+		var DEV = false;
 		/**
-         * Definimos la variable global con la ruta a la API.
+		 * Definimos la variable global con la ruta a la API.
 		 * @type {string}
 		 */
-		$rootScope.API_PATH = '../../frameApi/public/';
+		$rootScope.API_PATH = DEV? '../../frameApi/public_html/' : 'https://frameapi.000webhostapp.com/';
     })
 
 	/**
@@ -329,7 +331,6 @@ angular.module('FrameApp.controllers')
             $scope.comments = [];
             CommentsService.getFromPosts(postId).then(
                 function(data) {
-                    console.log(data);
                     $scope.comments = data;
                 }
             );
@@ -346,11 +347,15 @@ angular.module('FrameApp.controllers')
 
                         // Verificamos si tuvimos éxito  o no.
                         if(responseData.status == 0) {
-                            $ionicPopup.alert({
-                                title: 'Error...',
-                                // TODO: Agregar los errores de validación.
-                                template: responseData.msg
-                            });
+							var error_msg = '';
+							for (var i in responseData.errors) {
+								error_msg += responseData.errors[i] + '<br>';
+							}
+
+							$ionicPopup.alert({
+								title: responseData.msg,
+								template: error_msg
+							});
 
                         }
                     }
@@ -456,7 +461,7 @@ angular.module('FrameApp.controllers')
  */
 
 angular.module('FrameApp.controllers')
-    .controller('NewPostCtrl', function ($scope, $state, $ionicPopup, PostsService, AuthService) {
+    .controller('NewPostCtrl', function ($scope, $state, $ionicPopup, PostsService, AuthService, ValidationService) {
 
         var user = AuthService.getUserData();
 
@@ -467,14 +472,32 @@ angular.module('FrameApp.controllers')
             date_added: null,
             id_user: user.id
         };
+
         $scope.save = function(data) {
-            if(!data.title) {
-                $ionicPopup.alert({
-                    title: 'Error',
-                    template: "Para postear se necesita un título al menos."
-                });
-                return;
+			var Validator = ValidationService.init(data, {
+				title: ['required', 'min:3', 'max:30']
+			}, {
+				title: {
+				    required: 'Ingrese un título.',
+                    min: 'El título debe tener al menos 3 caracteres.',
+                    max: 'El título no debe tener más de 30 caracteres.'
+                }
+			});
+
+			if(Validator.isInvalid()) {
+				var error_msg = '';
+				var errors = Validator.getErrors();
+				for (var i in errors) {
+					error_msg += errors[i] + '<br>';
+				}
+
+				$ionicPopup.alert({
+					title: 'Datos incorrectos',
+					template: error_msg
+				});
+				return;
             }
+
             PostsService.create(data).then(
                 function(response) {
 
@@ -491,13 +514,24 @@ angular.module('FrameApp.controllers')
                             $state.go('tab.dash');
                         });
                     } else {
-                        $ionicPopup.alert({
-                            title: 'Error...',
-                            // TODO: Agregar los errores de validación.
-                            template: 'Hubo un error al tratar de crear el producto. Por favor, verifique los datos.'
-                        });
+						var error_msg = '';
+						for (var i in responseData.errors) {
+							error_msg += responseData.errors[i] + '<br>';
+						}
+
+						$ionicPopup.alert({
+							title: responseData.msg,
+							template: error_msg
+						});
                     }
-                }
+                },
+				function() {
+					// Reject
+					$ionicPopup.alert({
+						title: 'Error',
+						template: "No pudimos conectarnos. Intente de nuevo más tarde."
+					});
+				}
             );
         };
     });
@@ -535,16 +569,11 @@ angular.module('FrameApp.controllers')
         '$state',
         'AuthService',
         'UserService',
-        'StorageService',
-        function($scope, $ionicPopup, $state, AuthService, UserService, StorageService) {
+        function($scope, $ionicPopup, $state, AuthService, UserService) {
 
-            function getUser() {
-                userData = StorageService.get('userData');
-            }
 
             // Buscamos la informacion del user.
             var user = AuthService.getUserData();
-
             $scope.user = {
                 id: user.id,
                 name: user.usuario,
@@ -593,11 +622,15 @@ angular.module('FrameApp.controllers')
                                         $state.go('tab.profile');
                                     });
                                 } else {
-                                    $ionicPopup.alert({
-                                        title: 'Error...',
-                                        // TODO: Agregar los errores de validación.
-                                        template: responseData.msg
-                                    });
+									var error_msg = '';
+									for (var i in responseData.errors) {
+										error_msg += responseData.errors[i] + '<br>';
+									}
+
+									$ionicPopup.alert({
+										title: responseData.msg,
+										template: error_msg
+									});
                                 }
                             }
                         );
@@ -642,8 +675,6 @@ angular.module('FrameApp.controllers')
                                 $state.go('login');
                             }
                         )
-                    } else {
-
                     }
                 });
 
@@ -925,7 +956,7 @@ angular.module('FrameApp.services')
  * Created by Bautista on 3/7/2017.
  */
 angular.module('FrameApp.services')
-    .service('CommentsService', function($http, $q, AuthService) {
+    .service('CommentsService', function($http, $q, $rootScope, AuthService) {
         /**
          * Array con todos los comentarios.
          * @type {Array}
@@ -938,7 +969,7 @@ angular.module('FrameApp.services')
          * @returns {Promise}
          */
         this.getAll = function(id) {
-            return $http.get('../../frameApi/public/comments/' + id)
+            return $http.get($rootScope.API_PATH + 'comments/' + id);
         };
 
 
@@ -981,7 +1012,7 @@ angular.module('FrameApp.services')
          * @returns {response} Devuelve la respuesta de la Api.
          */
         this.save = function (newComment) {
-            return $http.post('../../frameApi/public/comments/save', newComment, {
+            return $http.post($rootScope.API_PATH + 'comments/save', newComment, {
                 'headers': {
                     'X-Token': AuthService.getToken()
                 }
@@ -1012,7 +1043,7 @@ angular.module('FrameApp.services')
  * Created by Bautista on 25/6/2017.
  */
 angular.module('FrameApp.services')
-    .service('PostsService', function ($http, $q, AuthService) {
+    .service('PostsService', function ($http, $q, $rootScope, AuthService) {
         /**
          * Variable que contendría los posts
          * @type Array
@@ -1021,10 +1052,10 @@ angular.module('FrameApp.services')
 
         /**
          * Trae todos los posts.
-         * @returns {HttpPromise}
+         * @returns {Promise}
          */
         this.getAll = function() {
-            return $http.get('../../frameApi/public/posts')
+            return $http.get($rootScope.API_PATH + 'posts')
         };
 
         /**
@@ -1063,14 +1094,13 @@ angular.module('FrameApp.services')
          * @returns {response} Devuelve la respuesta de la Api.
          */
         this.get = function (id) {
-            return $http.get('../../frameApi/public/posts/' + id, {
+            return $http.get($rootScope.API_PATH + 'posts/' + id, {
                 'headers': {
                     'X-Token': AuthService.getToken()
                 }
             }).then(function(response) {
-                    var responseData = response.data;
 
-                    return responseData;
+                    return response.data;
                 },
                 function(response) {
                     return response;
@@ -1086,18 +1116,16 @@ angular.module('FrameApp.services')
          */
         this.create = function (newPost) {
             console.log(newPost);
-            return $http.post('../../frameApi/public/posts/save', newPost, {
+            return $http.post($rootScope.API_PATH + 'posts/save', newPost, {
                 'headers': {
                     'X-Token': AuthService.getToken()
                 }
             }).then(function(response) {
                     var responseData = response.data;
-                    console.log(responseData);
                     // Verificamos si grabó bien.
                     if(responseData.status == 1) {
-                        posts.push(responseData.data);
+                        posts.unshift(responseData.data);
                     }
-
                     return response;
                 },
                 function(response) {
@@ -1163,18 +1191,20 @@ angular.module('FrameApp.services')
 angular.module('FrameApp.services')
     .service('UserService', [
         '$http',
+        '$rootScope',
         'StorageService',
         'AuthService',
         '$q',
-        /**
-         * Servicio de administración de la autenticación.
-         *
-         * @param $http
-         * @param StorageService
-         * @param $q
-         * @param AuthService
-         */
-        function($http, StorageService, AuthService, $q) {
+		/**
+		 * Servicio de administración de la autenticación.
+		 *
+		 * @param $http
+		 * @param $rootScope
+		 * @param StorageService
+		 * @param $q
+		 * @param AuthService
+		 */
+        function($http, $rootScope,  StorageService, AuthService, $q) {
 
 
             var userData = null;
@@ -1213,7 +1243,7 @@ angular.module('FrameApp.services')
                 // Acá estamos retornando como venimos haciendo siempre el $http.post para  devolver la promesa.
                 // Si embargo, a diferencia de los casos anteriores, en este el mismo método está utilizando ya la promesa.
                 // Para que el que llame a este método tenga acceso a los datos de la promesa, los métodos del then deben retornar el resultado que reciben.
-                return $http.put('../../frameApi/public/users/edit', data, {
+                return $http.put($rootScope.API_PATH + 'users/edit', data, {
                     'headers': {
                         'X-Token': AuthService.getToken()
                     }
@@ -1235,7 +1265,6 @@ angular.module('FrameApp.services')
 
                             // Guardamos los datos en el almacenamiento.
                             StorageService.set('userData', userData);
-                            console.log(userData);
                         }
                         // Retornamos la respuesta, para que esté disponible para los lugares que llamen a este método.
                         return response;
