@@ -7,16 +7,11 @@ angular.module('FrameApp.controllers')
         '$state',
         'AuthService',
         'UserService',
-        'StorageService',
-        function($scope, $ionicPopup, $state, AuthService, UserService, StorageService) {
+        function($scope, $ionicPopup, $state, AuthService, UserService) {
 
-            function getUser() {
-                userData = StorageService.get('userData');
-            }
 
             // Buscamos la informacion del user.
             var user = AuthService.getUserData();
-
             $scope.user = {
                 id: user.id,
                 name: user.usuario,
@@ -65,11 +60,15 @@ angular.module('FrameApp.controllers')
                                         $state.go('tab.profile');
                                     });
                                 } else {
-                                    $ionicPopup.alert({
-                                        title: 'Error...',
-                                        // TODO: Agregar los errores de validación.
-                                        template: responseData.msg
-                                    });
+									var error_msg = '';
+									for (var i in responseData.errors) {
+										error_msg += responseData.errors[i] + '<br>';
+									}
+
+									$ionicPopup.alert({
+										title: responseData.msg,
+										template: error_msg
+									});
                                 }
                             }
                         );
@@ -114,8 +113,6 @@ angular.module('FrameApp.controllers')
                                 $state.go('login');
                             }
                         )
-                    } else {
-
                     }
                 });
 

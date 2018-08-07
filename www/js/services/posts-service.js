@@ -11,7 +11,7 @@ angular.module('FrameApp.services')
 
         /**
          * Trae todos los posts.
-         * @returns {HttpPromise}
+         * @returns {Promise}
          */
         this.getAll = function() {
             return $http.get('../../frameApi/public/posts')
@@ -58,9 +58,8 @@ angular.module('FrameApp.services')
                     'X-Token': AuthService.getToken()
                 }
             }).then(function(response) {
-                    var responseData = response.data;
 
-                    return responseData;
+                    return response.data;
                 },
                 function(response) {
                     return response;
@@ -82,12 +81,10 @@ angular.module('FrameApp.services')
                 }
             }).then(function(response) {
                     var responseData = response.data;
-                    console.log(responseData);
                     // Verificamos si grabó bien.
                     if(responseData.status == 1) {
-                        posts.push(responseData.data);
+                        posts.unshift(responseData.data);
                     }
-
                     return response;
                 },
                 function(response) {

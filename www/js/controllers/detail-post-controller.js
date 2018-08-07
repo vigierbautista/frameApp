@@ -39,7 +39,6 @@ angular.module('FrameApp.controllers')
             $scope.comments = [];
             CommentsService.getFromPosts(postId).then(
                 function(data) {
-                    console.log(data);
                     $scope.comments = data;
                 }
             );
@@ -56,11 +55,15 @@ angular.module('FrameApp.controllers')
 
                         // Verificamos si tuvimos éxito  o no.
                         if(responseData.status == 0) {
-                            $ionicPopup.alert({
-                                title: 'Error...',
-                                // TODO: Agregar los errores de validación.
-                                template: responseData.msg
-                            });
+							var error_msg = '';
+							for (var i in responseData.errors) {
+								error_msg += responseData.errors[i] + '<br>';
+							}
+
+							$ionicPopup.alert({
+								title: responseData.msg,
+								template: error_msg
+							});
 
                         }
                     }

@@ -11,14 +11,14 @@ angular.module('FrameApp.services')
         'StorageService',
         'AuthService',
         '$q',
-        /**
-         * Servicio de administración de la autenticación.
-         *
-         * @param $http
-         * @param StorageService
-         * @param $q
-         * @param AuthService
-         */
+		/**
+		 * Servicio de administración de la autenticación.
+		 *
+		 * @param $http
+		 * @param StorageService
+		 * @param $q
+		 * @param AuthService
+		 */
         function($http, StorageService, AuthService, $q) {
 
 
@@ -80,7 +80,6 @@ angular.module('FrameApp.services')
 
                             // Guardamos los datos en el almacenamiento.
                             StorageService.set('userData', userData);
-                            console.log(userData);
                         }
                         // Retornamos la respuesta, para que esté disponible para los lugares que llamen a este método.
                         return response;

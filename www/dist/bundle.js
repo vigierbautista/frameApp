@@ -329,7 +329,6 @@ angular.module('FrameApp.controllers')
             $scope.comments = [];
             CommentsService.getFromPosts(postId).then(
                 function(data) {
-                    console.log(data);
                     $scope.comments = data;
                 }
             );
@@ -346,11 +345,15 @@ angular.module('FrameApp.controllers')
 
                         // Verificamos si tuvimos éxito  o no.
                         if(responseData.status == 0) {
-                            $ionicPopup.alert({
-                                title: 'Error...',
-                                // TODO: Agregar los errores de validación.
-                                template: responseData.msg
-                            });
+							var error_msg = '';
+							for (var i in responseData.errors) {
+								error_msg += responseData.errors[i] + '<br>';
+							}
+
+							$ionicPopup.alert({
+								title: responseData.msg,
+								template: error_msg
+							});
 
                         }
                     }
@@ -456,7 +459,7 @@ angular.module('FrameApp.controllers')
  */
 
 angular.module('FrameApp.controllers')
-    .controller('NewPostCtrl', function ($scope, $state, $ionicPopup, PostsService, AuthService) {
+    .controller('NewPostCtrl', function ($scope, $state, $ionicPopup, PostsService, AuthService, ValidationService) {
 
         var user = AuthService.getUserData();
 
@@ -467,14 +470,32 @@ angular.module('FrameApp.controllers')
             date_added: null,
             id_user: user.id
         };
+
         $scope.save = function(data) {
-            if(!data.title) {
-                $ionicPopup.alert({
-                    title: 'Error',
-                    template: "Para postear se necesita un título al menos."
-                });
-                return;
+			var Validator = ValidationService.init(data, {
+				title: ['required', 'min:3', 'max:30']
+			}, {
+				title: {
+				    required: 'Ingrese un título.',
+                    min: 'El título debe tener al menos 3 caracteres.',
+                    max: 'El título no debe tener más de 30 caracteres.'
+                }
+			});
+
+			if(Validator.isInvalid()) {
+				var error_msg = '';
+				var errors = Validator.getErrors();
+				for (var i in errors) {
+					error_msg += errors[i] + '<br>';
+				}
+
+				$ionicPopup.alert({
+					title: 'Datos incorrectos',
+					template: error_msg
+				});
+				return;
             }
+
             PostsService.create(data).then(
                 function(response) {
 
@@ -491,13 +512,24 @@ angular.module('FrameApp.controllers')
                             $state.go('tab.dash');
                         });
                     } else {
-                        $ionicPopup.alert({
-                            title: 'Error...',
-                            // TODO: Agregar los errores de validación.
-                            template: 'Hubo un error al tratar de crear el producto. Por favor, verifique los datos.'
-                        });
+						var error_msg = '';
+						for (var i in responseData.errors) {
+							error_msg += responseData.errors[i] + '<br>';
+						}
+
+						$ionicPopup.alert({
+							title: responseData.msg,
+							template: error_msg
+						});
                     }
-                }
+                },
+				function() {
+					// Reject
+					$ionicPopup.alert({
+						title: 'Error',
+						template: "No pudimos conectarnos. Intente de nuevo más tarde."
+					});
+				}
             );
         };
     });
@@ -535,16 +567,11 @@ angular.module('FrameApp.controllers')
         '$state',
         'AuthService',
         'UserService',
-        'StorageService',
-        function($scope, $ionicPopup, $state, AuthService, UserService, StorageService) {
+        function($scope, $ionicPopup, $state, AuthService, UserService) {
 
-            function getUser() {
-                userData = StorageService.get('userData');
-            }
 
             // Buscamos la informacion del user.
             var user = AuthService.getUserData();
-
             $scope.user = {
                 id: user.id,
                 name: user.usuario,
@@ -593,11 +620,15 @@ angular.module('FrameApp.controllers')
                                         $state.go('tab.profile');
                                     });
                                 } else {
-                                    $ionicPopup.alert({
-                                        title: 'Error...',
-                                        // TODO: Agregar los errores de validación.
-                                        template: responseData.msg
-                                    });
+									var error_msg = '';
+									for (var i in responseData.errors) {
+										error_msg += responseData.errors[i] + '<br>';
+									}
+
+									$ionicPopup.alert({
+										title: responseData.msg,
+										template: error_msg
+									});
                                 }
                             }
                         );
@@ -642,8 +673,6 @@ angular.module('FrameApp.controllers')
                                 $state.go('login');
                             }
                         )
-                    } else {
-
                     }
                 });
 
@@ -1021,7 +1050,7 @@ angular.module('FrameApp.services')
 
         /**
          * Trae todos los posts.
-         * @returns {HttpPromise}
+         * @returns {Promise}
          */
         this.getAll = function() {
             return $http.get('../../frameApi/public/posts')
@@ -1068,9 +1097,8 @@ angular.module('FrameApp.services')
                     'X-Token': AuthService.getToken()
                 }
             }).then(function(response) {
-                    var responseData = response.data;
 
-                    return responseData;
+                    return response.data;
                 },
                 function(response) {
                     return response;
@@ -1092,12 +1120,10 @@ angular.module('FrameApp.services')
                 }
             }).then(function(response) {
                     var responseData = response.data;
-                    console.log(responseData);
                     // Verificamos si grabó bien.
                     if(responseData.status == 1) {
-                        posts.push(responseData.data);
+                        posts.unshift(responseData.data);
                     }
-
                     return response;
                 },
                 function(response) {
@@ -1166,14 +1192,14 @@ angular.module('FrameApp.services')
         'StorageService',
         'AuthService',
         '$q',
-        /**
-         * Servicio de administración de la autenticación.
-         *
-         * @param $http
-         * @param StorageService
-         * @param $q
-         * @param AuthService
-         */
+		/**
+		 * Servicio de administración de la autenticación.
+		 *
+		 * @param $http
+		 * @param StorageService
+		 * @param $q
+		 * @param AuthService
+		 */
         function($http, StorageService, AuthService, $q) {
 
 
@@ -1235,7 +1261,6 @@ angular.module('FrameApp.services')
 
                             // Guardamos los datos en el almacenamiento.
                             StorageService.set('userData', userData);
-                            console.log(userData);
                         }
                         // Retornamos la respuesta, para que esté disponible para los lugares que llamen a este método.
                         return response;
