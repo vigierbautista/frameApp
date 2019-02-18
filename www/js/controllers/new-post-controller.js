@@ -3,17 +3,27 @@
  */
 
 angular.module('FrameApp.controllers')
-    .controller('NewPostCtrl', function ($scope, $state, $ionicPopup, PostsService, AuthService, ValidationService) {
+    .controller('NewPostCtrl', function ($scope, $state, $ionicPopup, PostsService, CategoriesService, AuthService, ValidationService) {
 
         var user = AuthService.getUserData();
 
-        $scope.post = {
-            title: null,
-            content: null,
-            image: null,
-            date_added: null,
-            id_user: user.id
-        };
+		$scope.categories = [];
+
+		CategoriesService.getCategories().then(
+			function(categories) {
+				$scope.categories = categories;
+
+				$scope.post = {
+					title: null,
+					content: null,
+					image: null,
+					date_added: null,
+					id_category: $scope.categories[0].id,
+					id_user: user.id
+				};
+			}
+		);
+
 
         $scope.save = function(data) {
 			var Validator = ValidationService.init(data, {

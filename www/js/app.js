@@ -61,7 +61,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
         });
 
 
-		var DEV = false;
+		var DEV = true;
 		/**
 		 * Definimos la variable global con la ruta a la API.
 		 * @type {string}
@@ -94,11 +94,19 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                 controller: 'LoginCtrl'
             })
 
+            .state('recover-pass', {
+                url: '/recover',
+                templateUrl: 'templates/login-recover-pass.html',
+                controller: 'LoginCtrl'
+
+            })
+
             .state('register', {
                 url: '/register',
                 templateUrl: 'templates/login-register.html',
                 controller: 'RegisterCtrl'
             })
+
             .state('tab.dash', {
                 url: '/dash',
                 data: {

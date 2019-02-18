@@ -36,7 +36,6 @@ angular.module('FrameApp.services')
                         var responseData = response.data;
                         // En caso de exito guardamos los comments en el resolve de la promesa.
                         comments = responseData.post;
-                        console.log(comments);
                         deferred.resolve(comments);
                     },
                     function () {
@@ -64,7 +63,6 @@ angular.module('FrameApp.services')
                 }
             }).then(function(response) {
                     var responseData = response.data;
-                    console.log(responseData);
                     // Verificamos si grabó bien.
                     if(responseData.status == 1) {
                         comments.push(responseData.data);

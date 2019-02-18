@@ -88,5 +88,9 @@ angular.module('FrameApp.controllers')
                     }
                 );
             }
+            
+            $scope.recover = function (userData) {
+				
+			}
         }
     ]);

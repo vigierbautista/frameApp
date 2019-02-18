@@ -74,18 +74,24 @@ angular.module('FrameApp.services')
          * @returns {response} Devuelve la respuesta de la Api.
          */
         this.create = function (newPost) {
+
             console.log(newPost);
 
 			var payload = new FormData();
 
 			payload.append("title", newPost.title);
-			payload.append('content', newPost.text);
-			payload.append('image', newPost.file);
+			payload.append('content', newPost.content);
+			payload.append('image', newPost.image);
 			payload.append('id_user', newPost.id_user);
+			payload.append('id_category', newPost.id_category);
 			payload.append('date_added', newPost.date_added);
+;
 
-            return $http.post($rootScope.API_PATH + 'posts/save', newPost, {
+            return $http.post($rootScope.API_PATH + 'posts/save', payload, {
                 'headers': {
+                    'transformRequest': angular.identity,
+                    'Content-Type': undefined,
+                    'Process-Data': false,
                     'X-Token': AuthService.getToken()
                 }
             }).then(function(response) {

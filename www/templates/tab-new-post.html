@@ -2,13 +2,16 @@
 <ion-view id="new-post-wrapper" view-title="Post">
     <ion-content class="padding">
         <div class="white-bg">
-            <form ng-submit="save(post)">
+            <form ng-submit="save(post)" enctype="multipart/form-data">
                 <div class="list">
                     <label class="item item-input">
                         <input type="text" ng-model="post.title" placeholder="Title">
                     </label>
                     <label class="item item-input">
                         <textarea ng-model="post.content" placeholder="Description"></textarea>
+                    </label>
+                    <label class="item item-input">
+                        <select ng-model="post.id_category" ng-options="category.id as category.category for category in categories"></select>
                     </label>
                     <label class="item item-input">
                         <input type="file" file-model="post.image">

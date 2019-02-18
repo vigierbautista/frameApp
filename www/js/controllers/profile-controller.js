@@ -11,7 +11,6 @@ angular.module('FrameApp.controllers')
             $scope.user = null;
             UserService.getUser().then(
                 function(user) {
-                    console.log(user);
                     $scope.user = {
                         name: user.usuario,
                         last_name: user.lastName,

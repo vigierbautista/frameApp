@@ -1,61 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a704ff68-9f74-4cbe-b376-932a81789c23" name="Default" comment="final_exam201807&#10; - file upload">
-      <change afterPath="$PROJECT_DIR$/resources/android/splash/splashscreen.png" afterDir="false" />
+    <list default="true" id="a704ff68-9f74-4cbe-b376-932a81789c23" name="Default" comment="final_exam201807&#10; - spashscreen">
+      <change afterPath="$PROJECT_DIR$/www/js/services/categories-service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/templates/login-recover-pass.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ionic.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/ionic.config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/drawable-hdpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-hdpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/drawable-ldpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-ldpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/drawable-mdpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-mdpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/drawable-xhdpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-xhdpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/drawable-xxhdpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-xxhdpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/drawable-xxxhdpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-xxxhdpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-hdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-hdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-ldpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-ldpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-mdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-mdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-xhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-xhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-xxhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-xxhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-xxxhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-xxxhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-hdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-hdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-ldpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-ldpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-mdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-mdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-xhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-xhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-xxhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-xxhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-xxxhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-xxxhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/icon-40.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/icon/icon-40.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/icon-40@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/icon/icon-40@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/icon-50.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/icon/icon-50.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/icon-50@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/icon/icon-50@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/icon-60.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/icon/icon-60.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/icon-60@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/icon/icon-60@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/icon-60@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/icon/icon-60@3x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/icon-72.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/icon/icon-72.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/icon-72@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/icon/icon-72@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/icon-76.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/icon/icon-76.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/icon-76@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/icon/icon-76@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/icon-small.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/icon/icon-small.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/icon-small@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/icon/icon-small@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/icon-small@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/icon/icon-small@3x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/icon/icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/icon@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/icon/icon@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-568h@2x~iphone.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-568h@2x~iphone.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-667h.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-667h.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-736h.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-736h.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-Landscape-736h.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-Landscape-736h.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-Landscape@2x~ipad.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-Landscape@2x~ipad.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-Landscape~ipad.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-Landscape~ipad.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-Portrait@2x~ipad.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-Portrait@2x~ipad.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-Portrait~ipad.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-Portrait~ipad.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default@2x~iphone.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default@2x~iphone.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default~iphone.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default~iphone.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/splash.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/dist/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/dist/bundle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/controllers/login-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/controllers/login-controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/controllers/new-post-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/controllers/new-post-controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/controllers/profile-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/controllers/profile-controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/services/comments-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/services/comments-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/services/posts-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/services/posts-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/templates/login-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/templates/login-form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/templates/login-register.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/templates/login-register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/templates/tab-new-post.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/templates/tab-new-post.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,78 +29,67 @@
       <option value="module" />
     </option>
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-1843722019">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.0" value="2" />
-          <entry key="project.open.time.1" value="1" />
-          <entry key="project.opened" value="3" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="css" value="1" />
-          <entry key="html" value="9" />
-          <entry key="iml" value="1" />
-          <entry key="js" value="34" />
-          <entry key="md" value="2" />
-          <entry key="xml" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="CSS" value="1" />
-          <entry key="HTML" value="9" />
-          <entry key="IDEA_MODULE" value="1" />
-          <entry key="JavaScript" value="34" />
-          <entry key="Markdown" value="2" />
-          <entry key="XML" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.vcs.git.usages">
-        <counts>
-          <entry key="git.branch.checkout.remote" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="html" value="29" />
-          <entry key="js" value="1141" />
-          <entry key="txt" value="127" />
-          <entry key="xml" value="69" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="HTML" value="29" />
-          <entry key="JavaScript" value="1141" />
-          <entry key="PLAIN_TEXT" value="127" />
-          <entry key="XML" value="69" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FavoritesManager">
     <favorites_list name="frameApp" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/app.js">
+        <entry file="file://$PROJECT_DIR$/www/templates/tab-profile.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/tab-profile-options.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/tab-new-post.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="63" column="23" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
+            <state relative-caret-position="195">
+              <caret line="13" column="104" selection-start-line="13" selection-start-column="104" selection-end-line="13" selection-end-column="104" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/tab-dash.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/controllers/dash-controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="26" lean-forward="true" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/www/css/style.css">
+        <entry file="file://$PROJECT_DIR$/www/js/controllers/new-post-controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="18" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="18" />
+            <state relative-caret-position="375">
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/services/posts-service.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="77" column="31" selection-start-line="77" selection-start-column="31" selection-end-line="77" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/services/categories-service.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="31" column="22" lean-forward="true" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -163,95 +112,39 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
+        <entry key="$PROJECT_DIR$" value="final_exam_201807" />
       </map>
     </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/www/js/controllers/login-controller.js" />
         <option value="$PROJECT_DIR$/www/js/services/validation-service.js" />
         <option value="$PROJECT_DIR$/www/js/controllers/register-controller.js" />
-        <option value="$PROJECT_DIR$/www/js/services/auth-service.js" />
         <option value="$PROJECT_DIR$/www/templates/tabs.html" />
         <option value="$PROJECT_DIR$/www/js/controllers/detail-post-controller.js" />
         <option value="$PROJECT_DIR$/www/js/controllers/profile-options-controller.js" />
-        <option value="$PROJECT_DIR$/www/js/services/comments-service.js" />
-        <option value="$PROJECT_DIR$/www/js/services/user-service.js" />
         <option value="$PROJECT_DIR$/www/js/directives/posts-directives.js" />
-        <option value="$PROJECT_DIR$/www/templates/tab-new-post.html" />
         <option value="$PROJECT_DIR$/www/js/controllers.js" />
         <option value="$PROJECT_DIR$/www/js/directives/directives.js" />
-        <option value="$PROJECT_DIR$/www/js/controllers/new-post-controller.js" />
-        <option value="$PROJECT_DIR$/www/js/services/posts-service.js" />
-        <option value="$PROJECT_DIR$/www/js/app.js" />
         <option value="$PROJECT_DIR$/config.xml" />
+        <option value="$PROJECT_DIR$/www/js/services/auth-service.js" />
+        <option value="$PROJECT_DIR$/www/templates/login-register.html" />
+        <option value="$PROJECT_DIR$/www/css/style.css" />
+        <option value="$PROJECT_DIR$/www/js/app.js" />
+        <option value="$PROJECT_DIR$/www/templates/login-form.html" />
+        <option value="$PROJECT_DIR$/www/templates/login-recover-pass.html" />
+        <option value="$PROJECT_DIR$/www/js/controllers/login-controller.js" />
+        <option value="$PROJECT_DIR$/www/js/controllers/profile-controller.js" />
+        <option value="$PROJECT_DIR$/www/js/services/comments-service.js" />
+        <option value="$PROJECT_DIR$/www/js/services/user-service.js" />
+        <option value="$PROJECT_DIR$/www/dist/bundle.js" />
+        <option value="$PROJECT_DIR$/www/js/services/categories-service.js" />
+        <option value="$PROJECT_DIR$/www/js/services/posts-service.js" />
+        <option value="$PROJECT_DIR$/www/templates/tab-new-post.html" />
+        <option value="$PROJECT_DIR$/www/js/controllers/new-post-controller.js" />
       </list>
     </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <gulpfiles>
-      <GulpfileState>
-        <gulpfile-path>$PROJECT_DIR$/gulpfile.js</gulpfile-path>
-        <tasks>
-          <GulpTaskState>
-            <dependencies>
-              <dependency value="sass" />
-              <dependency value="js" />
-            </dependencies>
-            <task-name>default</task-name>
-          </GulpTaskState>
-          <GulpTaskState>
-            <task-name>js</task-name>
-          </GulpTaskState>
-          <GulpTaskState>
-            <dependencies>
-              <dependency value="js" />
-            </dependencies>
-            <task-name>js:watch</task-name>
-          </GulpTaskState>
-          <GulpTaskState>
-            <task-name>sass</task-name>
-          </GulpTaskState>
-          <GulpTaskState>
-            <dependencies>
-              <dependency value="sass" />
-            </dependencies>
-            <task-name>watch</task-name>
-          </GulpTaskState>
-          <GulpTaskState>
-            <dependencies>
-              <dependency value="git-check" />
-            </dependencies>
-            <task-name>install</task-name>
-          </GulpTaskState>
-          <GulpTaskState>
-            <task-name>git-check</task-name>
-          </GulpTaskState>
-        </tasks>
-      </GulpfileState>
-    </gulpfiles>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="NodeModulesDirectoryManager">
-    <handled-path value="$PROJECT_DIR$/node_modules" />
-  </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths>
-      <path value="$PROJECT_DIR$/package.json" />
-      <path value="$PROJECT_DIR$/plugins/cordova-plugin-device/package.json" />
-      <path value="$PROJECT_DIR$/plugins/cordova-plugin-device/tests/package.json" />
-      <path value="$PROJECT_DIR$/plugins/cordova-plugin-ionic-keyboard/package.json" />
-      <path value="$PROJECT_DIR$/plugins/cordova-plugin-ionic-webview/package.json" />
-      <path value="$PROJECT_DIR$/plugins/cordova-plugin-splashscreen/package.json" />
-      <path value="$PROJECT_DIR$/plugins/cordova-plugin-splashscreen/tests/ios/package.json" />
-      <path value="$PROJECT_DIR$/plugins/cordova-plugin-splashscreen/tests/package.json" />
-      <path value="$PROJECT_DIR$/plugins/cordova-plugin-whitelist/package.json" />
-    </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
@@ -266,31 +159,12 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="frameApp" type="b2602c69:ProjectViewProjectNode" />
               <item name="frameApp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="frameApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="frameApp" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="frameApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="frameApp" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="frameApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="frameApp" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="splash" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="frameApp" type="b2602c69:ProjectViewProjectNode" />
@@ -310,10 +184,44 @@
               <item name="css" type="462c0819:PsiDirectoryNode" />
               <item name="ionic.app.css" type="620a8d5e:NestingTreeNode" />
             </path>
+            <path>
+              <item name="frameApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="frameApp" type="462c0819:PsiDirectoryNode" />
+              <item name="www" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="frameApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="frameApp" type="462c0819:PsiDirectoryNode" />
+              <item name="www" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="frameApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="frameApp" type="462c0819:PsiDirectoryNode" />
+              <item name="www" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="directives" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="frameApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="frameApp" type="462c0819:PsiDirectoryNode" />
+              <item name="www" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="frameApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="frameApp" type="462c0819:PsiDirectoryNode" />
+              <item name="www" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -326,6 +234,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\xampp\htdocs\frameApp\www\js\services" />
+      <recent name="D:\xampp\htdocs\frameApp\www\templates" />
       <recent name="D:\xampp\htdocs\frameApp\resources" />
     </key>
   </component>
@@ -342,7 +252,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Gulp.js.default">
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+    <configuration default="true" type="js.build_tools.gulp">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <gulpfile />
@@ -351,7 +261,7 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="default" type="js.build_tools.gulp" factoryName="Gulp.js" temporary="true">
+    <configuration name="default" type="js.build_tools.gulp" temporary="true">
       <node-interpreter>C:/Program Files/nodejs/node</node-interpreter>
       <node-options />
       <gulpfile>$PROJECT_DIR$/gulpfile.js</gulpfile>
@@ -362,7 +272,18 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="js:watch" type="js.build_tools.gulp" factoryName="Gulp.js" temporary="true">
+    <configuration name="js" type="js.build_tools.gulp" temporary="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile>$PROJECT_DIR$/gulpfile.js</gulpfile>
+      <tasks>
+        <task>js</task>
+      </tasks>
+      <arguments />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="js:watch" type="js.build_tools.gulp" temporary="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <gulpfile>$PROJECT_DIR$/gulpfile.js</gulpfile>
@@ -376,11 +297,13 @@
     <list>
       <item itemvalue="Gulp.js.default" />
       <item itemvalue="Gulp.js.js:watch" />
+      <item itemvalue="Gulp.js.js" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gulp.js.js:watch" />
         <item itemvalue="Gulp.js.default" />
+        <item itemvalue="Gulp.js.js" />
       </list>
     </recent_temporary>
   </component>
@@ -398,7 +321,9 @@
       <workItem from="1532370703372" duration="475000" />
       <workItem from="1533565592130" duration="4190000" />
       <workItem from="1533572263473" duration="839000" />
-      <workItem from="1533573204781" duration="31829000" />
+      <workItem from="1533573204781" duration="33304000" />
+      <workItem from="1550368437463" duration="7608000" />
+      <workItem from="1550451656831" duration="10775000" />
     </task>
     <task id="LOCAL-00001" summary="final_exam201807&#10; - Se implementó la validación en el registro de usuarios">
       <created>1533596916066</created>
@@ -428,11 +353,18 @@
       <option name="project" value="LOCAL" />
       <updated>1533654240323</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="final_exam201807&#10; - spashscreen">
+      <created>1533660647852</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1533660647852</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37369000" />
+    <option name="totallyTimeSpent" value="57227000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -446,18 +378,18 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1934" height="1047" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.67907995" visible="true" weight="0.16275346" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.67391306" visible="true" weight="0.16275346" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5032538" side_tool="true" weight="0.16257995" />
-      <window_info id="Gulp" order="3" sideWeight="0.32092005" side_tool="true" visible="true" weight="0.16275346" />
+      <window_info id="Gulp" order="3" sideWeight="0.32608697" side_tool="true" visible="true" weight="0.16275346" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.14895947" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.19474836" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49946696" weight="0.28806135" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49946696" weight="0.28774616" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32968238" />
       <window_info anchor="bottom" id="TODO" order="9" sideWeight="0.50053304" side_tool="true" weight="0.28850326" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
@@ -471,16 +403,14 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
     <MESSAGE value="final_exam201807&#10; - Se implementó la validación en el registro de usuarios" />
     <MESSAGE value="final_exam201807&#10; - Se implementó la validación en los posts y comments" />
     <MESSAGE value="final_exam201807&#10; - Api route" />
     <MESSAGE value="final_exam201807&#10; - file upload" />
-    <option name="LAST_COMMIT_MESSAGE" value="final_exam201807&#10; - file upload" />
+    <MESSAGE value="final_exam201807&#10; - spashscreen" />
+    <option name="LAST_COMMIT_MESSAGE" value="final_exam201807&#10; - spashscreen" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.gitignore">
@@ -497,24 +427,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/login-form.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/login-register.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/tab-profile.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/profile-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers/register-controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -526,23 +438,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
           <caret line="40" column="32" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/login-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="87" column="21" lean-forward="true" selection-start-line="81" selection-start-column="20" selection-end-line="87" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/profile-options-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-232">
-          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -573,40 +468,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/services/auth-service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="56" lean-forward="true" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="56" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/services/comments-service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="52" selection-start-line="4" selection-start-column="52" selection-end-line="4" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/services/user-service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/dash-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="26" lean-forward="true" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -616,34 +477,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/services.js">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/tab-new-post.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="60" selection-start-line="13" selection-start-column="60" selection-end-line="13" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/directives/directives.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/new-post-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-195">
-          <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/services/posts-service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="519">
-          <caret line="84" column="59" selection-start-line="84" selection-start-column="59" selection-end-line="84" selection-end-column="59" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/platforms/android/app/app.iml">
       <provider selected="true" editor-type-id="text-editor" />
@@ -671,17 +504,160 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/login-register.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="90" selection-start-line="22" selection-start-column="90" selection-end-line="22" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="63" column="23" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
+        <state>
+          <caret line="102" selection-start-line="102" selection-end-line="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/login-form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="13" column="89" selection-start-line="13" selection-start-column="89" selection-end-line="13" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/login-recover-pass.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="20" column="11" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="18" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="18" />
+        <state relative-caret-position="750">
+          <caret line="50" column="21" lean-forward="true" selection-start-line="50" selection-start-column="21" selection-end-line="50" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/services/auth-service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="42" column="34" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="34" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/login-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="92" column="16" lean-forward="true" selection-start-line="92" selection-start-column="16" selection-end-line="92" selection-end-column="16" />
+          <folding>
+            <element signature="e#411#2430#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/profile-options-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="66" lean-forward="true" selection-start-line="9" selection-start-column="66" selection-end-line="9" selection-end-column="66" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/profile-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/services/comments-service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="64" column="53" selection-start-line="64" selection-start-column="53" selection-end-line="64" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/services/user-service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="58" column="40" selection-start-line="58" selection-start-column="40" selection-end-line="58" selection-end-column="40" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/directives/directives.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/dist/bundle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="1153" column="26" selection-start-line="1153" selection-start-column="26" selection-end-line="1153" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="1267" column="4" selection-start-line="1267" selection-start-column="4" selection-end-line="1267" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/tab-dash.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/dash-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="26" lean-forward="true" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/services/categories-service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="22" lean-forward="true" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/tab-profile.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/tab-profile-options.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/services/posts-service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="77" column="31" selection-start-line="77" selection-start-column="31" selection-end-line="77" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/tab-new-post.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="104" selection-start-line="13" selection-start-column="104" selection-end-line="13" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/new-post-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
         </state>
       </provider>
     </entry>

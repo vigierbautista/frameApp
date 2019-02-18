@@ -61,7 +61,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
         });
 
 
-		var DEV = false;
+		var DEV = true;
 		/**
 		 * Definimos la variable global con la ruta a la API.
 		 * @type {string}
@@ -94,11 +94,19 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                 controller: 'LoginCtrl'
             })
 
+            .state('recover-pass', {
+                url: '/recover',
+                templateUrl: 'templates/login-recover-pass.html',
+                controller: 'LoginCtrl'
+
+            })
+
             .state('register', {
                 url: '/register',
                 templateUrl: 'templates/login-register.html',
                 controller: 'RegisterCtrl'
             })
+
             .state('tab.dash', {
                 url: '/dash',
                 data: {
@@ -454,6 +462,10 @@ angular.module('FrameApp.controllers')
                     }
                 );
             }
+            
+            $scope.recover = function (userData) {
+				
+			}
         }
     ]);
 /**
@@ -461,17 +473,27 @@ angular.module('FrameApp.controllers')
  */
 
 angular.module('FrameApp.controllers')
-    .controller('NewPostCtrl', function ($scope, $state, $ionicPopup, PostsService, AuthService, ValidationService) {
+    .controller('NewPostCtrl', function ($scope, $state, $ionicPopup, PostsService, CategoriesService, AuthService, ValidationService) {
 
         var user = AuthService.getUserData();
 
-        $scope.post = {
-            title: null,
-            content: null,
-            image: null,
-            date_added: null,
-            id_user: user.id
-        };
+		$scope.categories = [];
+
+		CategoriesService.getCategories().then(
+			function(categories) {
+				$scope.categories = categories;
+
+				$scope.post = {
+					title: null,
+					content: null,
+					image: null,
+					date_added: null,
+					id_category: $scope.categories[0].id,
+					id_user: user.id
+				};
+			}
+		);
+
 
         $scope.save = function(data) {
 			var Validator = ValidationService.init(data, {
@@ -548,7 +570,6 @@ angular.module('FrameApp.controllers')
             $scope.user = null;
             UserService.getUser().then(
                 function(user) {
-                    console.log(user);
                     $scope.user = {
                         name: user.usuario,
                         last_name: user.lastName,
@@ -791,22 +812,6 @@ angular.module('FrameApp.controllers')
             }
         }
     ]);
-angular.module('FrameApp.directives', [])
-	.directive('fileModel', function($parse) {
-		return {
-			restrict: 'A',
-			link: function(scope, element, attrs) {
-				var model = $parse(attrs.fileModel);
-				var modelSetter = model.assign;
-
-				element.bind('change', function(){
-					scope.$apply(function(){
-						modelSetter(scope, element[0].files[0]);
-					});
-				});
-			}
-		};
-	});
 // Definimos el servicio de autenticación.
 // Este servicio debe poder:
 // 1. Loguear a un usuario
@@ -968,6 +973,45 @@ angular.module('FrameApp.services')
             }
         }
     ]);
+angular.module('FrameApp.services')
+    .service('CategoriesService', function ($http, $q, $rootScope) {
+
+        var categories = [];
+
+        /**
+         * Trae todas las categorias.
+         * @returns {Promise}
+         */
+        this.getAll = function() {
+            return $http.get($rootScope.API_PATH + 'categories')
+        };
+
+
+        /**
+         * Retorna una promesa que devuelve las categorias.
+         * @returns {Promise}
+         */
+        this.getCategories = function () {
+            var deferred = $q.defer();
+
+            if(categories.length === 0) {
+                this.getAll().then(
+                    function(response) {
+                        var responseData = response.data;
+                        categories = responseData.data;
+
+                        deferred.resolve(categories);
+                    },
+                    function () {
+                        deferred.reject('Error trayendo las categorias');
+                    })
+            } else {
+                deferred.resolve(categories);
+            }
+            return deferred.promise;
+        };
+
+    });
 /**
  * Created by Bautista on 3/7/2017.
  */
@@ -1006,7 +1050,6 @@ angular.module('FrameApp.services')
                         var responseData = response.data;
                         // En caso de exito guardamos los comments en el resolve de la promesa.
                         comments = responseData.post;
-                        console.log(comments);
                         deferred.resolve(comments);
                     },
                     function () {
@@ -1034,7 +1077,6 @@ angular.module('FrameApp.services')
                 }
             }).then(function(response) {
                     var responseData = response.data;
-                    console.log(responseData);
                     // Verificamos si grabó bien.
                     if(responseData.status == 1) {
                         comments.push(responseData.data);
@@ -1131,18 +1173,24 @@ angular.module('FrameApp.services')
          * @returns {response} Devuelve la respuesta de la Api.
          */
         this.create = function (newPost) {
+
             console.log(newPost);
 
 			var payload = new FormData();
 
 			payload.append("title", newPost.title);
-			payload.append('content', newPost.text);
-			payload.append('image', newPost.file);
+			payload.append('content', newPost.content);
+			payload.append('image', newPost.image);
 			payload.append('id_user', newPost.id_user);
+			payload.append('id_category', newPost.id_category);
 			payload.append('date_added', newPost.date_added);
+;
 
-            return $http.post($rootScope.API_PATH + 'posts/save', newPost, {
+            return $http.post($rootScope.API_PATH + 'posts/save', payload, {
                 'headers': {
+                    'transformRequest': angular.identity,
+                    'Content-Type': undefined,
+                    'Process-Data': false,
                     'X-Token': AuthService.getToken()
                 }
             }).then(function(response) {
@@ -1633,3 +1681,19 @@ angular.module('FrameApp.services')
 			}
 		}
 	]);
+angular.module('FrameApp.directives', [])
+	.directive('fileModel', function($parse) {
+		return {
+			restrict: 'A',
+			link: function(scope, element, attrs) {
+				var model = $parse(attrs.fileModel);
+				var modelSetter = model.assign;
+
+				element.bind('change', function(){
+					scope.$apply(function(){
+						modelSetter(scope, element[0].files[0]);
+					});
+				});
+			}
+		};
+	});
