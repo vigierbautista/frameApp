@@ -45,8 +45,8 @@ angular.module('FrameApp.services')
                         if(responseData.status == 1) {
                             // Guardamos los datos del usuario.
                             userData = {
-                                usuario: responseData.data.name,
-                                lastName: responseData.data.last_name,
+                                name: responseData.data.name,
+                                last_name: responseData.data.last_name,
                                 id: responseData.data.id,
                                 email: responseData.data.email,
                                 image: responseData.data.image
@@ -81,8 +81,8 @@ angular.module('FrameApp.services')
                         if(responseData.status == 1) {
                             // Guardamos los datos del usuario.
                             userData = {
-                                usuario: responseData.data.name,
-                                lastName: responseData.data.last_name,
+                                name: responseData.data.name,
+                                last_name: responseData.data.last_name,
                                 id: responseData.data.id,
                                 email: responseData.data.email,
                                 image: responseData.data.image

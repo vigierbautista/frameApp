@@ -86,7 +86,16 @@ img {
     width: 75%;
 }
 
+/************* PROFILE EDIT **************/
+#config .field {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
 
+#config .field:first-child {
+    margin-top: 0px;
+}
 
 /************* LOGIN **************/
 #login-wrapper ion-content {

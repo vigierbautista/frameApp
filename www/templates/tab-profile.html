@@ -2,7 +2,8 @@
 <ion-view id="profile-wrapper" view-title="Profile">
   <ion-content class="padding">
     <div class="padding">
-      <img class="post-img" ng-src="img/user/{{user.image}}">
+      <img class="post-img" ng-show="user.image" ng-src="{{user.image}}">
+      <img class="post-img" ng-show="!user.image" ng-src="img/user/default.png">
       <h3>{{user.name}} {{user.last_name}}</h3>
       <p class="post-info">{{ user.email }}</p>
     </div>

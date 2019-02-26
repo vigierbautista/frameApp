@@ -286,6 +286,22 @@ angular.module('FrameApp.services', [])
   };
 });
 
+angular.module('FrameApp.directives', [])
+	.directive('fileModel', function($parse) {
+		return {
+			restrict: 'A',
+			link: function(scope, element, attrs) {
+				var model = $parse(attrs.fileModel);
+				var modelSetter = model.assign;
+
+				element.bind('change', function(){
+					scope.$apply(function(){
+						modelSetter(scope, element[0].files[0]);
+					});
+				});
+			}
+		};
+	});
 /**
  * Created by Bautista on 25/6/2017.
  */
@@ -575,10 +591,10 @@ angular.module('FrameApp.controllers')
             UserService.getUser().then(
                 function(user) {
                     $scope.user = {
-                        name: user.usuario,
-                        last_name: user.lastName,
+                        name: user.name,
+                        last_name: user.last_name,
                         email: user.email,
-                        image: (user.image == null)? 'default.png' : user.image
+                        image: user.image
                     };
                 }
             );
@@ -597,14 +613,14 @@ angular.module('FrameApp.controllers')
         function($scope, $ionicPopup, $state, AuthService, UserService) {
 
 
-            // Buscamos la informacion del user.
+            // Buscamos la información del user.
             var user = AuthService.getUserData();
             $scope.user = {
                 id: user.id,
-                name: user.usuario,
-                last_name: user.lastName,
+                name: user.name,
+                last_name: user.last_name,
                 email: user.email,
-                image: (user.image == null)? 'default.png' : user.image
+                image: user.image
             };
 
 
@@ -638,10 +654,21 @@ angular.module('FrameApp.controllers')
                                 // Verificamos si tuvimos éxito  o no.
                                 if(responseData.status == 1) {
 
+                                    var edited = responseData.data;
+
+                                    $scope.user = {
+                                        id: edited.id,
+                                        name: edited.name,
+                                        last_name: edited.last_name,
+                                        email: edited.email,
+                                        image: edited.image
+                                    };
+
                                     var popup = $ionicPopup.alert({
                                         title: 'Éxito',
                                         template: 'Su información fue modificada exitosamente!'
                                     });
+
                                     // Redireccionamos al usuario cuando cierre el popup.
                                     popup.then(function(rta) {
                                         $state.go('tab.profile');
@@ -816,22 +843,6 @@ angular.module('FrameApp.controllers')
             }
         }
     ]);
-angular.module('FrameApp.directives', [])
-	.directive('fileModel', function($parse) {
-		return {
-			restrict: 'A',
-			link: function(scope, element, attrs) {
-				var model = $parse(attrs.fileModel);
-				var modelSetter = model.assign;
-
-				element.bind('change', function(){
-					scope.$apply(function(){
-						modelSetter(scope, element[0].files[0]);
-					});
-				});
-			}
-		};
-	});
 // Definimos el servicio de autenticación.
 // Este servicio debe poder:
 // 1. Loguear a un usuario
@@ -879,8 +890,8 @@ angular.module('FrameApp.services')
                         if(responseData.status == 1) {
                             // Guardamos los datos del usuario.
                             userData = {
-                                usuario: responseData.data.name,
-                                lastName: responseData.data.last_name,
+                                name: responseData.data.name,
+                                last_name: responseData.data.last_name,
                                 id: responseData.data.id,
                                 email: responseData.data.email,
                                 image: responseData.data.image
@@ -915,8 +926,8 @@ angular.module('FrameApp.services')
                         if(responseData.status == 1) {
                             // Guardamos los datos del usuario.
                             userData = {
-                                usuario: responseData.data.name,
-                                lastName: responseData.data.last_name,
+                                name: responseData.data.name,
+                                last_name: responseData.data.last_name,
                                 id: responseData.data.id,
                                 email: responseData.data.email,
                                 image: responseData.data.image
@@ -1203,8 +1214,6 @@ angular.module('FrameApp.services')
          */
         this.create = function (newPost) {
 
-            console.log(newPost);
-
 			var payload = new FormData();
 
 			payload.append("title", newPost.title);
@@ -1213,7 +1222,6 @@ angular.module('FrameApp.services')
 			payload.append('id_user', newPost.id_user);
 			payload.append('id_category', newPost.id_category);
 			payload.append('date_added', newPost.date_added);
-;
 
             return $http.post($rootScope.API_PATH + 'posts/save', payload, {
                 'headers': {
@@ -1342,11 +1350,26 @@ angular.module('FrameApp.services')
              * @returns {Promise}
              */
             this.edit = function(data) {
+
+                var payload = new FormData();
+
+                payload.append("id", data.id);
+                payload.append('name', data.name);
+                payload.append('last_name', data.last_name);
+                payload.append('email', data.email);
+
+                if (data.image) {
+                    payload.append('image', data.image);
+                }
+
                 // Acá estamos retornando como venimos haciendo siempre el $http.post para  devolver la promesa.
                 // Si embargo, a diferencia de los casos anteriores, en este el mismo método está utilizando ya la promesa.
                 // Para que el que llame a este método tenga acceso a los datos de la promesa, los métodos del then deben retornar el resultado que reciben.
-                return $http.put($rootScope.API_PATH + 'users/edit', data, {
+                return $http.post($rootScope.API_PATH + 'users/edit', payload, {
                     'headers': {
+                        'transformRequest': angular.identity,
+                        'Content-Type': undefined,
+                        'Process-Data': false,
                         'X-Token': AuthService.getToken()
                     }
                 }).then(
@@ -1358,14 +1381,15 @@ angular.module('FrameApp.services')
                             // Guardamos los datos del usuario.
 
                             userData = {
-                                usuario: responseData.data.name,
-                                lastName: responseData.data.last_name,
                                 id: responseData.data.id,
+                                name: responseData.data.name,
+                                last_name: responseData.data.last_name,
                                 email: responseData.data.email,
                                 image: responseData.data.image
                             };
 
                             // Guardamos los datos en el almacenamiento.
+                            AuthService.setUserData(userData);
                             StorageService.set('userData', userData);
                         }
                         // Retornamos la respuesta, para que esté disponible para los lugares que llamen a este método.

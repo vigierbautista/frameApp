@@ -10,14 +10,14 @@ angular.module('FrameApp.controllers')
         function($scope, $ionicPopup, $state, AuthService, UserService) {
 
 
-            // Buscamos la informacion del user.
+            // Buscamos la información del user.
             var user = AuthService.getUserData();
             $scope.user = {
                 id: user.id,
-                name: user.usuario,
-                last_name: user.lastName,
+                name: user.name,
+                last_name: user.last_name,
                 email: user.email,
-                image: (user.image == null)? 'default.png' : user.image
+                image: user.image
             };
 
 
@@ -51,10 +51,21 @@ angular.module('FrameApp.controllers')
                                 // Verificamos si tuvimos éxito  o no.
                                 if(responseData.status == 1) {
 
+                                    var edited = responseData.data;
+
+                                    $scope.user = {
+                                        id: edited.id,
+                                        name: edited.name,
+                                        last_name: edited.last_name,
+                                        email: edited.email,
+                                        image: edited.image
+                                    };
+
                                     var popup = $ionicPopup.alert({
                                         title: 'Éxito',
                                         template: 'Su información fue modificada exitosamente!'
                                     });
+
                                     // Redireccionamos al usuario cuando cierre el popup.
                                     popup.then(function(rta) {
                                         $state.go('tab.profile');

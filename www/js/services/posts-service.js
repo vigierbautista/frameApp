@@ -75,8 +75,6 @@ angular.module('FrameApp.services')
          */
         this.create = function (newPost) {
 
-            console.log(newPost);
-
 			var payload = new FormData();
 
 			payload.append("title", newPost.title);
@@ -85,7 +83,6 @@ angular.module('FrameApp.services')
 			payload.append('id_user', newPost.id_user);
 			payload.append('id_category', newPost.id_category);
 			payload.append('date_added', newPost.date_added);
-;
 
             return $http.post($rootScope.API_PATH + 'posts/save', payload, {
                 'headers': {

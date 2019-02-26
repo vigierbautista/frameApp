@@ -12,10 +12,10 @@ angular.module('FrameApp.controllers')
             UserService.getUser().then(
                 function(user) {
                     $scope.user = {
-                        name: user.usuario,
-                        last_name: user.lastName,
+                        name: user.name,
+                        last_name: user.last_name,
                         email: user.email,
-                        image: (user.image == null)? 'default.png' : user.image
+                        image: user.image
                     };
                 }
             );

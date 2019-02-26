@@ -2,19 +2,23 @@
 <ion-view id="config" view-title="Configuración">
     <ion-content class="padding">
         <h3>Edita tu información: </h3>
-        <form ng-submit=" edit(user)">
+        <form ng-submit="edit(user)" enctype="multipart/form-data">
             <div class="list">
+                <p class="field">Nombre:</p>
                 <label class="item item-input">
                     <input type="text" ng-model="user.name" placeholder="{{user.name}}">
                 </label>
+                <p class="field">Apellido:</p>
                 <label class="item item-input">
                     <input type="text" ng-model="user.last_name" placeholder="{{user.last_name}}">
                 </label>
+                <p class="field">Email:</p>
                 <label class="item item-input">
                     <input type="text" ng-model="user.email" placeholder="{{user.email}}">
                 </label>
+                <p class="field">Imagen:</p>
                 <label class="item item-input">
-                    <input type="file" ng-model="user.image">
+                    <input type="file" file-model="user.image">
                 </label>
                 <input type="hidden" ng-model="user.id">
             </div>
