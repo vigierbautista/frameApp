@@ -7,6 +7,8 @@ angular.module('FrameApp.controllers')
 
         var user = AuthService.getUserData();
 
+		$scope.date = new Date();
+
 		$scope.categories = [];
 
 		CategoriesService.getCategories().then(
@@ -14,9 +16,9 @@ angular.module('FrameApp.controllers')
 				$scope.categories = categories;
 
 				$scope.post = {
-					title: null,
-					content: null,
-					image: null,
+					title: '',
+					content: '',
+					image: '',
 					date_added: null,
 					id_category: $scope.categories[0].id,
 					id_user: user.id

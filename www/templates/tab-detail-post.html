@@ -4,7 +4,7 @@
         <div class="padding">
             <h3>{{post.title}}</h3>
             <p class="post-info">{{ post.user }} - {{ post.date_added }}</p>
-            <img class="post-img" ng-src="img/{{post.image}}">
+            <img class="post-img" ng-show="post.image" ng-src="{{post.image}}">
             <p class="post-content">{{ post.content }}</p>
         </div>
         <h4>Comentarios:</h4>

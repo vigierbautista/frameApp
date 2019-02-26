@@ -6,7 +6,7 @@
                 <ion-item href="#/tab/dash/{{post.id}}" ng-repeat="post in posts">
                     <h3 class="post-title">{{ post.title }}</h3>
                     <p class="post-info">{{ post.user }} - {{ post.date_added }}</p>
-                    <img class="post-img" ng-src="img/{{post.image}}">
+                    <img class="post-img" ng-show="post.image" ng-src="{{post.image}}">
                     <p class="post-content">{{ post.content }}</p>
                 </ion-item>
             </ion-list>

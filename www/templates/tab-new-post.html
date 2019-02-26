@@ -17,6 +17,7 @@
                         <input type="file" file-model="post.image">
                     </label>
                     <input type="hidden" ng-model="post.id_user">
+                    <input type="hidden" ng-model="post.date_added" value="{{date | date:'yyyy-MM-dd hh:mm:ss'}}">
                 </div>
                 <button class="button button-block frame-color-bg">Post</button>
             </form>
