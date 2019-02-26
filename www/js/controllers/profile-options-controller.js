@@ -110,7 +110,7 @@ angular.module('FrameApp.controllers')
 
                         msg.then(
                             function() {
-                                $state.go('login');
+                                $state.go('login', {reload:true});
                             }
                         )
                     }

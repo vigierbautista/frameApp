@@ -177,6 +177,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                     requireAuth: true,
                     refresh: true
                 },
+                cache: false,
                 views: {
                     'tab-profile': {
                         templateUrl: 'templates/tab-profile.html',
@@ -189,6 +190,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                     requireAuth: true
                 },
                 url: '/profile/options',
+                cache: false,
                 views: {
                     'tab-profile': {
                         templateUrl: 'templates/tab-profile-options.html',

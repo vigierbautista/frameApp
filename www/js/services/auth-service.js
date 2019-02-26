@@ -126,6 +126,11 @@ angular.module('FrameApp.services')
             this.getToken = function() {
                 return token;
             };
+
+            this.setToken = function (string) {
+                token = string;
+            };
+
             /**
              * Retorna lso datos del usuario si existe. Null si no
              * existe.
@@ -134,6 +139,10 @@ angular.module('FrameApp.services')
              */
             this.getUserData = function() {
                 return userData;
+            };
+
+            this.setUserData = function(object) {
+                userData = object;
             };
 
             /**
