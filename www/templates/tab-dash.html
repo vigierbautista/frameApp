@@ -1,8 +1,11 @@
 <ion-view id="dashboard" view-title="Frame">
 
-    <ion-content ng-show="posts" class="padding">
-
-        <div class="frame-color-bg padding">
+    <ion-content class="padding">
+        <form class="category-selector">
+            <p>Categorías:</p>
+            <select ng-change="applyFilter(category)" ng-model="category" ng-options="category.id as category.category for category in categories"></select>
+        </form>
+        <div ng-if="posts.length > 0" class="frame-color-bg padding">
             <ion-list>
                 <ion-item href="#/tab/dash/{{post.id}}" ng-repeat="post in posts">
                     <h3 class="post-title">{{ post.title }}</h3>
@@ -12,6 +15,7 @@
                 </ion-item>
             </ion-list>
         </div>
+        <p class="alert no-posts" ng-show="posts.length == 0">Por el momento no hay posts <br> :(</p>
     </ion-content>
     <a ui-sref="tab.dash-new" class="button frame-color2-bg btn-fixed">
         <i class="icon ion-paintbrush"></i>

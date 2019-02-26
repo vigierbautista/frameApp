@@ -68,6 +68,27 @@ img {
 }
 
 
+/************* DASHBOARD **************/
+#dashboard .category-selector {
+    font-weight: bold;
+    text-align: right;
+    color: #39B7CC;
+}
+
+#dashboard .category-selector p {
+    display: inline-block;
+}
+
+#dashboard .alert.no-posts {
+    padding: 140px 0;
+    font-size: 23px;
+    text-align: center;
+    background-color: #39B7CC;
+    font-family: pacificoregular, fantasy !important;
+    color: white;
+    line-height: 55px;
+}
+
 /************* PROFILE **************/
 
 #profile-wrapper .button i {

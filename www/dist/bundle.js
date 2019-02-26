@@ -286,35 +286,57 @@ angular.module('FrameApp.services', [])
   };
 });
 
-angular.module('FrameApp.directives', [])
-	.directive('fileModel', function($parse) {
-		return {
-			restrict: 'A',
-			link: function(scope, element, attrs) {
-				var model = $parse(attrs.fileModel);
-				var modelSetter = model.assign;
-
-				element.bind('change', function(){
-					scope.$apply(function(){
-						modelSetter(scope, element[0].files[0]);
-					});
-				});
-			}
-		};
-	});
 /**
  * Created by Bautista on 25/6/2017.
  */
 
 angular.module('FrameApp.controllers')
-    .controller('DashCtrl', function ($scope, PostsService) {
+    .controller('DashCtrl', function ($scope, PostsService, CategoriesService) {
+        var allposts = [];
+
         $scope.posts = [];
+
+        $scope.categories = [];
+
+
+        CategoriesService.getCategories().then(
+            function(categories) {
+                $scope.categories = categories;
+                $scope.categories.unshift({
+                    id: 0,
+                    category: 'Todas'
+                });
+                $scope.category = $scope.categories[0].id
+            }
+        );
 
         PostsService.getPosts().then(
             function(posts) {
                 $scope.posts = posts;
+                allposts = posts;
             }
         );
+
+        /**
+         * Filtra los posts por categoría
+         * @param category
+         */
+        $scope.applyFilter = function (category) {
+
+            if (category == 0) {
+                $scope.posts = allposts;
+                return;
+            }
+
+            var filtered = [];
+
+            for (var i in allposts) {
+                console.log(allposts[i]);
+                if (allposts[i].id_category == category) filtered.push(allposts[i]);
+            }
+
+            $scope.posts = filtered;
+        }
     });
 // Abrimos el módulo de controllers, definido en
 // controllers.js
@@ -843,6 +865,22 @@ angular.module('FrameApp.controllers')
             }
         }
     ]);
+angular.module('FrameApp.directives', [])
+	.directive('fileModel', function($parse) {
+		return {
+			restrict: 'A',
+			link: function(scope, element, attrs) {
+				var model = $parse(attrs.fileModel);
+				var modelSetter = model.assign;
+
+				element.bind('change', function(){
+					scope.$apply(function(){
+						modelSetter(scope, element[0].files[0]);
+					});
+				});
+			}
+		};
+	});
 // Definimos el servicio de autenticación.
 // Este servicio debe poder:
 // 1. Loguear a un usuario
