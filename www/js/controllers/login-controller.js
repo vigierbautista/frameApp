@@ -66,7 +66,7 @@ angular.module('FrameApp.controllers')
                             );
 
                         } else {
-
+							console.log(response);
 							var error_msg = '';
 							for (var i in responseData.errors) {
 								error_msg += responseData.errors[i] + '<br>';

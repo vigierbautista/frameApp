@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "angular-file-upload": "^2.5.0",
-    "cordova-android": "7.0.0",
+    "cordova-android": "^7.1.4",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.1.2",
     "cordova-plugin-ionic-webview": "^2.0.2",

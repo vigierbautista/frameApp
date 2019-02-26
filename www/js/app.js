@@ -61,12 +61,12 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
         });
 
 
-		var DEV = true;
+		var DEV = false;
 		/**
 		 * Definimos la variable global con la ruta a la API.
 		 * @type {string}
 		 */
-		$rootScope.API_PATH = DEV? '../../frameApi/public_html/' : 'https://frameapi.000webhostapp.com/';
+		$rootScope.API_PATH = DEV? '../../frameApi/public_html/' : 'http://u388058213.hostingerapp.com/';
     })
 
 	/**

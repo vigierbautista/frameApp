@@ -61,12 +61,12 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
         });
 
 
-		var DEV = true;
+		var DEV = false;
 		/**
 		 * Definimos la variable global con la ruta a la API.
 		 * @type {string}
 		 */
-		$rootScope.API_PATH = DEV? '../../frameApi/public_html/' : 'https://frameapi.000webhostapp.com/';
+		$rootScope.API_PATH = DEV? '../../frameApi/public_html/' : 'http://u388058213.hostingerapp.com/';
     })
 
 	/**
@@ -480,7 +480,7 @@ angular.module('FrameApp.controllers')
                             );
 
                         } else {
-
+							console.log(response);
 							var error_msg = '';
 							for (var i in responseData.errors) {
 								error_msg += responseData.errors[i] + '<br>';
@@ -921,7 +921,11 @@ angular.module('FrameApp.services')
                 // Acá estamos retornando como venimos haciendo siempre el $http.post para  devolver la promesa.
                 // Si embargo, a diferencia de los casos anteriores, en este el mismo método está utilizando ya la promesa.
                 // Para que el que llame a este método tenga acceso a los datos de la promesa, los métodos del then deben retornar el resultado que reciben.
-                return $http.post($rootScope.API_PATH + 'login', data).then(
+                return $http.post($rootScope.API_PATH + 'login', data, {
+                    'headers': {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(
                     function(response) {
                         // Resolve
                         var responseData = response.data;
@@ -947,8 +951,9 @@ angular.module('FrameApp.services')
                         // Reject
                         // Idem arriba.
                         return response;
+
                     }
-                );
+                )
             };
 
 
