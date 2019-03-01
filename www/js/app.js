@@ -61,7 +61,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
         });
 
 
-		var DEV = false;
+		var DEV = true;
 		/**
 		 * Definimos la variable global con la ruta a la API.
 		 * @type {string}
@@ -112,6 +112,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                 data: {
                     requireAuth: true
                 },
+                cache: false,
                 views: {
                     'tab-dash': {
                         templateUrl: 'templates/tab-dash.html',
@@ -123,6 +124,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                 data: {
                     requireAuth: true
                 },
+                cache: false,
                 url: '/dash/new',
                 views: {
                     'tab-dash': {

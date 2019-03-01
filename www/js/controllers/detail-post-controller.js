@@ -1,5 +1,4 @@
-// Abrimos el módulo de controllers, definido en
-// controllers.js
+
 angular.module('FrameApp.controllers')
     .controller('DetailPostCtrl', [
         '$scope',
@@ -14,12 +13,14 @@ angular.module('FrameApp.controllers')
             // Caputramos el id del post de los parametros de la ruta.
             var postId = $stateParams.postId;
 
-
             // Buscamos la informacion del user.
             var user = AuthService.getUserData();
 
+            $scope.likedByUser = false;
+
             // Pasamos los datos útiles al $scope.
             $scope.comment = {
+                comment: '',
                 date_added: null,
                 id_user: user.id,
                 id_post: postId
@@ -65,10 +66,50 @@ angular.module('FrameApp.controllers')
 								template: error_msg
 							});
 
+                        } else {
+                            $scope.comments = CommentsService.getComments();
+                            $scope.comment.comment = '';
                         }
+
                     }
                 );
-            }
+            };
+
+
+            $scope.submitLike = function () {
+
+                $scope.post.likedByUser = !$scope.post.likedByUser;
+
+                PostsService.likePost({
+                    'post_id': $scope.post.id,
+                    'user_id': user.id,
+                    'liked': $scope.post.likedByUser
+                }).then(
+                    function (response) {
+                        var responseData = response.data;
+
+                        if (responseData.liked) {
+                            $scope.post.likes.push({
+                                'id_user': user.id,
+                                'id_post': responseData.post_id,
+                                'image': user.image,
+                                'name': user.name,
+                                'last_name': user.last_name
+                            });
+
+                        } else {
+
+                            for (var i in $scope.post.likes) {
+                                if ($scope.post.likes[i].id_post == responseData.post_id && $scope.post.likes[i].id_user == responseData.user_id) {
+                                    $scope.post.likes.splice(i)
+                                }
+                            }
+
+                        }
+
+                    }
+                );
+            };
 
         }
     ]);

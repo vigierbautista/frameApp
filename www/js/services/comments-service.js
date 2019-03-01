@@ -65,7 +65,7 @@ angular.module('FrameApp.services')
                     var responseData = response.data;
                     // Verificamos si grabó bien.
                     if(responseData.status == 1) {
-                        comments.push(responseData.data);
+                        comments.unshift(responseData.data);
                     }
 
                     return response;
@@ -76,7 +76,9 @@ angular.module('FrameApp.services')
             );
         };
 
-
+        this.getComments = function () {
+            return comments;
+        };
 
         this.clear = function() {
             comments = [];

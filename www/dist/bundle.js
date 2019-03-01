@@ -61,7 +61,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
         });
 
 
-		var DEV = false;
+		var DEV = true;
 		/**
 		 * Definimos la variable global con la ruta a la API.
 		 * @type {string}
@@ -112,6 +112,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                 data: {
                     requireAuth: true
                 },
+                cache: false,
                 views: {
                     'tab-dash': {
                         templateUrl: 'templates/tab-dash.html',
@@ -123,6 +124,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                 data: {
                     requireAuth: true
                 },
+                cache: false,
                 url: '/dash/new',
                 views: {
                     'tab-dash': {
@@ -286,585 +288,6 @@ angular.module('FrameApp.services', [])
   };
 });
 
-/**
- * Created by Bautista on 25/6/2017.
- */
-
-angular.module('FrameApp.controllers')
-    .controller('DashCtrl', function ($scope, PostsService, CategoriesService) {
-        var allposts = [];
-
-        $scope.posts = [];
-
-        $scope.categories = [];
-
-
-        CategoriesService.getCategories().then(
-            function(categories) {
-                $scope.categories = categories;
-                $scope.categories.unshift({
-                    id: 0,
-                    category: 'Todas'
-                });
-                $scope.category = $scope.categories[0].id
-            }
-        );
-
-        PostsService.getPosts().then(
-            function(posts) {
-                $scope.posts = posts;
-                allposts = posts;
-            }
-        );
-
-        /**
-         * Filtra los posts por categoría
-         * @param category
-         */
-        $scope.applyFilter = function (category) {
-
-            if (category == 0) {
-                $scope.posts = allposts;
-                return;
-            }
-
-            var filtered = [];
-
-            for (var i in allposts) {
-                console.log(allposts[i]);
-                if (allposts[i].id_category == category) filtered.push(allposts[i]);
-            }
-
-            $scope.posts = filtered;
-        }
-    });
-// Abrimos el módulo de controllers, definido en
-// controllers.js
-angular.module('FrameApp.controllers')
-    .controller('DetailPostCtrl', [
-        '$scope',
-        '$ionicPopup',
-        '$state',
-        '$stateParams',
-        'PostsService',
-        'CommentsService',
-        'AuthService',
-        function($scope, $ionicPopup, $state, $stateParams, PostsService, CommentsService, AuthService) {
-
-            // Caputramos el id del post de los parametros de la ruta.
-            var postId = $stateParams.postId;
-
-
-            // Buscamos la informacion del user.
-            var user = AuthService.getUserData();
-
-            // Pasamos los datos útiles al $scope.
-            $scope.comment = {
-                date_added: null,
-                id_user: user.id,
-                id_post: postId
-            };
-            /**
-             * Traemos la información del post
-             */
-            PostsService.get(postId).then(
-                function(data) {
-                    $scope.post = data.post;
-                }
-            );
-
-            /**
-             * Traemos los comentarios del post
-             */
-            $scope.comments = [];
-            CommentsService.getFromPosts(postId).then(
-                function(data) {
-                    $scope.comments = data;
-                }
-            );
-
-
-            $scope.save = function(data) {
-                if(!data.comment) {
-                    return;
-                }
-                CommentsService.save(data).then(
-                    function(response) {
-
-                        var responseData = response.data;
-
-                        // Verificamos si tuvimos éxito  o no.
-                        if(responseData.status == 0) {
-							var error_msg = '';
-							for (var i in responseData.errors) {
-								error_msg += responseData.errors[i] + '<br>';
-							}
-
-							$ionicPopup.alert({
-								title: responseData.msg,
-								template: error_msg
-							});
-
-                        }
-                    }
-                );
-            }
-
-        }
-    ]);
-
-angular.module('FrameApp.controllers')
-    .controller('LoginCtrl', [
-        '$scope',
-        '$ionicPopup',
-        '$state',
-        'AuthService',
-        'ValidationService',
-        function($scope, $ionicPopup, $state, AuthService, ValidationService) {
-            $scope.user = {
-                name: null,
-                password: null
-            };
-
-            $scope.login = function(userData) {
-
-            	var Validator = ValidationService.init(userData, {
-            		name: ['required'],
-					password: ['required']
-				}, {
-            		name: {required: "Ingrese su nombre."},
-            		password: {required: "Ingrese su constraseña."}
-				});
-
-
-                if(Validator.isInvalid()) {
-
-                	var error_msg = '';
-					var errors = Validator.getErrors();
-                	for (var i in errors) {
-                		error_msg += errors[i] + '<br>';
-					}
-
-                    $ionicPopup.alert({
-                        title: 'Datos incorrectos',
-                        template: error_msg
-                    });
-                    return;
-                }
-
-
-                AuthService.login(userData).then(
-                    function(response) {
-                        // Resolve
-
-                        var responseData = response.data;
-
-                        if(responseData.status == 1) {
-
-                            var popup = $ionicPopup.alert({
-                                title: 'Éxito',
-                                template: responseData.msg
-                            });
-
-                            // Reseteamos el form.
-							$scope.user = {
-								name: null,
-								password: null
-							};
-
-                            // Cuando el usuario cierre  el popup, lo redireccionamos al dashboard.
-                            popup.then(
-                                function(rta) {
-                                    $state.go('tab.dash');
-                                }
-                            );
-
-                        } else {
-							console.log(response);
-							var error_msg = '';
-							for (var i in responseData.errors) {
-								error_msg += responseData.errors[i] + '<br>';
-							}
-
-                            $ionicPopup.alert({
-                                title: responseData.msg,
-                                template: error_msg
-                            });
-
-                        }
-                    },
-                    function(response) {
-                        // Reject
-						$ionicPopup.alert({
-							title: 'Error',
-							template: "No pudimos conectarnos. Intente de nuevo más tarde."
-						});
-                    }
-                );
-            }
-            
-            $scope.recover = function (userData) {
-				
-			}
-        }
-    ]);
-/**
- * Created by Bautista on 27/6/2017.
- */
-
-angular.module('FrameApp.controllers')
-    .controller('NewPostCtrl', function ($scope, $state, $ionicPopup, PostsService, CategoriesService, AuthService, ValidationService) {
-
-        var user = AuthService.getUserData();
-
-		$scope.date = new Date();
-
-		$scope.categories = [];
-
-		CategoriesService.getCategories().then(
-			function(categories) {
-				$scope.categories = categories;
-
-				$scope.post = {
-					title: '',
-					content: '',
-					image: '',
-					date_added: null,
-					id_category: $scope.categories[0].id,
-					id_user: user.id
-				};
-			}
-		);
-
-
-        $scope.save = function(data) {
-			var Validator = ValidationService.init(data, {
-				title: ['required', 'min:3', 'max:30']
-			}, {
-				title: {
-				    required: 'Ingrese un título.',
-                    min: 'El título debe tener al menos 3 caracteres.',
-                    max: 'El título no debe tener más de 30 caracteres.'
-                }
-			});
-
-			if(Validator.isInvalid()) {
-				var error_msg = '';
-				var errors = Validator.getErrors();
-				for (var i in errors) {
-					error_msg += errors[i] + '<br>';
-				}
-
-				$ionicPopup.alert({
-					title: 'Datos incorrectos',
-					template: error_msg
-				});
-				return;
-            }
-
-            PostsService.create(data).then(
-                function(response) {
-
-                    var responseData = response.data;
-
-                    // Verificamos si tuvimos éxito  o no.
-                    if(responseData.status == 1) {
-                        var popup = $ionicPopup.alert({
-                            title: 'Éxito',
-                            template: responseData.msg
-                        });
-                        // Redireccionamos al usuario cuando cierre el popup.
-                        popup.then(function(rta) {
-                            $state.go('tab.dash');
-                        });
-                    } else {
-						var error_msg = '';
-						for (var i in responseData.errors) {
-							error_msg += responseData.errors[i] + '<br>';
-						}
-
-						$ionicPopup.alert({
-							title: responseData.msg,
-							template: error_msg
-						});
-                    }
-                },
-				function() {
-					// Reject
-					$ionicPopup.alert({
-						title: 'Error',
-						template: "No pudimos conectarnos. Intente de nuevo más tarde."
-					});
-				}
-            );
-        };
-    });
-// Abrimos el módulo de controllers, definido en
-// controllers.js
-angular.module('FrameApp.controllers')
-    .controller('ProfileCtrl', [
-        '$scope',
-        '$ionicPopup',
-        '$state',
-        'AuthService',
-        'UserService',
-        function($scope, $ionicPopup, $state, AuthService, UserService) {
-            $scope.user = null;
-            UserService.getUser().then(
-                function(user) {
-                    $scope.user = {
-                        name: user.name,
-                        last_name: user.last_name,
-                        email: user.email,
-                        image: user.image
-                    };
-                }
-            );
-
-        }
-    ]);
-// Abrimos el módulo de controllers, definido en
-// controllers.js
-angular.module('FrameApp.controllers')
-    .controller('ProfileOptionsCtrl', [
-        '$scope',
-        '$ionicPopup',
-        '$state',
-        'AuthService',
-        'UserService',
-        function($scope, $ionicPopup, $state, AuthService, UserService) {
-
-
-            // Buscamos la información del user.
-            var user = AuthService.getUserData();
-            $scope.user = {
-                id: user.id,
-                name: user.name,
-                last_name: user.last_name,
-                email: user.email,
-                image: user.image
-            };
-
-
-
-            $scope.edit = function(editData) {
-
-                // Pedimos confirmación del usuario.
-                var confirmPopup = $ionicPopup.confirm({
-                    title: 'Editar Perfil',
-                    template: 'Está seguro de cambiar su información?',
-                    buttons: [
-                        { text: 'No' },
-                        {
-                            text: 'Si',
-                            type: 'button-positive',
-                            onTap: function(e) {
-                                return true;
-                            }
-                        }
-                    ]
-                });
-
-                confirmPopup.then(function(res) {
-                    if(res) {
-
-                        // Si confirma enviamos los datos
-                        UserService.edit(editData).then(
-                            function(response) {
-
-                                var responseData = response.data;
-                                // Verificamos si tuvimos éxito  o no.
-                                if(responseData.status == 1) {
-
-                                    var edited = responseData.data;
-
-                                    $scope.user = {
-                                        id: edited.id,
-                                        name: edited.name,
-                                        last_name: edited.last_name,
-                                        email: edited.email,
-                                        image: edited.image
-                                    };
-
-                                    var popup = $ionicPopup.alert({
-                                        title: 'Éxito',
-                                        template: 'Su información fue modificada exitosamente!'
-                                    });
-
-                                    // Redireccionamos al usuario cuando cierre el popup.
-                                    popup.then(function(rta) {
-                                        $state.go('tab.profile');
-                                    });
-                                } else {
-									var error_msg = '';
-									for (var i in responseData.errors) {
-										error_msg += responseData.errors[i] + '<br>';
-									}
-
-									$ionicPopup.alert({
-										title: responseData.msg,
-										template: error_msg
-									});
-                                }
-                            }
-                        );
-
-                    } else {
-                        // Si no confirma no hacemos nada.
-                    }
-                });
-            };
-
-
-
-            /**
-             * Logout
-             */
-            $scope.logout = function() {
-                var confirmPopup = $ionicPopup.confirm({
-                    title: 'Cerrar Sesión',
-                    template: 'Está seguro de cerrar la sesión actual?',
-                    buttons: [
-                        { text: 'No' },
-                        {
-                            text: 'Si',
-                            type: 'button-positive',
-                            onTap: function(e) {
-                                return true;
-                            }
-                        }
-                    ]
-                });
-
-                confirmPopup.then(function(res) {
-                    if(res) {
-                        AuthService.logout();
-                        var msg = $ionicPopup.alert({
-                            title: 'Sesión Cerrada',
-                            template: 'Gracias por utilizar la app. Lo esperamos nuevamente!'
-                        });
-
-                        msg.then(
-                            function() {
-                                $state.go('login', {reload:true});
-                            }
-                        )
-                    }
-                });
-
-
-            };
-        }
-    ]);
-
-angular.module('FrameApp.controllers')
-    .controller('RegisterCtrl', [
-        '$scope',
-        '$ionicPopup',
-        '$state',
-        'AuthService',
-        'ValidationService',
-        function($scope, $ionicPopup, $state, AuthService, ValidationService) {
-            $scope.user = {
-                name: null,
-                last_name: null,
-                email: null,
-                password: null,
-                password2: null
-            };
-
-            $scope.register = function(userData) {
-
-				var Validator = ValidationService.init(userData, {
-					name: ['required', 'min:3', 'max:20'],
-					last_name: ['required', 'min:3', 'max:20'],
-					email: ['required', 'email'],
-					password: ['required', 'password'],
-					password2: ['required', 'equal:password']
-				}, {
-					name: {
-						required: "Ingrese su nombre.",
-						min: 'Su nombre debe tener un mínimo de 3 letras.',
-						max: 'Su nombre debe tener un máximo de 20 letras.'
-					},
-					last_name: {
-						required: "Ingrese su apellido.",
-						min: 'Su apellido debe tener un mínimo de 3 letras.',
-						max: 'Su apellido debe tener un máximo de 20 letras.'
-					},
-					email: {
-						required: 'Ingrese su email.',
-						email: 'El formato del email debe ser ejemplo@dominio.com'
-					},
-					password: {
-						required: "Ingrese su contraseña.",
-						password: 'La contraseña debe tener un mínimo de 5 caracteres, una mayúscula y un número.'
-					},
-					password2: {
-						required: 'Repita la contraseña.',
-						equal: 'Las contraseñas deben ser iguales.'
-					}
-				});
-
-				if (Validator.isInvalid()) {
-					var error_msg = '';
-					var errors = Validator.getErrors();
-					for (var i in errors) {
-						error_msg += errors[i] + '<br>';
-					}
-
-					$ionicPopup.alert({
-						title: 'Datos incorrectos',
-						template: error_msg
-					});
-					return;
-				}
-
-				AuthService.register(userData).then(
-					function(response) {
-						// Resolve
-						var responseData = response.data;
-						if(responseData.status == 1) {
-							var popup = $ionicPopup.alert({
-								title: '¡Cuenta creada con éxito!'
-							});
-
-							// reseteamos el form.
-							$scope.user = {
-								name: null,
-								last_name: null,
-								email: null,
-								password: null,
-								password2: null
-							};
-
-							// Cuando el usuario cierre  el popup, lo redireccionamos al dashboard.
-							popup.then(
-								function(rta) {
-									$state.go('tab.dash');
-								}
-							);
-						} else {
-							var error_msg = '';
-							var errors = responseData.errors;
-							for (var i in errors) {
-								error_msg += errors[i] + '<br>';
-							}
-
-							$ionicPopup.alert({
-								title: 'Datos incorrectos',
-								template: error_msg
-							});
-						}
-					},
-					function(response) {
-						// Reject
-						console.error("REGISTER REJECT:" + response);
-					}
-				);
-            }
-        }
-    ]);
 angular.module('FrameApp.directives', [])
 	.directive('fileModel', function($parse) {
 		return {
@@ -1162,7 +585,7 @@ angular.module('FrameApp.services')
                     var responseData = response.data;
                     // Verificamos si grabó bien.
                     if(responseData.status == 1) {
-                        comments.push(responseData.data);
+                        comments.unshift(responseData.data);
                     }
 
                     return response;
@@ -1173,7 +596,9 @@ angular.module('FrameApp.services')
             );
         };
 
-
+        this.getComments = function () {
+            return comments;
+        };
 
         this.clear = function() {
             comments = [];
@@ -1235,18 +660,30 @@ angular.module('FrameApp.services')
          * @returns {response} Devuelve la respuesta de la Api.
          */
         this.get = function (id) {
-            return $http.get($rootScope.API_PATH + 'posts/' + id, {
-                'headers': {
-                    'X-Token': AuthService.getToken()
-                }
-            }).then(function(response) {
 
-                    return response.data;
-                },
-                function(response) {
-                    return response;
+            if (posts.length === 0) {
+                return $http.get($rootScope.API_PATH + 'posts/' + id, {
+                    'headers': {
+                        'X-Token': AuthService.getToken()
+                    }
+                }).then(function(response) {
+
+                        return response.data;
+                    },
+                    function(response) {
+                        return response;
+                    }
+                );
+            } else {
+                var deferred = $q.defer();
+
+                for (var i in posts) {
+                    if (posts[i].id == id) deferred.resolve({ 'status': 1, 'post': posts[i] });
                 }
-            );
+
+                return deferred.promise;
+            }
+
         };
 
         /**
@@ -1286,6 +723,17 @@ angular.module('FrameApp.services')
                 }
             );
         };
+
+
+        this.likePost = function (data) {
+            return $http.post($rootScope.API_PATH + 'posts/like', data, {
+                'headers': {
+                    'X-Token': AuthService.getToken()
+                }
+            }).then(function (response) {
+                return response;
+            })
+        }
 
     });
 // Definimos el servicio de Categoria.
@@ -1777,3 +1225,697 @@ angular.module('FrameApp.services')
 			}
 		}
 	]);
+angular.module('FrameApp.controllers')
+    .controller('DashCtrl', function ($scope, $timeout, PostsService, CategoriesService, AuthService) {
+
+        /**
+         * Referencia de todos los posts existentes para usarlos como base para los filtros
+         * @type {Array}
+         */
+        var allposts = [];
+
+        $scope.User = AuthService.getUserData();
+
+        $scope.loading = true;
+
+        $scope.posts = [];
+
+        $scope.categories = [];
+
+        $scope.likedByUser = false;
+
+
+        CategoriesService.getCategories().then(
+            function(categories) {
+                $scope.categories = categories;
+                $scope.categories.unshift({
+                    id: 0,
+                    category: 'Todas'
+                });
+                $scope.category = $scope.categories[0].id
+            }
+        );
+
+        PostsService.getPosts().then(
+            function(posts) {
+
+                // Definimos los posts que están likeados por el usuario
+                for (var i in posts) {
+                    for(var j in posts[i].likes){
+                        if (posts[i].likes[j].id_user == $scope.User.id) {
+                            posts[i].likedByUser = true;
+                        } else {
+                            posts[i].likedByUser = false;
+                        }
+                    }
+                }
+
+                $scope.posts = posts;
+                allposts = posts;
+                $scope.loading = false;
+            }
+        );
+
+        /**
+         * Filtra los posts por categoría
+         * @param category
+         */
+        $scope.applyFilter = function (category) {
+            $scope.loading = true;
+
+            $timeout(function () {
+                if (category == 0) {
+                    $scope.posts = allposts;
+                    $scope.loading = false;
+                    return;
+                }
+
+                var filtered = [];
+
+                for (var i in allposts) {
+                    if (allposts[i].id_category == category) filtered.push(allposts[i]);
+                }
+
+                $scope.posts = filtered;
+
+                $scope.loading = false;
+            }, 500);
+        };
+        
+        $scope.submitLike = function (post_id) {
+
+            var post;
+
+            for (var i in $scope.posts) {
+                if ($scope.posts[i].id == post_id) {
+                    $scope.posts[i].likedByUser = !$scope.posts[i].likedByUser;
+                    post = $scope.posts[i];
+
+                }
+            }
+
+            PostsService.likePost({
+                'post_id': post_id,
+                'user_id': $scope.User.id,
+                'liked': post.likedByUser
+            }).then(
+                function (response) {
+                    var responseData = response.data;
+
+                    for (var i in $scope.posts) {
+                        if ($scope.posts[i].id == responseData.post_id) {
+
+                            if (responseData.liked) {
+                                $scope.posts[i].likes.push({
+                                    'id_user': $scope.User.id,
+                                    'id_post': responseData.post_id,
+                                    'image': $scope.User.image,
+                                    'name': $scope.User.name,
+                                    'last_name': $scope.User.last_name
+                                });
+
+                            } else {
+                                
+                                for (var j in $scope.posts[i].likes) {
+                                    if ($scope.posts[i].likes[j].id_post == responseData.post_id && $scope.posts[i].likes[j].id_user == responseData.user_id) {
+                                        $scope.posts[i].likes.splice(j)
+                                    }
+                                }
+                                
+                            }
+
+                        }
+                    }
+
+                }
+            );
+        };
+    });
+
+angular.module('FrameApp.controllers')
+    .controller('DetailPostCtrl', [
+        '$scope',
+        '$ionicPopup',
+        '$state',
+        '$stateParams',
+        'PostsService',
+        'CommentsService',
+        'AuthService',
+        function($scope, $ionicPopup, $state, $stateParams, PostsService, CommentsService, AuthService) {
+
+            // Caputramos el id del post de los parametros de la ruta.
+            var postId = $stateParams.postId;
+
+            // Buscamos la informacion del user.
+            var user = AuthService.getUserData();
+
+            $scope.likedByUser = false;
+
+            // Pasamos los datos útiles al $scope.
+            $scope.comment = {
+                comment: '',
+                date_added: null,
+                id_user: user.id,
+                id_post: postId
+            };
+            /**
+             * Traemos la información del post
+             */
+            PostsService.get(postId).then(
+                function(data) {
+                    $scope.post = data.post;
+                }
+            );
+
+            /**
+             * Traemos los comentarios del post
+             */
+            $scope.comments = [];
+            CommentsService.getFromPosts(postId).then(
+                function(data) {
+                    $scope.comments = data;
+                }
+            );
+
+
+            $scope.save = function(data) {
+                if(!data.comment) {
+                    return;
+                }
+                CommentsService.save(data).then(
+                    function(response) {
+
+                        var responseData = response.data;
+
+                        // Verificamos si tuvimos éxito  o no.
+                        if(responseData.status == 0) {
+							var error_msg = '';
+							for (var i in responseData.errors) {
+								error_msg += responseData.errors[i] + '<br>';
+							}
+
+							$ionicPopup.alert({
+								title: responseData.msg,
+								template: error_msg
+							});
+
+                        } else {
+                            $scope.comments = CommentsService.getComments();
+                            $scope.comment.comment = '';
+                        }
+
+                    }
+                );
+            };
+
+
+            $scope.submitLike = function () {
+
+                $scope.post.likedByUser = !$scope.post.likedByUser;
+
+                PostsService.likePost({
+                    'post_id': $scope.post.id,
+                    'user_id': user.id,
+                    'liked': $scope.post.likedByUser
+                }).then(
+                    function (response) {
+                        var responseData = response.data;
+
+                        if (responseData.liked) {
+                            $scope.post.likes.push({
+                                'id_user': user.id,
+                                'id_post': responseData.post_id,
+                                'image': user.image,
+                                'name': user.name,
+                                'last_name': user.last_name
+                            });
+
+                        } else {
+
+                            for (var i in $scope.post.likes) {
+                                if ($scope.post.likes[i].id_post == responseData.post_id && $scope.post.likes[i].id_user == responseData.user_id) {
+                                    $scope.post.likes.splice(i)
+                                }
+                            }
+
+                        }
+
+                    }
+                );
+            };
+
+        }
+    ]);
+
+angular.module('FrameApp.controllers')
+    .controller('LoginCtrl', [
+        '$scope',
+        '$ionicPopup',
+        '$state',
+        'AuthService',
+        'ValidationService',
+        function($scope, $ionicPopup, $state, AuthService, ValidationService) {
+            $scope.user = {
+                name: null,
+                password: null
+            };
+
+            $scope.login = function(userData) {
+
+            	var Validator = ValidationService.init(userData, {
+            		name: ['required'],
+					password: ['required']
+				}, {
+            		name: {required: "Ingrese su nombre."},
+            		password: {required: "Ingrese su constraseña."}
+				});
+
+
+                if(Validator.isInvalid()) {
+
+                	var error_msg = '';
+					var errors = Validator.getErrors();
+                	for (var i in errors) {
+                		error_msg += errors[i] + '<br>';
+					}
+
+                    $ionicPopup.alert({
+                        title: 'Datos incorrectos',
+                        template: error_msg
+                    });
+                    return;
+                }
+
+
+                AuthService.login(userData).then(
+                    function(response) {
+                        // Resolve
+
+                        var responseData = response.data;
+
+                        if(responseData.status == 1) {
+
+                            var popup = $ionicPopup.alert({
+                                title: 'Éxito',
+                                template: responseData.msg
+                            });
+
+                            // Reseteamos el form.
+							$scope.user = {
+								name: null,
+								password: null
+							};
+
+                            // Cuando el usuario cierre  el popup, lo redireccionamos al dashboard.
+                            popup.then(
+                                function(rta) {
+                                    $state.go('tab.dash');
+                                }
+                            );
+
+                        } else {
+							console.log(response);
+							var error_msg = '';
+							for (var i in responseData.errors) {
+								error_msg += responseData.errors[i] + '<br>';
+							}
+
+                            $ionicPopup.alert({
+                                title: responseData.msg,
+                                template: error_msg
+                            });
+
+                        }
+                    },
+                    function(response) {
+                        // Reject
+						$ionicPopup.alert({
+							title: 'Error',
+							template: "No pudimos conectarnos. Intente de nuevo más tarde."
+						});
+                    }
+                );
+            }
+            
+            $scope.recover = function (userData) {
+				
+			}
+        }
+    ]);
+/**
+ * Created by Bautista on 27/6/2017.
+ */
+
+angular.module('FrameApp.controllers')
+    .controller('NewPostCtrl', function ($scope, $state, $ionicPopup, PostsService, CategoriesService, AuthService, ValidationService) {
+
+        var user = AuthService.getUserData();
+
+		$scope.date = new Date();
+
+		$scope.categories = [];
+
+		CategoriesService.getCategories().then(
+			function(categories) {
+				$scope.categories = categories;
+
+				$scope.post = {
+					title: '',
+					content: '',
+					image: '',
+					date_added: null,
+					id_category: $scope.categories[0].id,
+					id_user: user.id
+				};
+			}
+		);
+
+
+        $scope.save = function(data) {
+			var Validator = ValidationService.init(data, {
+				title: ['required', 'min:3', 'max:30']
+			}, {
+				title: {
+				    required: 'Ingrese un título.',
+                    min: 'El título debe tener al menos 3 caracteres.',
+                    max: 'El título no debe tener más de 30 caracteres.'
+                }
+			});
+
+			if(Validator.isInvalid()) {
+				var error_msg = '';
+				var errors = Validator.getErrors();
+				for (var i in errors) {
+					error_msg += errors[i] + '<br>';
+				}
+
+				$ionicPopup.alert({
+					title: 'Datos incorrectos',
+					template: error_msg
+				});
+				return;
+            }
+
+            PostsService.create(data).then(
+                function(response) {
+
+                    var responseData = response.data;
+
+                    // Verificamos si tuvimos éxito  o no.
+                    if(responseData.status == 1) {
+                        var popup = $ionicPopup.alert({
+                            title: 'Éxito',
+                            template: responseData.msg
+                        });
+                        // Redireccionamos al usuario cuando cierre el popup.
+                        popup.then(function(rta) {
+                            $state.go('tab.dash');
+                        });
+                    } else {
+						var error_msg = '';
+						for (var i in responseData.errors) {
+							error_msg += responseData.errors[i] + '<br>';
+						}
+
+						$ionicPopup.alert({
+							title: responseData.msg,
+							template: error_msg
+						});
+                    }
+                },
+				function() {
+					// Reject
+					$ionicPopup.alert({
+						title: 'Error',
+						template: "No pudimos conectarnos. Intente de nuevo más tarde."
+					});
+				}
+            );
+        };
+    });
+// Abrimos el módulo de controllers, definido en
+// controllers.js
+angular.module('FrameApp.controllers')
+    .controller('ProfileCtrl', [
+        '$scope',
+        '$ionicPopup',
+        '$state',
+        'AuthService',
+        'UserService',
+        function($scope, $ionicPopup, $state, AuthService, UserService) {
+            $scope.user = null;
+            UserService.getUser().then(
+                function(user) {
+                    $scope.user = {
+                        name: user.name,
+                        last_name: user.last_name,
+                        email: user.email,
+                        image: user.image
+                    };
+                }
+            );
+
+        }
+    ]);
+// Abrimos el módulo de controllers, definido en
+// controllers.js
+angular.module('FrameApp.controllers')
+    .controller('ProfileOptionsCtrl', [
+        '$scope',
+        '$ionicPopup',
+        '$state',
+        'AuthService',
+        'UserService',
+        function($scope, $ionicPopup, $state, AuthService, UserService) {
+
+
+            // Buscamos la información del user.
+            var user = AuthService.getUserData();
+            $scope.user = {
+                id: user.id,
+                name: user.name,
+                last_name: user.last_name,
+                email: user.email,
+                image: user.image
+            };
+
+
+
+            $scope.edit = function(editData) {
+
+                // Pedimos confirmación del usuario.
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Editar Perfil',
+                    template: 'Está seguro de cambiar su información?',
+                    buttons: [
+                        { text: 'No' },
+                        {
+                            text: 'Si',
+                            type: 'button-positive',
+                            onTap: function(e) {
+                                return true;
+                            }
+                        }
+                    ]
+                });
+
+                confirmPopup.then(function(res) {
+                    if(res) {
+
+                        // Si confirma enviamos los datos
+                        UserService.edit(editData).then(
+                            function(response) {
+
+                                var responseData = response.data;
+                                // Verificamos si tuvimos éxito  o no.
+                                if(responseData.status == 1) {
+
+                                    var edited = responseData.data;
+
+                                    $scope.user = {
+                                        id: edited.id,
+                                        name: edited.name,
+                                        last_name: edited.last_name,
+                                        email: edited.email,
+                                        image: edited.image
+                                    };
+
+                                    var popup = $ionicPopup.alert({
+                                        title: 'Éxito',
+                                        template: 'Su información fue modificada exitosamente!'
+                                    });
+
+                                    // Redireccionamos al usuario cuando cierre el popup.
+                                    popup.then(function(rta) {
+                                        $state.go('tab.profile');
+                                    });
+                                } else {
+									var error_msg = '';
+									for (var i in responseData.errors) {
+										error_msg += responseData.errors[i] + '<br>';
+									}
+
+									$ionicPopup.alert({
+										title: responseData.msg,
+										template: error_msg
+									});
+                                }
+                            }
+                        );
+
+                    } else {
+                        // Si no confirma no hacemos nada.
+                    }
+                });
+            };
+
+
+
+            /**
+             * Logout
+             */
+            $scope.logout = function() {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Cerrar Sesión',
+                    template: 'Está seguro de cerrar la sesión actual?',
+                    buttons: [
+                        { text: 'No' },
+                        {
+                            text: 'Si',
+                            type: 'button-positive',
+                            onTap: function(e) {
+                                return true;
+                            }
+                        }
+                    ]
+                });
+
+                confirmPopup.then(function(res) {
+                    if(res) {
+                        AuthService.logout();
+                        var msg = $ionicPopup.alert({
+                            title: 'Sesión Cerrada',
+                            template: 'Gracias por utilizar la app. Lo esperamos nuevamente!'
+                        });
+
+                        msg.then(
+                            function() {
+                                $state.go('login', {reload:true});
+                            }
+                        )
+                    }
+                });
+
+
+            };
+        }
+    ]);
+
+angular.module('FrameApp.controllers')
+    .controller('RegisterCtrl', [
+        '$scope',
+        '$ionicPopup',
+        '$state',
+        'AuthService',
+        'ValidationService',
+        function($scope, $ionicPopup, $state, AuthService, ValidationService) {
+            $scope.user = {
+                name: null,
+                last_name: null,
+                email: null,
+                password: null,
+                password2: null
+            };
+
+            $scope.register = function(userData) {
+
+				var Validator = ValidationService.init(userData, {
+					name: ['required', 'min:3', 'max:20'],
+					last_name: ['required', 'min:3', 'max:20'],
+					email: ['required', 'email'],
+					password: ['required', 'password'],
+					password2: ['required', 'equal:password']
+				}, {
+					name: {
+						required: "Ingrese su nombre.",
+						min: 'Su nombre debe tener un mínimo de 3 letras.',
+						max: 'Su nombre debe tener un máximo de 20 letras.'
+					},
+					last_name: {
+						required: "Ingrese su apellido.",
+						min: 'Su apellido debe tener un mínimo de 3 letras.',
+						max: 'Su apellido debe tener un máximo de 20 letras.'
+					},
+					email: {
+						required: 'Ingrese su email.',
+						email: 'El formato del email debe ser ejemplo@dominio.com'
+					},
+					password: {
+						required: "Ingrese su contraseña.",
+						password: 'La contraseña debe tener un mínimo de 5 caracteres, una mayúscula y un número.'
+					},
+					password2: {
+						required: 'Repita la contraseña.',
+						equal: 'Las contraseñas deben ser iguales.'
+					}
+				});
+
+				if (Validator.isInvalid()) {
+					var error_msg = '';
+					var errors = Validator.getErrors();
+					for (var i in errors) {
+						error_msg += errors[i] + '<br>';
+					}
+
+					$ionicPopup.alert({
+						title: 'Datos incorrectos',
+						template: error_msg
+					});
+					return;
+				}
+
+				AuthService.register(userData).then(
+					function(response) {
+						// Resolve
+						var responseData = response.data;
+						if(responseData.status == 1) {
+							var popup = $ionicPopup.alert({
+								title: '¡Cuenta creada con éxito!'
+							});
+
+							// reseteamos el form.
+							$scope.user = {
+								name: null,
+								last_name: null,
+								email: null,
+								password: null,
+								password2: null
+							};
+
+							// Cuando el usuario cierre  el popup, lo redireccionamos al dashboard.
+							popup.then(
+								function(rta) {
+									$state.go('tab.dash');
+								}
+							);
+						} else {
+							var error_msg = '';
+							var errors = responseData.errors;
+							for (var i in errors) {
+								error_msg += errors[i] + '<br>';
+							}
+
+							$ionicPopup.alert({
+								title: 'Datos incorrectos',
+								template: error_msg
+							});
+						}
+					},
+					function(response) {
+						// Reject
+						console.error("REGISTER REJECT:" + response);
+					}
+				);
+            }
+        }
+    ]);

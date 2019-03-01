@@ -5,17 +5,25 @@
             <p>Categorías:</p>
             <select ng-change="applyFilter(category)" ng-model="category" ng-options="category.id as category.category for category in categories"></select>
         </form>
-        <div ng-if="posts.length > 0" class="frame-color-bg padding">
+        <ion-spinner ng-show="loading"></ion-spinner>
+        <div ng-show="!loading" ng-if="posts.length > 0" class="frame-color-bg padding">
             <ion-list>
                 <ion-item href="#/tab/dash/{{post.id}}" ng-repeat="post in posts">
-                    <h3 class="post-title">{{ post.title }}</h3>
-                    <p class="post-info">{{ post.user }} - {{ post.date_added }}</p>
+                    <p class="post-info">
+                        <img class="post-user-image" ng-src="{{post.user.image ? post.user.image : 'img/user/default.png'}}" alt="{{ post.user.name }} {{ post.user.last_name }}">
+                        {{ post.user.name }} {{ post.user.last_name }}
+                    </p>
+                    <h3 class="post-title">{{ post.title }} <span class="post-info">{{post.category}}</span></h3>
                     <img class="post-img" ng-show="post.image" ng-src="{{post.image}}">
                     <p class="post-content">{{ post.content }}</p>
+                    <p class="post-info-bot">
+                        <span class="like-counter"> {{post.likes.length}} Me gusta</span>
+                        <span ng-click="$event.preventDefault();submitLike(post.id)" ng-class="post.likedByUser ? 'ion-android-favorite' : 'ion-android-favorite-outline' " class="icon-like"></span>
+                    </p>
                 </ion-item>
             </ion-list>
         </div>
-        <p class="alert no-posts" ng-show="posts.length == 0">Por el momento no hay posts <br> :(</p>
+        <p class="alert no-posts" ng-show="posts.length == 0 && !loading">Por el momento no hay posts <br> :(</p>
     </ion-content>
     <a ui-sref="tab.dash-new" class="button frame-color2-bg btn-fixed">
         <i class="icon ion-paintbrush"></i>

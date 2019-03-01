@@ -53,18 +53,30 @@ angular.module('FrameApp.services')
          * @returns {response} Devuelve la respuesta de la Api.
          */
         this.get = function (id) {
-            return $http.get($rootScope.API_PATH + 'posts/' + id, {
-                'headers': {
-                    'X-Token': AuthService.getToken()
-                }
-            }).then(function(response) {
 
-                    return response.data;
-                },
-                function(response) {
-                    return response;
+            if (posts.length === 0) {
+                return $http.get($rootScope.API_PATH + 'posts/' + id, {
+                    'headers': {
+                        'X-Token': AuthService.getToken()
+                    }
+                }).then(function(response) {
+
+                        return response.data;
+                    },
+                    function(response) {
+                        return response;
+                    }
+                );
+            } else {
+                var deferred = $q.defer();
+
+                for (var i in posts) {
+                    if (posts[i].id == id) deferred.resolve({ 'status': 1, 'post': posts[i] });
                 }
-            );
+
+                return deferred.promise;
+            }
+
         };
 
         /**
@@ -104,5 +116,16 @@ angular.module('FrameApp.services')
                 }
             );
         };
+
+
+        this.likePost = function (data) {
+            return $http.post($rootScope.API_PATH + 'posts/like', data, {
+                'headers': {
+                    'X-Token': AuthService.getToken()
+                }
+            }).then(function (response) {
+                return response;
+            })
+        }
 
     });

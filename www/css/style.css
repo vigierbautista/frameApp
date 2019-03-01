@@ -4,6 +4,12 @@ ion-content {
     /*background-color: #ffc900;*/
 }
 
+ion-spinner {
+    position: absolute;
+    left: 45%;
+    top: 45%;
+}
+
 .frame-color {
     color: #39B7CC !important;
 }
@@ -42,10 +48,11 @@ img {
 
 #comment-form {
     position: fixed;
-    bottom: 10px;
+    bottom: 0;
     right: 0;
     width: 100%;
-    padding: 0 10px;
+    padding: 10px;
+    background-color: #efeeee;
 }
 
 #comment-form label {
@@ -165,6 +172,39 @@ img {
     margin-bottom: 10px !important;
 }
 
+.post-user-image {
+    width: 30px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 5px;
+    border-radius: 50%;
+}
+
+.post-info-bot {
+    position: relative;
+    padding: 10px 0;
+}
+
+.post-info-bot .like-counter {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.post-info-bot .icon-like{
+    font-size: 30px;
+    position: absolute;
+    right: 12px;
+    bottom: 4px;
+    -webkit-transition: all ease-in;
+    -moz-transition: all ease-in;
+    -ms-transition: all ease-in;
+    -o-transition: all ease-in;
+    transition: all ease-in;
+}
+
+.post-info-bot .ion-android-favorite {
+    color: rgba(255, 0, 1, 0.51);
+}
 
 #new-post-wrapper textarea {
     min-height: 150px;

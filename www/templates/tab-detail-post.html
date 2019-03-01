@@ -2,15 +2,25 @@
 <ion-view id="detail-post-wrapper" view-title="Post">
     <ion-content class="padding">
         <div class="padding">
-            <h3>{{post.title}}</h3>
-            <p class="post-info">{{ post.user }} - {{ post.date_added }}</p>
+            <h3>{{post.title}} <span class="post-info">{{post.category}}</span></h3>
+            <p class="post-info">
+                <img class="post-user-image" ng-src="{{post.user.image ? post.user.image : 'img/user/default.png'}}" alt="{{ post.user.name }} {{ post.user.last_name }}">
+                {{ post.user.name }} {{ post.user.last_name }}
+            </p>
             <img class="post-img" ng-show="post.image" ng-src="{{post.image}}">
             <p class="post-content">{{ post.content }}</p>
+            <p class="post-info-bot">
+                <span class="like-counter"> {{post.likes.length}} Me gusta</span>
+                <span ng-click="$event.preventDefault();submitLike()" ng-class="post.likedByUser ? 'ion-android-favorite' : 'ion-android-favorite-outline' " class="icon-like"></span>
+            </p>
         </div>
-        <h4>Comentarios:</h4>
+        <h4 ng-show="comments.length">Comentarios:</h4>
         <ion-list>
             <ion-item ng-repeat="comment in comments track by comment.id">
-                <p class="post-info">{{ comment.user }} - {{ comment.date_added }}</p>
+                <p class="post-info">
+                    <img class="post-user-image" ng-src="{{comment.user.image ? comment.user.image : 'img/user/default.png'}}" alt="{{ comment.user.name }} {{ comment.user.last_name }}">
+                    {{ comment.user.name }} {{ comment.user.last_name }} - {{ comment.date_added }}
+                </p>
                 <p class="post-content">{{ comment.comment }}</p>
             </ion-item>
         </ion-list>
@@ -18,7 +28,7 @@
     <form id="comment-form" ng-submit="save(comment)">
 
         <label class="item item-input">
-            <textarea ng-model="comment.comment" placeholder="Comment"></textarea>
+            <textarea ng-model="comment.comment" placeholder="Escribe un comentario"></textarea>
         </label>
         <input type="hidden" ng-model="data.id_user">
         <input type="hidden" ng-model="data.id_post">

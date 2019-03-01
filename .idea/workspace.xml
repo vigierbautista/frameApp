@@ -3,14 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="a704ff68-9f74-4cbe-b376-932a81789c23" name="Default" comment="added category filter">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/dist/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/dist/bundle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/js/controllers/login-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/controllers/login-controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/js/services/auth-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/services/auth-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/controllers/dash-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/controllers/dash-controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/controllers/detail-post-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/controllers/detail-post-controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/services/comments-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/services/comments-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/services/posts-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/services/posts-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/templates/tab-dash.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/templates/tab-dash.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/templates/tab-detail-post.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/templates/tab-detail-post.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,19 +31,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/templates/tab-dash.html">
+        <entry file="file://$PROJECT_DIR$/www/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="94" selection-start-line="17" selection-start-column="94" selection-end-line="17" selection-end-column="94" />
+            <state relative-caret-position="345">
+              <caret line="197" column="35" selection-start-line="197" selection-start-column="35" selection-end-line="197" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/templates/tab-new-post.html">
+        <entry file="file://$PROJECT_DIR$/www/templates/tab-dash.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" selection-start-line="26" selection-end-line="26" />
+            <state relative-caret-position="300">
+              <caret line="20" column="83" selection-start-line="20" selection-start-column="64" selection-end-line="20" selection-end-column="83" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/tab-detail-post.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" column="66" selection-start-line="13" selection-start-column="56" selection-end-line="13" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -50,17 +60,30 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/controllers/dash-controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="735">
-              <caret line="49" column="36" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="36" />
+            <state relative-caret-position="292">
+              <caret line="83" column="79" lean-forward="true" selection-start-line="83" selection-start-column="20" selection-end-line="83" selection-end-column="79" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/www/js/controllers/detail-post-controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="84" column="31" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="31" />
+              <caret line="92" column="43" selection-start-line="92" selection-start-column="43" selection-end-line="92" selection-end-column="43" />
+              <caret line="94" column="41" selection-start-line="94" selection-start-column="41" selection-end-line="94" selection-end-column="41" />
+              <caret line="95" column="40" selection-start-line="95" selection-start-column="40" selection-end-line="95" selection-end-column="40" />
+              <caret line="96" column="45" selection-start-line="96" selection-start-column="45" selection-end-line="96" selection-end-column="45" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/css/style.css">
+        <entry file="file://$PROJECT_DIR$/www/js/services/posts-service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="573">
-              <caret line="194" column="28" selection-start-line="194" selection-start-column="28" selection-end-line="194" selection-end-column="28" />
+            <state relative-caret-position="862">
+              <caret line="126" column="32" selection-start-line="126" selection-start-column="32" selection-end-line="126" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -68,38 +91,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="68" column="103" selection-start-line="68" selection-start-column="103" selection-end-line="68" selection-end-column="103" />
+            <state relative-caret-position="405">
+              <caret line="138" column="18" selection-start-line="138" selection-start-column="18" selection-end-line="138" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/services/auth-service.js">
+        <entry file="file://$PROJECT_DIR$/www/js/services/comments-service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="718">
-              <caret line="66" column="40" selection-start-line="66" selection-start-column="40" selection-end-line="66" selection-end-column="40" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/controllers/login-controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1150">
-              <caret line="77" column="31" selection-start-line="77" selection-start-column="31" selection-end-line="77" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/www/js/services/posts-service.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="90" column="42" selection-start-line="90" selection-start-column="42" selection-end-line="90" selection-end-column="42" />
+            <state relative-caret-position="870">
+              <caret line="67" column="41" selection-start-line="67" selection-start-column="41" selection-end-line="67" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -116,6 +118,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>console.lo</find>
+      <find>clog</find>
       <find>fileModel</find>
     </findStrings>
     <replaceStrings>
@@ -136,7 +139,6 @@
         <option value="$PROJECT_DIR$/www/js/services/validation-service.js" />
         <option value="$PROJECT_DIR$/www/js/controllers/register-controller.js" />
         <option value="$PROJECT_DIR$/www/templates/tabs.html" />
-        <option value="$PROJECT_DIR$/www/js/controllers/detail-post-controller.js" />
         <option value="$PROJECT_DIR$/www/js/directives/posts-directives.js" />
         <option value="$PROJECT_DIR$/www/js/controllers.js" />
         <option value="$PROJECT_DIR$/www/js/directives/directives.js" />
@@ -144,28 +146,29 @@
         <option value="$PROJECT_DIR$/www/templates/login-register.html" />
         <option value="$PROJECT_DIR$/www/templates/login-form.html" />
         <option value="$PROJECT_DIR$/www/templates/login-recover-pass.html" />
-        <option value="$PROJECT_DIR$/www/js/services/comments-service.js" />
         <option value="$PROJECT_DIR$/www/dist/bundle.js" />
         <option value="$PROJECT_DIR$/www/js/services/categories-service.js" />
         <option value="$PROJECT_DIR$/www/templates/tab-new-post.html" />
         <option value="$PROJECT_DIR$/www/js/controllers/new-post-controller.js" />
-        <option value="$PROJECT_DIR$/www/templates/tab-detail-post.html" />
-        <option value="$PROJECT_DIR$/www/js/services/posts-service.js" />
         <option value="$PROJECT_DIR$/www/templates/tab-profile.html" />
         <option value="$PROJECT_DIR$/www/templates/tab-profile-options.html" />
         <option value="$PROJECT_DIR$/www/js/controllers/profile-controller.js" />
         <option value="$PROJECT_DIR$/www/js/controllers/profile-options-controller.js" />
         <option value="$PROJECT_DIR$/www/js/services/user-service.js" />
-        <option value="$PROJECT_DIR$/www/js/controllers/dash-controller.js" />
-        <option value="$PROJECT_DIR$/www/templates/tab-dash.html" />
-        <option value="$PROJECT_DIR$/www/css/style.css" />
         <option value="$PROJECT_DIR$/www/js/controllers/login-controller.js" />
         <option value="$PROJECT_DIR$/www/js/services/auth-service.js" />
+        <option value="$PROJECT_DIR$/www/js/services/comments-service.js" />
+        <option value="$PROJECT_DIR$/www/css/style.css" />
         <option value="$PROJECT_DIR$/www/js/app.js" />
+        <option value="$PROJECT_DIR$/www/js/services/posts-service.js" />
+        <option value="$PROJECT_DIR$/www/templates/tab-dash.html" />
+        <option value="$PROJECT_DIR$/www/js/controllers/dash-controller.js" />
+        <option value="$PROJECT_DIR$/www/templates/tab-detail-post.html" />
+        <option value="$PROJECT_DIR$/www/js/controllers/detail-post-controller.js" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="width" value="1934" />
     <option name="height" value="1047" />
@@ -208,6 +211,13 @@
               <item name="frameApp" type="462c0819:PsiDirectoryNode" />
               <item name="www" type="462c0819:PsiDirectoryNode" />
               <item name="img" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="frameApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="frameApp" type="462c0819:PsiDirectoryNode" />
+              <item name="www" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="frameApp" type="b2602c69:ProjectViewProjectNode" />
@@ -349,7 +359,7 @@
       <workItem from="1533573204781" duration="33304000" />
       <workItem from="1550368437463" duration="7608000" />
       <workItem from="1550451656831" duration="10837000" />
-      <workItem from="1551150075899" duration="30820000" />
+      <workItem from="1551150075899" duration="60416000" />
     </task>
     <task id="LOCAL-00001" summary="final_exam201807&#10; - Se implementó la validación en el registro de usuarios">
       <created>1533596916066</created>
@@ -421,11 +431,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551171124343</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="added category filter">
+      <created>1551216619439</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1551216619439</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88109000" />
+    <option name="totallyTimeSpent" value="117705000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -437,15 +454,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1934" height="1047" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6704731" visible="true" weight="0.16275346" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6697987" visible="true" weight="0.16257995" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5032538" side_tool="true" weight="0.16257995" />
-      <window_info id="Gulp" order="3" sideWeight="0.32952693" side_tool="true" visible="true" weight="0.16275346" />
+      <window_info id="Gulp" order="3" sideWeight="0.33020133" side_tool="true" visible="true" weight="0.16257995" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.19474836" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.1928494" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -454,7 +471,7 @@
       <window_info anchor="bottom" id="TODO" order="8" sideWeight="0.50053304" side_tool="true" weight="0.28850326" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32932165" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32932165" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -581,13 +598,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/services/comments-service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="64" column="53" selection-start-line="64" selection-start-column="53" selection-end-line="64" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/dist/bundle.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -606,23 +616,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
           <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/detail-post-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="40" column="32" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/tab-detail-post.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
         </state>
       </provider>
     </entry>
@@ -700,13 +693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/dash-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="49" column="36" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/tab-new-post.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
@@ -714,31 +700,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/tab-dash.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="94" selection-start-line="17" selection-start-column="94" selection-end-line="17" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="573">
-          <caret line="194" column="28" selection-start-line="194" selection-start-column="28" selection-end-line="194" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers/new-post-controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="22" column="56" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="68" column="103" selection-start-line="68" selection-start-column="103" selection-end-line="68" selection-end-column="103" />
         </state>
       </provider>
     </entry>
@@ -752,6 +717,11 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/css/ionic.app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-90" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers/login-controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1150">
@@ -759,10 +729,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="197" column="35" selection-start-line="197" selection-start-column="35" selection-end-line="197" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/services/comments-service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="870">
+          <caret line="67" column="41" selection-start-line="67" selection-start-column="41" selection-end-line="67" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="138" column="18" selection-start-line="138" selection-start-column="18" selection-end-line="138" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/services/posts-service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="90" column="42" selection-start-line="90" selection-start-column="42" selection-end-line="90" selection-end-column="42" />
+        <state relative-caret-position="862">
+          <caret line="126" column="32" selection-start-line="126" selection-start-column="32" selection-end-line="126" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/tab-dash.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="83" selection-start-line="20" selection-start-column="64" selection-end-line="20" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/dash-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="83" column="79" lean-forward="true" selection-start-line="83" selection-start-column="20" selection-end-line="83" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/tab-detail-post.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="66" selection-start-line="13" selection-start-column="56" selection-end-line="13" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/detail-post-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="84" column="31" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="31" />
+          <caret line="92" column="43" selection-start-line="92" selection-start-column="43" selection-end-line="92" selection-end-column="43" />
+          <caret line="94" column="41" selection-start-line="94" selection-start-column="41" selection-end-line="94" selection-end-column="41" />
+          <caret line="95" column="40" selection-start-line="95" selection-start-column="40" selection-end-line="95" selection-end-column="40" />
+          <caret line="96" column="45" selection-start-line="96" selection-start-column="45" selection-end-line="96" selection-end-column="45" />
         </state>
       </provider>
     </entry>
