@@ -18,6 +18,8 @@ angular.module('FrameApp.controllers')
 
             $scope.likedByUser = false;
 
+            $scope.loading = false;
+
             // Pasamos los datos útiles al $scope.
             $scope.comment = {
                 comment: '',
@@ -49,8 +51,11 @@ angular.module('FrameApp.controllers')
                 if(!data.comment) {
                     return;
                 }
+                $scope.loading = true;
+
                 CommentsService.save(data).then(
                     function(response) {
+                        $scope.loading = false;
 
                         var responseData = response.data;
 

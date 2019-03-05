@@ -26,13 +26,15 @@
         </ion-list>
     </ion-content>
     <form id="comment-form" ng-submit="save(comment)">
+        <ion-spinner ng-show="loading"></ion-spinner>
+        <div ng-show="!loading">
+            <label class="item item-input">
+                <textarea ng-model="comment.comment" placeholder="Escribe un comentario"></textarea>
+            </label>
+            <input type="hidden" ng-model="data.id_user">
+            <input type="hidden" ng-model="data.id_post">
 
-        <label class="item item-input">
-            <textarea ng-model="comment.comment" placeholder="Escribe un comentario"></textarea>
-        </label>
-        <input type="hidden" ng-model="data.id_user">
-        <input type="hidden" ng-model="data.id_post">
-
-        <button class="button frame-color-bg"><i class="icon ion-chatbubble"></i></button>
+            <button class="button frame-color-bg"><i class="icon ion-chatbubble"></i></button>
+        </div>
     </form>
 </ion-view>

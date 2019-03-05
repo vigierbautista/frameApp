@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a704ff68-9f74-4cbe-b376-932a81789c23" name="Default" comment="recover pass">
+    <list default="true" id="a704ff68-9f74-4cbe-b376-932a81789c23" name="Default" comment="ajax loading screen">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/dist/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/dist/bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/js/controllers/change-pass-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/controllers/change-pass-controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/js/controllers/login-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/controllers/login-controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/js/controllers/new-post-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/controllers/new-post-controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/js/controllers/profile-options-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/controllers/profile-options-controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/js/controllers/recover-pass-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/controllers/recover-pass-controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/js/controllers/register-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/controllers/register-controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/templates/change-pass.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/templates/change-pass.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/templates/login-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/templates/login-form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/templates/login-recover-pass.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/templates/login-recover-pass.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/templates/login-register.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/templates/login-register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/templates/tab-new-post.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/templates/tab-new-post.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/templates/tab-profile-options.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/templates/tab-profile-options.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/controllers/detail-post-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/controllers/detail-post-controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/templates/tab-detail-post.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/templates/tab-detail-post.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,20 +39,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/templates/login-form.html">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/www/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" selection-start-line="4" selection-end-line="5" />
+            <state relative-caret-position="157">
+              <caret line="63" column="23" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/templates/login-register.html">
+        <entry file="file://$PROJECT_DIR$/www/js/controllers/detail-post-controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="32" lean-forward="true" selection-start-line="5" selection-start-column="8" selection-end-line="6" selection-end-column="32" />
+            <state relative-caret-position="232">
+              <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/tab-dash.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/controllers/dash-controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/tab-detail-post.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="555">
+              <caret line="37" column="14" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -69,35 +87,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/controllers/register-controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1057">
-              <caret line="112" column="47" selection-start-line="112" selection-start-column="47" selection-end-line="112" selection-end-column="47" />
+            <state relative-caret-position="165">
+              <caret line="14" column="31" lean-forward="true" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/templates/change-pass.html">
+        <entry file="file://$PROJECT_DIR$/www/js/services/auth-service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/templates/tab-profile-options.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/www/js/controllers/profile-options-controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
+            <state>
+              <caret line="66" column="40" selection-start-line="66" selection-start-column="40" selection-end-line="66" selection-end-column="40" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -106,37 +106,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/templates/tab-new-post.html">
+        <entry file="file://$PROJECT_DIR$/www/templates/login-register.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/controllers/new-post-controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="90" selection-start-line="90" selection-end-line="90" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/controllers/change-pass-controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="810">
-              <caret line="54" selection-start-line="54" selection-end-line="54" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/controllers/login-controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+            <state relative-caret-position="90">
+              <caret line="6" column="32" selection-start-line="5" selection-start-column="8" selection-end-line="6" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -184,11 +157,8 @@
         <option value="$PROJECT_DIR$/www/js/services/comments-service.js" />
         <option value="$PROJECT_DIR$/www/js/services/posts-service.js" />
         <option value="$PROJECT_DIR$/www/templates/tab-dash.html" />
-        <option value="$PROJECT_DIR$/www/templates/tab-detail-post.html" />
-        <option value="$PROJECT_DIR$/www/js/controllers/detail-post-controller.js" />
         <option value="$PROJECT_DIR$/www/templates/tabs.html" />
         <option value="$PROJECT_DIR$/www/js/services/categories-service.js" />
-        <option value="$PROJECT_DIR$/www/js/controllers/dash-controller.js" />
         <option value="$USER_HOME$/Desktop/etc.html" />
         <option value="$PROJECT_DIR$/www/css/style.css" />
         <option value="$PROJECT_DIR$/www/js/controllers/RecoverPassCtrl.js" />
@@ -196,19 +166,22 @@
         <option value="$PROJECT_DIR$/www/index.html" />
         <option value="$PROJECT_DIR$/www/js/services/validation-service.js" />
         <option value="$PROJECT_DIR$/www/js/services/user-service.js" />
-        <option value="$PROJECT_DIR$/www/js/app.js" />
         <option value="$PROJECT_DIR$/www/templates/login-recover-pass.html" />
         <option value="$PROJECT_DIR$/www/js/controllers/recover-pass-controller.js" />
         <option value="$PROJECT_DIR$/www/js/controllers/login-controller.js" />
         <option value="$PROJECT_DIR$/www/templates/login-form.html" />
         <option value="$PROJECT_DIR$/www/templates/login-register.html" />
-        <option value="$PROJECT_DIR$/www/js/controllers/register-controller.js" />
         <option value="$PROJECT_DIR$/www/templates/tab-new-post.html" />
         <option value="$PROJECT_DIR$/www/js/controllers/new-post-controller.js" />
         <option value="$PROJECT_DIR$/www/js/controllers/change-pass-controller.js" />
         <option value="$PROJECT_DIR$/www/templates/change-pass.html" />
         <option value="$PROJECT_DIR$/www/templates/tab-profile-options.html" />
         <option value="$PROJECT_DIR$/www/js/controllers/profile-options-controller.js" />
+        <option value="$PROJECT_DIR$/www/js/controllers/detail-post-controller.js" />
+        <option value="$PROJECT_DIR$/www/templates/tab-detail-post.html" />
+        <option value="$PROJECT_DIR$/www/js/controllers/register-controller.js" />
+        <option value="$PROJECT_DIR$/www/js/controllers/dash-controller.js" />
+        <option value="$PROJECT_DIR$/www/js/app.js" />
       </list>
     </option>
   </component>
@@ -379,7 +352,7 @@
       <workItem from="1550451656831" duration="10837000" />
       <workItem from="1551150075899" duration="73510000" />
       <workItem from="1551751038360" duration="10586000" />
-      <workItem from="1551767939386" duration="4315000" />
+      <workItem from="1551767939386" duration="7027000" />
     </task>
     <task id="LOCAL-00001" summary="final_exam201807&#10; - Se implementó la validación en el registro de usuarios">
       <created>1533596916066</created>
@@ -472,11 +445,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551771197251</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="ajax loading screen">
+      <created>1551772361530</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1551772361530</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="145700000" />
+    <option name="totallyTimeSpent" value="148412000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -530,7 +510,8 @@
     <MESSAGE value="added category filter" />
     <MESSAGE value="posts likes" />
     <MESSAGE value="recover pass" />
-    <option name="LAST_COMMIT_MESSAGE" value="recover pass" />
+    <MESSAGE value="ajax loading screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajax loading screen" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/gulpfile.js">
@@ -636,13 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/tab-detail-post.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="8" lean-forward="true" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -741,16 +715,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/services/auth-service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="66" column="40" selection-start-line="66" selection-start-column="40" selection-end-line="66" selection-end-column="40" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers/profile-controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -761,13 +725,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/detail-post-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-480">
-          <caret line="10" column="58" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/services/user-service.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="412">
@@ -775,20 +732,6 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="109" column="29" selection-start-line="109" selection-start-column="29" selection-end-line="109" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/tab-dash.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="53" />
         </state>
       </provider>
     </entry>
@@ -806,20 +749,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/dash-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="33" column="46" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/login-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/login-form.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -827,10 +756,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/register-controller.js">
+    <entry file="file://$PROJECT_DIR$/www/templates/change-pass.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1057">
-          <caret line="112" column="47" selection-start-line="112" selection-start-column="47" selection-end-line="112" selection-end-column="47" />
+        <state relative-caret-position="270">
+          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/tab-profile-options.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/profile-options-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="49" column="28" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -855,34 +801,69 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/login-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/login-register.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
-          <caret line="6" column="32" lean-forward="true" selection-start-line="5" selection-start-column="8" selection-end-line="6" selection-end-column="32" />
+          <caret line="6" column="32" selection-start-line="5" selection-start-column="8" selection-end-line="6" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/change-pass.html">
+    <entry file="file://$PROJECT_DIR$/www/js/services/auth-service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/tab-profile-options.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/profile-options-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
+        <state>
+          <caret line="66" column="40" selection-start-line="66" selection-start-column="40" selection-end-line="66" selection-end-column="40" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/register-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="14" column="31" lean-forward="true" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/tab-dash.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/dash-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/tab-detail-post.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="37" column="14" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/detail-post-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="63" column="23" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
         </state>
       </provider>
     </entry>
