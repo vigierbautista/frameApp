@@ -20,9 +20,11 @@ angular.module('FrameApp.controllers')
                 image: user.image
             };
 
+            $scope.loading = false;
 
 
             $scope.edit = function(editData) {
+
 
                 // Pedimos confirmación del usuario.
                 var confirmPopup = $ionicPopup.confirm({
@@ -42,11 +44,11 @@ angular.module('FrameApp.controllers')
 
                 confirmPopup.then(function(res) {
                     if(res) {
-
+                        $scope.loading = true;
                         // Si confirma enviamos los datos
                         UserService.edit(editData).then(
                             function(response) {
-
+                                $scope.loading = false;
                                 var responseData = response.data;
                                 // Verificamos si tuvimos éxito  o no.
                                 if(responseData.status == 1) {

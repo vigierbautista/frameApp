@@ -11,6 +11,8 @@ angular.module('FrameApp.controllers')
 
 		$scope.categories = [];
 
+		$scope.loading = false;
+
 		CategoriesService.getCategories().then(
 			function(categories) {
 				$scope.categories = categories;
@@ -27,6 +29,8 @@ angular.module('FrameApp.controllers')
 
 
         $scope.save = function(data) {
+			$scope.loading = true;
+
 			var Validator = ValidationService.init(data, {
 				title: ['required', 'min:3', 'max:30']
 			}, {
@@ -48,11 +52,14 @@ angular.module('FrameApp.controllers')
 					title: 'Datos incorrectos',
 					template: error_msg
 				});
+
+				$scope.loading = false;
 				return;
             }
 
             PostsService.create(data).then(
                 function(response) {
+					$scope.loading = false;
 
                     var responseData = response.data;
 
@@ -80,6 +87,8 @@ angular.module('FrameApp.controllers')
                 },
 				function() {
 					// Reject
+					$scope.loading = false;
+
 					$ionicPopup.alert({
 						title: 'Error',
 						template: "No pudimos conectarnos. Intente de nuevo más tarde."

@@ -13,9 +13,10 @@ angular.module('FrameApp.controllers')
 				email: null
 			};
 
+			$scope.loading = false;
 
 			$scope.sendCode = function (user) {
-
+				$scope.loading = true;
 				var Validator = ValidationService.init(user, {
 					email: ['required', 'email']
 				}, {
@@ -36,12 +37,14 @@ angular.module('FrameApp.controllers')
 						title: 'Datos incorrectos',
 						template: error_msg
 					});
+					$scope.loading = false;
 					return;
 				}
 
 
 				UserService.sendRecoverCode(user.email).then(
 					function (response) {
+						$scope.loading = false;
 						if (response.status == 0) {
 							$ionicPopup.alert({
 								title: 'Error',
@@ -66,7 +69,7 @@ angular.module('FrameApp.controllers')
 
 
 			$scope.validateRecoverCode = function (user) {
-
+				$scope.loading = true;
 				var Validator = ValidationService.init(user, {
 					code: ['required', 'min:6', 'max:6']
 				}, {
@@ -88,12 +91,14 @@ angular.module('FrameApp.controllers')
 						title: 'Datos incorrectos',
 						template: error_msg
 					});
+					$scope.loading = false;
 					return;
 				}
 
 
 				UserService.validateRecoverCode(user).then(
 					function (response) {
+						$scope.loading = false;
 						if (response.status == 0) {
 							$ionicPopup.alert({
 								title: 'Error',

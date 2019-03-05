@@ -12,7 +12,11 @@ angular.module('FrameApp.controllers')
                 password: null
             };
 
+            $scope.loading = false;
+
             $scope.login = function(userData) {
+
+            	$scope.loading = true;
 
             	var Validator = ValidationService.init(userData, {
 					email: ['required', 'email'],
@@ -38,6 +42,7 @@ angular.module('FrameApp.controllers')
                         title: 'Datos incorrectos',
                         template: error_msg
                     });
+					$scope.loading = false;
                     return;
                 }
 
@@ -45,7 +50,7 @@ angular.module('FrameApp.controllers')
                 AuthService.login(userData).then(
                     function(response) {
                         // Resolve
-
+						$scope.loading = false;
                         var responseData = response.data;
 
                         if(responseData.status == 1) {
@@ -69,7 +74,7 @@ angular.module('FrameApp.controllers')
                             );
 
                         } else {
-							console.log(response);
+
 							var error_msg = '';
 							for (var i in responseData.errors) {
 								error_msg += responseData.errors[i] + '<br>';
@@ -80,10 +85,12 @@ angular.module('FrameApp.controllers')
                                 template: error_msg
                             });
 
+
                         }
                     },
                     function(response) {
                         // Reject
+						$scope.loading = false;
 						$ionicPopup.alert({
 							title: 'Error',
 							template: "No pudimos conectarnos. Intente de nuevo más tarde."

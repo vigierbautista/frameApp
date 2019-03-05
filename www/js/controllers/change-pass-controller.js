@@ -13,8 +13,12 @@ angular.module('FrameApp.controllers')
 				email: $stateParams.user.email
 			};
 
+			$scope.loading = false;
+
 
 			$scope.changePass = function (user) {
+				$scope.loading = true;
+
 				var Validator = ValidationService.init(user,{
 					password: ['required', 'password'],
 					password2: ['required', 'equal:password']
@@ -40,11 +44,15 @@ angular.module('FrameApp.controllers')
 						title: 'Datos incorrectos',
 						template: error_msg
 					});
+
+					$scope.loading = false;
 					return;
 				}
 
 				UserService.changePass(user).then(
 					function (response) {
+						$scope.loading = false;
+
 						if (response.status == 0) {
 							$ionicPopup.alert({
 								title: 'Error',

@@ -2,22 +2,25 @@
     <ion-content>
         <img class="logo" ng-src="img/assets/logo.png" alt="">
         <p class="frame-color text-center">Inicia sesión</p>
-        <form ng-submit="login(user)">
-            <div class="list">
-                <label class="item item-input">
-                    <input type="email" ng-model="user.email" placeholder="Email">
-                </label>
-                <label class="item item-input">
-                    <input type="password" ng-model="user.password" placeholder="Password">
-                </label>
-            </div>
-            <p class="frame-color text-center"><a class="frame-color underline" ui-sref="send-recover-pass">¿Olvidaste tu contraseña?</a></p>
-            <button class="button button-block button-positive frame-color-bg">Ingresar</button>
-        </form>
+        <ion-spinner ng-show="loading"></ion-spinner>
+        <div ng-show="!loading">
+            <form ng-submit="login(user)">
+                <div class="list">
+                    <label class="item item-input">
+                        <input type="email" ng-model="user.email" placeholder="Email">
+                    </label>
+                    <label class="item item-input">
+                        <input type="password" ng-model="user.password" placeholder="Password">
+                    </label>
+                </div>
+                <p class="frame-color text-center"><a class="frame-color underline" ui-sref="send-recover-pass">¿Olvidaste tu contraseña?</a></p>
+                <button class="button button-block button-positive frame-color-bg">Ingresar</button>
+            </form>
 
-        <p class="frame-color text-center">O <br> Si no tienes una cuenta regístrate aquí</p>
+            <p class="frame-color text-center">O <br> Si no tienes una cuenta regístrate aquí</p>
 
-        <button ui-sref="register" class="button button-block button-positive frame-color-bg">Regístrate</button>
+            <button ui-sref="register" class="button button-block button-positive frame-color-bg">Regístrate</button>
+        </div>
 
     </ion-content>
 </ion-view>

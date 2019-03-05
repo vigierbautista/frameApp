@@ -15,7 +15,11 @@ angular.module('FrameApp.controllers')
                 password2: null
             };
 
+            $scope.loading = false;
+
             $scope.register = function(userData) {
+
+				$scope.loading = true;
 
 				var Validator = ValidationService.init(userData, {
 					name: ['required', 'min:3', 'max:20'],
@@ -59,12 +63,16 @@ angular.module('FrameApp.controllers')
 						title: 'Datos incorrectos',
 						template: error_msg
 					});
+
+					$scope.loading = false;
 					return;
 				}
 
 				AuthService.register(userData).then(
 					function(response) {
 						// Resolve
+
+						$scope.loading = false;
 						var responseData = response.data;
 						if(responseData.status == 1) {
 							var popup = $ionicPopup.alert({
@@ -101,6 +109,8 @@ angular.module('FrameApp.controllers')
 					},
 					function(response) {
 						// Reject
+
+						$scope.loading = false;
 						console.error("REGISTER REJECT:" + response);
 					}
 				);
