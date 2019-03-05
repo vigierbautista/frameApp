@@ -89,7 +89,7 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
             .state('login', {
                 url: '/login',
                 data : {
-                    redirectToIfLogged: 'tab.profile'
+                    redirectToIfLogged: 'tab.dash'
                 },
                 templateUrl: 'templates/login-form.html',
                 controller: 'LoginCtrl'
@@ -99,7 +99,10 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                 url: '/recover',
                 cache: false,
                 templateUrl: 'templates/login-recover-pass.html',
-                controller: 'RecoverPassCtrl'
+                controller: 'RecoverPassCtrl',
+                data : {
+                    redirectToIfLogged: 'tab.dash'
+                }
 
             })
 
@@ -112,12 +115,16 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
                     user: null
                 },
                 data: {
-                    requireAuth: false
+                    requireAuth: false,
+                    redirectToIfLogged: 'tab.dash'
                 }
             })
 
             .state('register', {
                 url: '/register',
+                data : {
+                    redirectToIfLogged: 'tab.dash'
+                },
                 cache: false,
                 templateUrl: 'templates/login-register.html',
                 controller: 'RegisterCtrl'
