@@ -66,9 +66,6 @@ img {
     width: 18%;
 }
 
-#detail-post-wrapper ion-list ion-item:last-child {
-    margin-bottom: 70px;
-}
 
 .underline {
     text-decoration: underline;
@@ -132,7 +129,7 @@ img {
 
 #login-wrapper .logo {
     margin: 40px auto 20px;
-    width: 30%;
+    width: 80%;
 }
 #login-wrapper button {
     padding: 10px;
@@ -209,6 +206,14 @@ img {
 #new-post-wrapper textarea {
     min-height: 150px;
 }
+
+/************* POST DETAIL **************/
+#detail-post-wrapper ion-content {
+    margin-bottom: 80px;
+}
+
+
+
 /************* OVERRRIDES **************/
 
 

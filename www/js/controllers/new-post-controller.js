@@ -14,7 +14,6 @@ angular.module('FrameApp.controllers')
 		CategoriesService.getCategories().then(
 			function(categories) {
 				$scope.categories = categories;
-
 				$scope.post = {
 					title: '',
 					content: '',

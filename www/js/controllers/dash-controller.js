@@ -20,11 +20,18 @@ angular.module('FrameApp.controllers')
 
         CategoriesService.getCategories().then(
             function(categories) {
-                $scope.categories = categories;
-                $scope.categories.unshift({
+
+                var scope_cat = [];
+
+                for (var i in categories) {
+                    scope_cat.push(categories[i]);
+                }
+                scope_cat.unshift({
                     id: 0,
                     category: 'Todas'
                 });
+
+                $scope.categories = scope_cat;
                 $scope.category = $scope.categories[0].id
             }
         );

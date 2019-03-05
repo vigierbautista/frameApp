@@ -110,5 +110,77 @@ angular.module('FrameApp.services')
                 );
             };
 
+
+            this.sendRecoverCode = function (email) {
+                return $http.post($rootScope.API_PATH + 'users/send-recover-code',{
+                    'email': email
+                }).then(
+                    function (response) {
+                        if (response.status != 200) {
+                            return {
+                                'status': 0,
+                                'msg': 'Error al conectarse'
+                            }
+                        }
+
+                        return response.data;
+                    },
+                    function (response) {
+                        return {
+                            'status': 0,
+                            'msg': 'Error al conectarse'
+                        }
+                    }
+                );
+            };
+            
+            
+            this.validateRecoverCode = function (user) {
+                return $http.post($rootScope.API_PATH + 'users/validate-recover-code', {
+                   'id': user.id,
+                   'code': user.code,
+                   'email': user.email
+                }).then(
+                    function (response) {
+                        if (response.status != 200) {
+                            return {
+                                'status': 0,
+                                'msg': 'Error al conectarse'
+                            }
+                        }
+
+                        return response.data;
+                    },
+                    function (response) {
+                        return {
+                            'status': 0,
+                            'msg': 'Error al conectarse'
+                        }
+                    }
+                );
+            };
+
+
+            this.changePass = function (user) {
+                return $http.post($rootScope.API_PATH + 'users/change-pass', user).then(
+                    function (response) {
+                        if (response.status != 200) {
+                            return {
+                                'status': 0,
+                                'msg': 'Error al conectarse'
+                            }
+                        }
+
+                        return response.data;
+                    },
+                    function (response) {
+                        return {
+                            'status': 0,
+                            'msg': 'Error al conectarse'
+                        }
+                    }
+                );
+            }
+
         }
     ]);

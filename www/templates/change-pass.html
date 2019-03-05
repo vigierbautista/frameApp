@@ -1,0 +1,20 @@
+<ion-view view-title="Frame" id="login-wrapper">
+    <ion-content>
+        <img class="logo" ng-src="img/assets/logo.png" alt="">
+        <p class="frame-color text-center">Ingresá tu nueva contraseña:</p>
+
+        <form ng-submit="changePass(user)">
+            <div class="list">
+                <label class="item item-input">
+                    <input type="password" ng-model="user.password" placeholder="Nueva contraseña">
+                </label>
+                <label class="item item-input">
+                    <input type="password" ng-model="user.password2" placeholder="Repita la contraseña">
+                </label>
+                <input type="hidden" ng-model="user.id">
+            </div>
+            <button class="button button-block button-positive frame-color-bg">Cambiar</button>
+        </form>
+
+    </ion-content>
+</ion-view>

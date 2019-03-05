@@ -66,7 +66,8 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
 		 * Definimos la variable global con la ruta a la API.
 		 * @type {string}
 		 */
-		$rootScope.API_PATH = DEV? '../../frameApi/public_html/' : 'http://u388058213.hostingerapp.com/';
+		//$rootScope.API_PATH = DEV? '../../frameApi/public_html/' : 'http://u388058213.hostingerapp.com/';
+		$rootScope.API_PATH = DEV? '../../frameApi/public_html/' : 'http://web-frame.site/';
     })
 
 	/**
@@ -88,21 +89,36 @@ angular.module('FrameApp', ['ionic', 'FrameApp.controllers', 'FrameApp.services'
             .state('login', {
                 url: '/login',
                 data : {
-                    redirectToIfLogged: 'tab.cuenta'
+                    redirectToIfLogged: 'tab.profile'
                 },
                 templateUrl: 'templates/login-form.html',
                 controller: 'LoginCtrl'
             })
 
-            .state('recover-pass', {
+            .state('send-recover-pass', {
                 url: '/recover',
+                cache: false,
                 templateUrl: 'templates/login-recover-pass.html',
-                controller: 'LoginCtrl'
+                controller: 'RecoverPassCtrl'
 
+            })
+
+            .state('change-pass', {
+                url: '/change-pass',
+                templateUrl: 'templates/change-pass.html',
+                controller: 'ChangePassCtrl',
+                cache: false,
+                params: {
+                    user: null
+                },
+                data: {
+                    requireAuth: false
+                }
             })
 
             .state('register', {
                 url: '/register',
+                cache: false,
                 templateUrl: 'templates/login-register.html',
                 controller: 'RegisterCtrl'
             })

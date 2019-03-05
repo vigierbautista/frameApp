@@ -15,10 +15,13 @@ angular.module('FrameApp.controllers')
             $scope.login = function(userData) {
 
             	var Validator = ValidationService.init(userData, {
-            		name: ['required'],
+					email: ['required', 'email'],
 					password: ['required']
 				}, {
-            		name: {required: "Ingrese su nombre."},
+					email: {
+						required: 'Ingrese su email.',
+						email: 'El formato del email debe ser ejemplo@dominio.com'
+					},
             		password: {required: "Ingrese su constraseña."}
 				});
 
@@ -87,10 +90,6 @@ angular.module('FrameApp.controllers')
 						});
                     }
                 );
-            }
-            
-            $scope.recover = function (userData) {
-				
-			}
+            };
         }
     ]);

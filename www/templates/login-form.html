@@ -1,17 +1,17 @@
 <ion-view view-title="Frame" id="login-wrapper">
     <ion-content>
-        <img class="logo" ng-src="img/logo/logo.png" alt="">
+        <img class="logo" ng-src="img/assets/logo.png" alt="">
         <p class="frame-color text-center">Inicia sesión</p>
         <form ng-submit="login(user)">
             <div class="list">
                 <label class="item item-input">
-                    <input type="text" ng-model="user.name" placeholder="Nombre">
+                    <input type="email" ng-model="user.email" placeholder="Email">
                 </label>
                 <label class="item item-input">
                     <input type="password" ng-model="user.password" placeholder="Password">
                 </label>
             </div>
-            <p class="frame-color text-center"><a class="frame-color underline" ui-sref="recover-pass">¿Olvidaste tu contraseña?</a></p>
+            <p class="frame-color text-center"><a class="frame-color underline" ui-sref="send-recover-pass">¿Olvidaste tu contraseña?</a></p>
             <button class="button button-block button-positive frame-color-bg">Ingresar</button>
         </form>
 
