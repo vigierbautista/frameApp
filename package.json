@@ -13,7 +13,7 @@
     "bower": "^1.8.4",
     "gulp": "^3.9.1",
     "gulp-util": "^2.2.20",
-    "shelljs": "^0.3.0"
+    "shelljs": "^0.8.5"
   },
   "dependencies": {
     "angular-file-upload": "^2.5.0",
