@@ -9,9 +9,9 @@
   "devDependencies": {
     "@ionic/cli-plugin-gulp": "1.0.1",
     "@ionic/cli-plugin-ionic1": "2.0.0",
-    "@ionic/v1-toolkit": "1.0.4",
+    "@ionic/v1-toolkit": "3.2.20",
     "bower": "^1.8.4",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-util": "^2.2.20",
     "shelljs": "^0.3.0"
   },
